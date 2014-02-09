@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FlappyCow</string>
+    <string name="action_settings">Settings</string>
+    <string name="ad_unit_id">ca-app-pub-5615758120938208/1207416779</string>
+    
+	<string name="current_score">Your score is</string>
+	<string name="best_score">Your best score is</string>
+</resources>
