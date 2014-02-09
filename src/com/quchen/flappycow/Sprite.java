@@ -147,19 +147,19 @@ public abstract class Sprite {
 		BitmapDrawable bd = (BitmapDrawable) drawable;
 		Bitmap bm = bd.getBitmap();
 		return Bitmap.createScaledBitmap(bm,
-				(int)(bm.getWidth() /* * getScaleFactor() */),
-				(int)(bm.getHeight() /* * getScaleFactor() */),
+				(int)(bm.getWidth() * getScaleFactor()),
+				(int)(bm.getHeight() * getScaleFactor()),
 				false);
 	}
 	
 	public float getScaleFactor(){
-		// 1.0 @ 720x1280 px
-		return context.getResources().getDisplayMetrics().heightPixels / 1280f;
+		// 1.2 @ 720x1280 px
+		return context.getResources().getDisplayMetrics().heightPixels / 1066f;
 	}
 	
 	private int getCollisionTolerance(){
-		// 25 @ 720x1280 px
-		return context.getResources().getDisplayMetrics().heightPixels / 50;
+		// 30 @ 720x1280 px
+		return context.getResources().getDisplayMetrics().heightPixels / 42;
 	}
 
 }

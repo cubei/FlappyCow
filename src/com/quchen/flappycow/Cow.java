@@ -21,7 +21,7 @@ public class Cow extends Sprite {
 	}
 	
 	private void playSound(){
-		Game.soundPool.play(sound, 0.3f, 0.3f, 0, 0, 1);
+		Game.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
 	}
 	
 	@Override

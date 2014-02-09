@@ -7,4 +7,10 @@
     
 	<string name="current_score">Your score is</string>
 	<string name="best_score">Your best score is</string>
+	
+	<string name="developer">Developer - Lars Harmsen</string>
+	<string name="graphics">Graphics - Lars Harmsen</string>
+	<string name="consulting">Consulting - repat</string>
+	<string name="license">License - MIT</string>
+	
 </resources>

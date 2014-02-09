@@ -50,4 +50,12 @@
         android:layout_marginBottom="140dp"
         android:text="  OK  " />
 
+    <ImageView
+        android:id="@+id/medaille"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_best_score_value"
+        android:layout_below="@+id/tv_current_score_value"
+        android:src="@drawable/gold" />
+
 </RelativeLayout>

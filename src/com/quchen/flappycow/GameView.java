@@ -22,7 +22,8 @@ public class GameView extends SurfaceView implements Runnable{
 	
 	Cow cow;
 	private Background bg;
-	private List<Obstical> obsticals = new ArrayList<Obstical>();
+	private Frontground fg;
+	private List<Obstacle> obstacles = new ArrayList<Obstacle>();
 
 	public GameView(Context context) {
 		super(context);
@@ -30,6 +31,7 @@ public class GameView extends SurfaceView implements Runnable{
 		holder = getHolder();
 		cow = new Cow(this, context);
 		bg = new Background(this, context);
+		fg = new Frontground(this, context);
 	}
 	
 	@SuppressLint("WrongCall")
@@ -106,11 +108,13 @@ public class GameView extends SurfaceView implements Runnable{
 		super.onDraw(canvas);
 		bg.draw(canvas);
 		
-		for(Obstical r : obsticals){
+		for(Obstacle r : obstacles){
 			r.draw(canvas);
 		}
 		
 		cow.draw(canvas);
+		
+		fg.draw(canvas);
 		
 		Paint paint = new Paint();
 		paint.setColor(Color.BLACK);
@@ -119,7 +123,7 @@ public class GameView extends SurfaceView implements Runnable{
 	}
 	
 	private void checkPasses(){
-		for(Obstical o : obsticals){
+		for(Obstacle o : obstacles){
 			if(o.isPassed()){
 				o.onPass();
 			}
@@ -130,9 +134,9 @@ public class GameView extends SurfaceView implements Runnable{
 	 * Checks whether sprites are out of range and deletes them
 	 */
 	private void checkOutOfRange(){
-		for(int i=0; i<obsticals.size(); i++){
-			if(this.obsticals.get(i).isOutOfRange()){
-				this.obsticals.remove(i);
+		for(int i=0; i<obstacles.size(); i++){
+			if(this.obstacles.get(i).isOutOfRange()){
+				this.obstacles.remove(i);
 				i--;
 			}
 		}
@@ -142,9 +146,10 @@ public class GameView extends SurfaceView implements Runnable{
 	 * Checks collisions and performs the action (dmg, heal)
 	 */
 	private void checkCollision(){
-		for(Obstical r : obsticals){
+		for(Obstacle r : obstacles){
 			if(r.isColliding(cow)){
 				r.onCollision();
+				this.shouldRun = false;
 				gameOver();
 			}
 		}
@@ -154,8 +159,8 @@ public class GameView extends SurfaceView implements Runnable{
 	 * Can create new Gameobjects
 	 */
 	private void createNew(){
-		if(obsticals.size() < 1){
-			obsticals.add(new Obstical(this, game));
+		if(obstacles.size() < 1){
+			obstacles.add(new Obstacle(this, game));
 		}
 	}
 	
@@ -163,13 +168,16 @@ public class GameView extends SurfaceView implements Runnable{
 	 * Update sprite movements
 	 */
 	private void move(){
-		for(Obstical o : obsticals){
+		for(Obstacle o : obstacles){
 			o.setSpeedX(-getSpeedX());
 			o.move();
 		}
 		
-		bg.setSpeedX(-getSpeedX());
+		bg.setSpeedX(-getSpeedX()/2);
 		bg.move();
+		
+		fg.setSpeedX(-getSpeedX()*3/2);
+		fg.move();
 		
 		cow.move();
 	}
@@ -180,7 +188,8 @@ public class GameView extends SurfaceView implements Runnable{
 	
 	public int getSpeedX(){
 		// 16 @ 720x1280 px
-		return this.getHeight() / 80;
+		return this.getHeight() / 80
+				+ (int) (this.getHeight() / 1000f * (game.points / 3));
 	}
 	
 	public void gameOver(){
