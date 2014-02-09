@@ -5,8 +5,8 @@ Flappy Cow
 Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details?id=com.quchen.spacecowboy) too!
 
 #### Screenshot
-![Sceenshot Flappy Cow](/graphics/screenshots/screenshot_phone_1.png =640x480)
-![Sceenshot Flappy Cow](/graphics/screenshots/screenshot_phone_2.png =640x480)
+![Sceenshot Flappy Cow](/graphics/screenshots/screenshot_phone_1.png)
+![Sceenshot Flappy Cow](/graphics/screenshots/screenshot_phone_2.png)
 
 #### Google Play Store
 [![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=de.quchen.flappycow)
