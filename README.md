@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Flappy Cow
 ======
 **Flappy Cow** is an Android game in "Flappy Bird" Style. Since Nguyen Ha Dong, the developer of "Flappy Bird", anounced [the end](http://www.forbes.com/sites/insertcoin/2014/02/08/flappy-bird-creator-says-hes-taking-the-game-down/) of his loved but also hated game I uploaded this Open Source game, so you have an alternative to fulfill your addiction.
@@ -27,30 +26,4 @@ Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details
 ## Contact
 #### quchen
 * email: Quchen@outlook.com
-=======
-FlappyCow
-=========
 
-Android game in "Flappy Bird" Style
-
-![Banner](/graphics/funktionsgrafik.png)
-
-[![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)]
-(https://play.google.com/store/apps/details?id=com.quchen.flappybird)
-
-
-**Screenshots**
-
-![Sceenshot](/graphics/screenshots/screenshot_phone_1.png)
-![Sceenshot](/graphics/screenshots/screenshot_phone_2.png)
-
-
-**License**
-
-MIT
-
-
-**Version**
-
-Version 0.9
->>>>>>> a7bf1ea201db989033fe90893308fe621c44ddfd
