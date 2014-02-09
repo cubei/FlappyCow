@@ -13,4 +13,8 @@ Android game in "Flappy Bird" Style
 ![Sceenshot](/graphics/screenshots/screenshot_phone_1.png)
 ![Sceenshot](/graphics/screenshots/screenshot_phone_2.png)
 
+**License**
+MIT
+
+**Version**
 Version 0.9
