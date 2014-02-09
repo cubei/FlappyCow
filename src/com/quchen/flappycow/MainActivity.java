@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +18,13 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent("com.quchen.flappycow.Game"));
+			}
+		});
+        
+        ((Button)findViewById(R.id.about_button)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent("com.quchen.flappycow.About"));
 			}
 		});
     }
