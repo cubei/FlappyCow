@@ -1,3 +1,9 @@
+/**
+ * A spider
+ * 
+ * instead of using a spider and multiple webs,
+ * it may would be better to use just one long bitmap
+ */
 package com.quchen.flappycow;
 
 import java.util.ArrayList;

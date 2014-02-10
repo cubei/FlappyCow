@@ -1,3 +1,7 @@
+/**
+ * A wooden log
+ */
+
 package com.quchen.flappycow;
 
 import android.content.Context;

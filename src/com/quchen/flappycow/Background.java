@@ -1,3 +1,7 @@
+/**
+ * Manages the Bitmap for the background: mountains and clouds
+ */
+
 package com.quchen.flappycow;
 
 import android.content.Context;
@@ -19,7 +23,13 @@ public class Background extends Sprite {
 		this.bitmap = globalBitmap;
 	}
 
-
+	/**
+	 * The whole bitmap (which is pretty long/big) is drawn.
+	 * In the worst case 2 times.
+	 * 
+	 * If you know a more efficient way to get the wrap around done
+	 * you're more than welcome to do so.
+	 */
 	@Override
 	public void draw(Canvas canvas) {
 		int scaledWidth = (int) ( 1.0 * canvas.getHeight()/bitmap.getHeight() * bitmap.getWidth());

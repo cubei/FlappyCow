@@ -1,3 +1,7 @@
+/**
+ * An obstacle: spider + logHead
+ */
+
 package com.quchen.flappycow;
 
 import android.content.Context;

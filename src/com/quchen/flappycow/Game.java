@@ -1,3 +1,7 @@
+/**
+ * The Game
+ */
+
 package com.quchen.flappycow;
 
 import com.google.android.gms.ads.AdRequest;
@@ -11,13 +15,10 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class Game extends Activity implements OnTouchListener{
+public class Game extends Activity{
 	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
 	
 	GameView view;
@@ -29,7 +30,6 @@ public class Game extends Activity implements OnTouchListener{
 		points = 0;
 		
 		view = new GameView(this);
-		view.setOnTouchListener(this);
 		setLayouts();
 	}
 	
@@ -49,12 +49,6 @@ public class Game extends Activity implements OnTouchListener{
 		setContentView(mainLayout);
 		
 		adView.loadAd(new AdRequest.Builder().build());
-	}
-
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		view.onTouch();
-		return true;
 	}
 	
 	@Override

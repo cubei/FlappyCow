@@ -1,3 +1,7 @@
+/**
+ * Manages the bitmap at the front: trees and ground
+ */
+
 package com.quchen.flappycow;
 
 import android.content.Context;

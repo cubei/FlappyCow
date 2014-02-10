@@ -3,15 +3,17 @@ package com.quchen.flappycow;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.View.OnTouchListener;
 
-public class GameView extends SurfaceView implements Runnable{
+public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
 	public static final long UPDATE_INTERVAL = 30;
 	
@@ -24,6 +26,7 @@ public class GameView extends SurfaceView implements Runnable{
 	private Background bg;
 	private Frontground fg;
 	private List<Obstacle> obstacles = new ArrayList<Obstacle>();
+	private PauseButton pauseButton;
 
 	public GameView(Context context) {
 		super(context);
@@ -32,9 +35,28 @@ public class GameView extends SurfaceView implements Runnable{
 		cow = new Cow(this, context);
 		bg = new Background(this, context);
 		fg = new Frontground(this, context);
+		pauseButton = new PauseButton(this, context);
+		setOnTouchListener(this);
 	}
 	
-	@SuppressLint("WrongCall")
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		if(event.getAction() == MotionEvent.ACTION_DOWN){
+			if(pauseButton.isTouching((int) event.getX(), (int) event.getY())){
+				// Pause
+				if(this.shouldRun){
+					pause();
+				}else{
+					resume();
+				}
+			}else if(shouldRun){
+				// Cow flap
+				this.cow.onTab();
+			}
+		}
+		return true;
+	}
+	
 	public void run() {
 		while(shouldRun){
 
@@ -42,20 +64,16 @@ public class GameView extends SurfaceView implements Runnable{
 				continue;
 			}
 
+			// check
 			checkPasses();
-
 			checkOutOfRange();
-		
 			checkCollision();
-
 			createNew();
-		
 			move();
 
 			// draw
 			Canvas c = holder.lockCanvas();
-			onDraw(c);
-
+			drawCanvas(c);
 			holder.unlockCanvasAndPost(c);
 
 			// sleep
@@ -67,13 +85,7 @@ public class GameView extends SurfaceView implements Runnable{
 		}
 	}
 	
-	public boolean isRunning(){
-		return shouldRun;
-	}
-	
 	public void pause(){
-		// Timer pausieren
-		
 		shouldRun = false;
 		while(t != null){
 			try {
@@ -87,35 +99,22 @@ public class GameView extends SurfaceView implements Runnable{
 	}
 	
 	public void resume(){
-		shouldRun = false;
-		while(t != null){
-			try {
-				t.join();
-				break;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+		pause();	// make sure not 2 threads are running
 		shouldRun = true;
 		t = new Thread(this);
 		t.start();
-		
-		// Timer fortsetzen
 	}
 	
-	@Override
-	protected void onDraw(Canvas canvas) {
-		super.onDraw(canvas);
+	protected void drawCanvas(Canvas canvas) {
 		bg.draw(canvas);
-		
 		for(Obstacle r : obstacles){
 			r.draw(canvas);
 		}
-		
 		cow.draw(canvas);
-		
 		fg.draw(canvas);
+		pauseButton.draw(canvas);
 		
+		// Score Text
 		Paint paint = new Paint();
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(getScoreTextMetrics());
@@ -143,7 +142,7 @@ public class GameView extends SurfaceView implements Runnable{
 	}
 	
 	/**
-	 * Checks collisions and performs the action (dmg, heal)
+	 * Checks collisions and performs the action
 	 */
 	private void checkCollision(){
 		for(Obstacle r : obstacles){
@@ -156,7 +155,7 @@ public class GameView extends SurfaceView implements Runnable{
 	}
 	
 	/**
-	 * Can create new Gameobjects
+	 * if no obstacle is present a new one is created
 	 */
 	private void createNew(){
 		if(obstacles.size() < 1){
@@ -176,16 +175,17 @@ public class GameView extends SurfaceView implements Runnable{
 		bg.setSpeedX(-getSpeedX()/2);
 		bg.move();
 		
-		fg.setSpeedX(-getSpeedX()*3/2);
+		fg.setSpeedX(-getSpeedX()*4/3);
 		fg.move();
+		
+		pauseButton.move();
 		
 		cow.move();
 	}
 	
-	public void onTouch(){
-		this.cow.onTab();
-	}
-	
+	/**
+	 * return the speed of the obstacles/cow
+	 */
 	public int getSpeedX(){
 		// 16 @ 720x1280 px
 		return this.getHeight() / 80
@@ -196,9 +196,12 @@ public class GameView extends SurfaceView implements Runnable{
 		game.gameOver();
 	}
 	
+	/**
+	 * A value for the position and size of the onScreen score Text
+	 */
 	public int getScoreTextMetrics(){
-		// 64 @ 720x1280 px
-		return this.getHeight() / 20;
+		// 80 @ 720x1280 px
+		return this.getHeight() / 16;
 	}
 
 }

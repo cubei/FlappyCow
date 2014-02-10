@@ -29,16 +29,13 @@ public class Cow extends Sprite {
 		this.x = this.view.getWidth() / 6;
 		
 		if(speedY < 0){
-			speedY = speedY * 2 / 3 + getSpeedTimeDecrease() / 4;
+			speedY = speedY * 2 / 3 + getSpeedTimeDecrease() / 2;
 		}else{
 			this.speedY += getSpeedTimeDecrease();
 		}
 		
 		if(this.speedY > getMaxSpeed()){
 			this.speedY = getMaxSpeed();
-		}
-		if(this.speedY < getMinSpeed()){
-			this.speedY = getMinSpeed();
 		}
 		
 		if(this.y + this.height > this.view.getHeight()) {
@@ -49,7 +46,7 @@ public class Cow extends Sprite {
 			this.y = 0;
 		}
 		
-		if(speedY > getTabSpeed() * 1/3 && speedY < getMaxSpeed() * 1/3){
+		if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
 			row = 0;
 		}else if(speedY > 0){
 			row = 1;
@@ -66,11 +63,6 @@ public class Cow extends Sprite {
 		playSound();
 	}
 	
-	private float getMinSpeed(){
-		// -50 @ 720x1280 px
-		return - view.getHeight() / 25.6f;
-	}
-	
 	private float getMaxSpeed(){
 		// 25 @ 720x1280 px
 		return view.getHeight() / 51.2f;
@@ -82,13 +74,13 @@ public class Cow extends Sprite {
 	}
 	
 	private float getTabSpeed(){
-		// -35 @ 720x1280 px
-		return - view.getHeight() / 36.5f;
+		// -80 @ 720x1280 px
+		return - view.getHeight() / 16f;
 	}
 	
 	private int getPosTabIncrease(){
-		// -7 @ 720x1280 px
-		return - view.getHeight() / 180;
+		// -12 @ 720x1280 px
+		return - view.getHeight() / 100;
 	}
 
 }

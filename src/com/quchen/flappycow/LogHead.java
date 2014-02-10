@@ -1,3 +1,10 @@
+/**
+ * A shopped wodden log
+ * 
+ * instead of using a head and multiple logs,
+ * it may would be better to use just one long bitmap
+ */
+
 package com.quchen.flappycow;
 
 import java.util.ArrayList;

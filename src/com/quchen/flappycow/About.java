@@ -1,3 +1,7 @@
+/**
+ * About Activity for credits
+ */
+
 package com.quchen.flappycow;
 
 import android.app.Activity;

@@ -1,3 +1,7 @@
+/**
+ * The template for every game object
+ */
+
 package com.quchen.flappycow;
 
 import android.content.Context;
@@ -92,11 +96,8 @@ public abstract class Sprite {
 	}
 	
 	public boolean isTouching(int x, int y){
-		if(	x /* + Util.ATTACK_AREA_EFFECT */ > this.x && x /* - Util.ATTACK_AREA_EFFECT */ < this.x + width
-			&& y /* + Util.ATTACK_AREA_EFFECT */ > this.y && y /* - Util.ATTACK_AREA_EFFECT */ < this.y + height){
-			return true;
-		}
-		return false;
+		return (x  > this.x && x  < this.x + width
+			&& y  > this.y && y < this.y + height);
 	}
 	
 	public void onCollision(){
