@@ -9,13 +9,13 @@ import android.graphics.Canvas;
 
 public class Obstacle extends Sprite{
 	private Spider spider;
-	private LogHead logHead;
+	private WoodLog log;
 	private boolean isPassed = false;
 
 	public Obstacle(GameView view, Context context) {
 		super(view, context);
 		spider = new Spider(view, context);
-		logHead = new LogHead(view, context);
+		log = new WoodLog(view, context);
 		
 		initPos();
 	}
@@ -26,45 +26,45 @@ public class Obstacle extends Sprite{
 		if(gab < height / 5){
 			gab = height / 5;
 		}
-		int random = (int) (Math.random() * height / 2);
+		int random = (int) (Math.random() * height * 2 / 5);
 		int y1 = (height / 10) + random - spider.height;
 		int y2 = (height / 10) + random + gab;
 		
 		spider.init(context.getResources().getDisplayMetrics().widthPixels, y1);
-		logHead.init(context.getResources().getDisplayMetrics().widthPixels, y2);
+		log.init(context.getResources().getDisplayMetrics().widthPixels, y2);
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
 		spider.draw(canvas);
-		logHead.draw(canvas);
+		log.draw(canvas);
 	}
 
 	@Override
 	public boolean isOutOfRange() {
-		return spider.isOutOfRange() && logHead.isOutOfRange();
+		return spider.isOutOfRange() && log.isOutOfRange();
 	}
 
 	@Override
 	public boolean isColliding(Sprite sprite) {
-		return spider.isColliding(sprite) || logHead.isColliding(sprite);
+		return spider.isColliding(sprite) || log.isColliding(sprite);
 	}
 
 	@Override
 	public void move() {
 		spider.move();
-		logHead.move();
+		log.move();
 	}
 
 	@Override
 	public void setSpeedX(float speedX) {
 		spider.setSpeedX(speedX);
-		logHead.setSpeedX(speedX);
+		log.setSpeedX(speedX);
 	}
 	
 	@Override
 	public boolean isPassed(){
-		return spider.isPassed() && logHead.isPassed();
+		return spider.isPassed() && log.isPassed();
 	}
 	
 	@Override

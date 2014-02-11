@@ -57,19 +57,19 @@ public class GameOverScreen extends Activity {
         SharedPreferences.Editor editor = medaille_save.edit();
 
         if(points >= gold){
-        	((ImageView)findViewById(R.id.medaille)).setImageDrawable(getResources().getDrawable(R.drawable.gold));
+        	((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.gold), this));
         	if(medaille < 3){
 	        	editor.putInt(MainActivity.medaille_key, 3);
 	        	editor.commit();
         	}
         }else if(points >= silver){
-        	((ImageView)findViewById(R.id.medaille)).setImageDrawable(getResources().getDrawable(R.drawable.silver));
+        	((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.silver), this));
         	if(medaille < 2){
 	        	editor.putInt(MainActivity.medaille_key, 2);
 	        	editor.commit();
         	}
         }else if(points >= bronce){
-        	((ImageView)findViewById(R.id.medaille)).setImageDrawable(getResources().getDrawable(R.drawable.bronce));
+        	((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.bronce), this));
         	if(medaille < 1){
 	        	editor.putInt(MainActivity.medaille_key, 1);
 	        	editor.commit();

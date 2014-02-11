@@ -145,15 +145,19 @@ public abstract class Sprite {
 	}
 	
 	public Bitmap createBitmap(Drawable drawable){
+		return createBitmap(drawable, context);
+	}
+	
+	public static Bitmap createBitmap(Drawable drawable, Context context){
 		BitmapDrawable bd = (BitmapDrawable) drawable;
 		Bitmap bm = bd.getBitmap();
 		return Bitmap.createScaledBitmap(bm,
-				(int)(bm.getWidth() * getScaleFactor()),
-				(int)(bm.getHeight() * getScaleFactor()),
+				(int)(bm.getWidth() * getScaleFactor(context)),
+				(int)(bm.getHeight() * getScaleFactor(context)),
 				false);
 	}
 	
-	public float getScaleFactor(){
+	public static float getScaleFactor(Context context){
 		// 1.2 @ 720x1280 px
 		return context.getResources().getDisplayMetrics().heightPixels / 1066f;
 	}

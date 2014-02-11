@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,6 +17,7 @@ import android.view.View.OnTouchListener;
 public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
 	public static final long UPDATE_INTERVAL = 30;
+	private long debugTime = 0;
 	
 	Game game;
 	private Thread t;
@@ -82,6 +84,9 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
+//			Log.i("FlappyCow", "GameViewRun: " + (System.currentTimeMillis() - debugTime));
+//			debugTime = System.currentTimeMillis();
 		}
 	}
 	
@@ -188,8 +193,17 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 */
 	public int getSpeedX(){
 		// 16 @ 720x1280 px
-		return this.getHeight() / 80
-				+ (int) (this.getHeight() / 1000f * (game.points / 3));
+		int speedDefault = this.getHeight() / 80;
+		// 1,2 every 3 points @ 720x1280 px
+		int speedIncrease = (int) (this.getHeight() / 1000f * (game.points / 3));
+		
+		int speed = speedDefault + speedIncrease;
+		
+		if(speed > 2*speedDefault){
+			return 2*speedDefault;
+		}else{
+			return speed;
+		}
 	}
 	
 	public void gameOver(){
@@ -200,8 +214,8 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 * A value for the position and size of the onScreen score Text
 	 */
 	public int getScoreTextMetrics(){
-		// 80 @ 720x1280 px
-		return this.getHeight() / 16;
+		// 106 @ 720x1280 px
+		return this.getHeight() / 12;
 	}
 
 }

@@ -63,8 +63,8 @@ int drawable ic_plusone_medium_off_client 0x7f02001e
 int drawable ic_plusone_small_off_client 0x7f02001f
 int drawable ic_plusone_standard_off_client 0x7f020020
 int drawable ic_plusone_tall_off_client 0x7f020021
-int drawable log 0x7f020022
-int drawable loghead 0x7f020023
+int drawable log_full 0x7f020022
+int drawable pause_button 0x7f020023
 int drawable play_button 0x7f020024
 int drawable silver 0x7f020025
 int drawable socket 0x7f020026
@@ -73,9 +73,8 @@ int drawable socket_gold 0x7f020028
 int drawable socket_silver 0x7f020029
 int drawable speaker 0x7f02002a
 int drawable speaker_mute 0x7f02002b
-int drawable spider 0x7f02002c
-int drawable spiderweb 0x7f02002d
-int drawable splash 0x7f02002e
+int drawable spider_full 0x7f02002c
+int drawable splash 0x7f02002d
 int id about_button 0x7f06000c
 int id action_settings 0x7f060015
 int id b_ok 0x7f060013

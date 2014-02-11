@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        ((ImageButton)findViewById(R.id.play_button)).setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.play_button), this));
         ((ImageButton)findViewById(R.id.play_button)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -31,15 +32,16 @@ public class MainActivity extends Activity {
 		});
         
         muteButton = ((ImageButton)findViewById(R.id.mute_button));
+        muteButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.speaker), this));
         muteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if(volume != 0){
 					volume = 0;
-					muteButton.setImageDrawable(getResources().getDrawable(R.drawable.speaker_mute));
+					muteButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.speaker_mute), MainActivity.this));
 				}else{
 					volume = DEFAULT_VOLUME;
-					muteButton.setImageDrawable(getResources().getDrawable(R.drawable.speaker));
+					muteButton.setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.speaker), MainActivity.this));
 				}
 			}
 		});
@@ -59,13 +61,13 @@ public class MainActivity extends Activity {
 		SharedPreferences saves = this.getSharedPreferences(medaille_save, 0);
         switch(saves.getInt(medaille_key, 0)){
         	case 1:
-        		((ImageView)findViewById(R.id.medaille_socket)).setImageDrawable(getResources().getDrawable(R.drawable.socket_bronce));
+        		((ImageView)findViewById(R.id.medaille_socket)).setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.socket_bronce), this));
         		break;
         	case 2:
-        		((ImageView)findViewById(R.id.medaille_socket)).setImageDrawable(getResources().getDrawable(R.drawable.socket_silver));
+        		((ImageView)findViewById(R.id.medaille_socket)).setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.socket_silver), this));
         		break;
         	case 3:
-        		((ImageView)findViewById(R.id.medaille_socket)).setImageDrawable(getResources().getDrawable(R.drawable.socket_gold));
+        		((ImageView)findViewById(R.id.medaille_socket)).setImageBitmap(Sprite.createBitmap(getResources().getDrawable(R.drawable.socket_gold), this));
         		break;
         }
 	}

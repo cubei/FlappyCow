@@ -23,26 +23,23 @@ public class Background extends Sprite {
 		this.bitmap = globalBitmap;
 	}
 
-	/**
-	 * The whole bitmap (which is pretty long/big) is drawn.
-	 * In the worst case 2 times.
-	 * 
-	 * If you know a more efficient way to get the wrap around done
-	 * you're more than welcome to do so.
-	 */
 	@Override
 	public void draw(Canvas canvas) {
-		int scaledWidth = (int) ( 1.0 * canvas.getHeight()/bitmap.getHeight() * bitmap.getWidth());
-		if(-x > scaledWidth){
-			x += scaledWidth;
+		double factor = (1.0 * canvas.getHeight()) / bitmap.getHeight();
+		int scaledWidth = (int) (factor * bitmap.getWidth());
+		if(-x > bitmap.getWidth()){
+			x += bitmap.getWidth();
 		}
-		for(int i=0; (x + scaledWidth*i) < canvas.getWidth(); i++){
-			Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-			Rect dst = new Rect(x+scaledWidth*i,
-								0,
-								x+scaledWidth*i + scaledWidth,
-								canvas.getHeight());
-
+		int endBitmap = Math.min(-x + (int) (canvas.getWidth() / factor), bitmap.getWidth());
+		int endCanvas = (int) ((endBitmap + x) * factor);
+		Rect src = new Rect(-x, 0, endBitmap, bitmap.getHeight());
+		Rect dst = new Rect(0, 0, endCanvas, canvas.getHeight());
+		canvas.drawBitmap(this.bitmap, src, dst, null);
+		
+		if(endBitmap == bitmap.getWidth()){
+			// draw second bitmap
+			src = new Rect(0, 0, (int) (canvas.getWidth() / factor), bitmap.getHeight());
+			dst = new Rect(endCanvas, 0, endCanvas + canvas.getWidth(), canvas.getHeight());
 			canvas.drawBitmap(this.bitmap, src, dst, null);
 		}
 	}

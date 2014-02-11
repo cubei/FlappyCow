@@ -224,8 +224,8 @@ containing a value of this type.
         public static final int ic_plusone_small_off_client=0x7f02001f;
         public static final int ic_plusone_standard_off_client=0x7f020020;
         public static final int ic_plusone_tall_off_client=0x7f020021;
-        public static final int log=0x7f020022;
-        public static final int loghead=0x7f020023;
+        public static final int log_full=0x7f020022;
+        public static final int pause_button=0x7f020023;
         public static final int play_button=0x7f020024;
         public static final int silver=0x7f020025;
         public static final int socket=0x7f020026;
@@ -234,9 +234,8 @@ containing a value of this type.
         public static final int socket_silver=0x7f020029;
         public static final int speaker=0x7f02002a;
         public static final int speaker_mute=0x7f02002b;
-        public static final int spider=0x7f02002c;
-        public static final int spiderweb=0x7f02002d;
-        public static final int splash=0x7f02002e;
+        public static final int spider_full=0x7f02002c;
+        public static final int splash=0x7f02002d;
     }
     public static final class id {
         public static final int about_button=0x7f06000c;
