@@ -1,0 +1,13 @@
+Version 1.7
+- To Exit the game you need to double press the back button
+- When you resume the game (after homebutton) the game will be on pause
+
+Version 1.6
+- Instruction at the beginning of a game
+
+Version 1.5
+- The woddenlog and the spider web are now just one image
+- Added pausebutton
+- The background is drawn in a way I think is better
+- Images on Startscreen and GameOverScreen will now be scaled with screen resolution
+- More points => faster game
