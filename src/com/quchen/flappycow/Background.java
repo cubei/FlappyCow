@@ -26,12 +26,11 @@ public class Background extends Sprite {
 	@Override
 	public void draw(Canvas canvas) {
 		double factor = (1.0 * canvas.getHeight()) / bitmap.getHeight();
-		int scaledWidth = (int) (factor * bitmap.getWidth());
 		if(-x > bitmap.getWidth()){
 			x += bitmap.getWidth();
 		}
 		int endBitmap = Math.min(-x + (int) (canvas.getWidth() / factor), bitmap.getWidth());
-		int endCanvas = (int) ((endBitmap + x) * factor);
+		int endCanvas = (int) ((endBitmap + x) * factor) + 1;
 		Rect src = new Rect(-x, 0, endBitmap, bitmap.getHeight());
 		Rect dst = new Rect(0, 0, endCanvas, canvas.getHeight());
 		canvas.drawBitmap(this.bitmap, src, dst, null);

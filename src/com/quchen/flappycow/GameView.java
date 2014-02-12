@@ -7,7 +7,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,41 +16,44 @@ import android.view.View.OnTouchListener;
 public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
 	public static final long UPDATE_INTERVAL = 30;
-	private long debugTime = 0;
 	
 	Game game;
 	private Thread t;
 	private SurfaceHolder holder;
 	volatile private boolean shouldRun = true;
+	private boolean showedTutorial = false;
 	
 	Cow cow;
 	private Background bg;
 	private Frontground fg;
 	private List<Obstacle> obstacles = new ArrayList<Obstacle>();
 	private PauseButton pauseButton;
+	private Tutorial tutorial;
 
 	public GameView(Context context) {
 		super(context);
 		this.game = (Game) context;
+
 		holder = getHolder();
 		cow = new Cow(this, context);
 		bg = new Background(this, context);
 		fg = new Frontground(this, context);
 		pauseButton = new PauseButton(this, context);
+		tutorial = new Tutorial(this, context);
+		
 		setOnTouchListener(this);
 	}
 	
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
-			if(pauseButton.isTouching((int) event.getX(), (int) event.getY())){
-				// Pause
-				if(this.shouldRun){
-					pause();
-				}else{
-					resume();
-				}
-			}else if(shouldRun){
+			if(!shouldRun){
+				// Start game if it's paused
+				resumeAndKeepRunning();
+			}
+			if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && this.shouldRun){
+				pause();
+			}else{
 				// Cow flap
 				this.cow.onTab();
 			}
@@ -60,34 +62,56 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	}
 	
 	public void run() {
-		while(shouldRun){
-
+		
+		//draw at least once
+		draw();
+		
+		while(shouldRun || !showedTutorial){
 			if(!holder.getSurface().isValid()){
 				continue;
 			}
-
-			// check
-			checkPasses();
-			checkOutOfRange();
-			checkCollision();
-			createNew();
-			move();
-
-			// draw
-			Canvas c = holder.lockCanvas();
-			drawCanvas(c);
-			holder.unlockCanvasAndPost(c);
-
-			// sleep
-			try {
-				Thread.sleep(UPDATE_INTERVAL);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			
-//			Log.i("FlappyCow", "GameViewRun: " + (System.currentTimeMillis() - debugTime));
-//			debugTime = System.currentTimeMillis();
+			if(!showedTutorial){
+				showTutorial();
+			}else{
+			
+				// check
+				checkPasses();
+				checkOutOfRange();
+				checkCollision();
+				createNew();
+				move();
+	
+				draw();
+	
+//				Log.i("FlappyCow", "GameViewRun: " + System.currentTimeMillis());
+				
+				// sleep
+				try {
+					Thread.sleep(UPDATE_INTERVAL);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+		
+	}
+	
+	/**
+	 * Draw Tutorial
+	 */
+	public void showTutorial(){
+		showedTutorial = true;
+		
+		cow.move();
+		pauseButton.move();
+		
+		while(!holder.getSurface().isValid()){/*wait*/}
+		
+		Canvas canvas = holder.lockCanvas();
+		drawCanvas(canvas);
+		drawTutorial(canvas);
+		holder.unlockCanvasAndPost(canvas);
 	}
 	
 	public void pause(){
@@ -104,13 +128,26 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	}
 	
 	public void resume(){
-		pause();	// make sure not 2 threads are running
+		pause();	// make sure the old thread isn't running
+		t = new Thread(this);
+		t.start();
+	}
+	
+	public void resumeAndKeepRunning(){
+		pause();	// make sure the old thread isn't running
 		shouldRun = true;
 		t = new Thread(this);
 		t.start();
 	}
 	
-	protected void drawCanvas(Canvas canvas) {
+	private void draw() {
+		while(!holder.getSurface().isValid()){/*wait*/}
+		Canvas canvas = holder.lockCanvas();
+		drawCanvas(canvas);
+		holder.unlockCanvasAndPost(canvas);
+	}
+	
+	private void drawCanvas(Canvas canvas) {
 		bg.draw(canvas);
 		for(Obstacle r : obstacles){
 			r.draw(canvas);
@@ -124,6 +161,11 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(getScoreTextMetrics());
 		canvas.drawText("Score: " + game.points, getScoreTextMetrics(), getScoreTextMetrics(), paint);
+	}
+	
+	private void drawTutorial(Canvas canvas) {
+		tutorial.move();
+		tutorial.draw(canvas);
 	}
 	
 	private void checkPasses(){
@@ -193,9 +235,9 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 */
 	public int getSpeedX(){
 		// 16 @ 720x1280 px
-		int speedDefault = this.getHeight() / 80;
+		int speedDefault = this.getWidth() / 45;
 		// 1,2 every 3 points @ 720x1280 px
-		int speedIncrease = (int) (this.getHeight() / 1000f * (game.points / 3));
+		int speedIncrease = (int) (this.getWidth() / 600f * (game.points / 3));
 		
 		int speed = speedDefault + speedIncrease;
 		

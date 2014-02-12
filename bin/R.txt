@@ -75,6 +75,7 @@ int drawable speaker 0x7f02002a
 int drawable speaker_mute 0x7f02002b
 int drawable spider_full 0x7f02002c
 int drawable splash 0x7f02002d
+int drawable tutorial 0x7f02002e
 int id about_button 0x7f06000c
 int id action_settings 0x7f060015
 int id b_ok 0x7f060013

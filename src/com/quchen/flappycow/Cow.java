@@ -38,12 +38,13 @@ public class Cow extends Sprite {
 			this.speedY = getMaxSpeed();
 		}
 		
-		if(this.y + this.height > this.view.getHeight()) {
-			this.y = this.view.getHeight() - this.height;
-			// Game over ?
+		if(this.y + this.height > this.view.getHeight() - this.view.getHeight() * Frontground.GROUND_HEIGHT) {
+			// Touching ground
+			view.gameOver();
 		}
 		if(this.y < 0){
-			this.y = 0;
+			// Touching sky
+			view.gameOver();
 		}
 		
 		if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){

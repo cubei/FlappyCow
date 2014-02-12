@@ -57,6 +57,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="1.5" />
+        android:text="1.7" />
 
 </RelativeLayout>

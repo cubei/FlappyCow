@@ -21,6 +21,10 @@ import android.widget.Toast;
 public class Game extends Activity{
 	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
 	
+	/** time interval (ms) you have to press the backbutton twice in to exit */
+	private static final long DOUBLE_BACK_TIME = 1000;
+	private long backPressed;
+	
 	GameView view;
 	int points;
 	
@@ -65,6 +69,16 @@ public class Game extends Activity{
 //			finish();
 		}
 		super.onResume();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if(System.currentTimeMillis() - backPressed < DOUBLE_BACK_TIME){
+			super.onBackPressed();
+		}else{
+			backPressed = System.currentTimeMillis();
+			Toast.makeText(this, "Press backbutton again to exit", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	public void gameOver(){

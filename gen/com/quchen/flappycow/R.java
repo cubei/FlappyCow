@@ -236,6 +236,7 @@ containing a value of this type.
         public static final int speaker_mute=0x7f02002b;
         public static final int spider_full=0x7f02002c;
         public static final int splash=0x7f02002d;
+        public static final int tutorial=0x7f02002e;
     }
     public static final class id {
         public static final int about_button=0x7f06000c;
