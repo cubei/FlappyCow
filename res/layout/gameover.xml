@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_dead" >
 
     <TextView
         android:id="@+id/tv_current_score_value"
@@ -9,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_current_score"
         android:layout_centerHorizontal="true"
-        android:text="1"
+        android:text="@string/defaultscore"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_best_score"
         android:layout_centerHorizontal="true"
-        android:text="1337"
+        android:text="@string/defaultscore"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView
@@ -39,6 +40,7 @@
         android:text="  OK  " />
 
     <TextView
+<<<<<<< HEAD
         android:id="@+id/tv_best_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,12 +51,52 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+=======
+>>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
         android:id="@+id/tv_current_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+<<<<<<< HEAD
         android:layout_centerHorizontal="true"
         android:text="@string/current_score"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
+=======
+        android:layout_alignRight="@+id/tv_best_score"
+        android:layout_marginTop="154dp"
+        android:text="@string/current_score"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tv_best_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_current_score_value"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:text="@string/best_score"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/medaille"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_best_score_value"
+        android:layout_below="@+id/tv_current_score_value"
+        android:contentDescription="@string/medaille"
+        android:src="@drawable/gold" />
+
+    <Button
+        android:id="@+id/b_ok"
+        style="@style/PrettyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/medaille"
+        android:background="@drawable/brownbutton"
+        android:text="@android:string/ok" />
+
+</RelativeLayout>
+>>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9

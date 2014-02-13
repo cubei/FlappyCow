@@ -5,11 +5,13 @@
 
     <Button
         android:id="@+id/back_button"
+        style="@style/PrettyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="back" />
+        android:background="@drawable/greybutton"
+        android:text="@string/about_back_button" />
 
     <TextView
         android:id="@+id/developer_tv"
@@ -25,9 +27,13 @@
         android:id="@+id/graphics_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/developer_tv"
+<<<<<<< HEAD
         android:layout_marginTop="50dp"
+=======
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+>>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
         android:text="@string/graphics"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -35,9 +41,13 @@
         android:id="@+id/consulting_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/graphics_tv"
+<<<<<<< HEAD
         android:layout_marginTop="50dp"
+=======
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+>>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
         android:text="@string/consulting"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -57,6 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+<<<<<<< HEAD
         android:text="1.8" />
 
     <TextView
@@ -69,5 +80,8 @@
         android:text="@string/nyan_cat"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp" />
+=======
+        android:text="@string/version" />
+>>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
 
 </RelativeLayout>

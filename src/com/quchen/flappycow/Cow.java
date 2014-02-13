@@ -1,7 +1,10 @@
 package com.quchen.flappycow;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.graphics.Bitmap;
+=======
+>>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
 
 public class Cow extends PlayableCharacter {
 	

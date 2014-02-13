@@ -1,0 +1,9 @@
+.git/
+.settings/
+assets
+gen/
+bin/
+.classpath
+.gitignore
+.project
+keystore
