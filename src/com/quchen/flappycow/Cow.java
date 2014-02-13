@@ -21,7 +21,7 @@ public class Cow extends Sprite {
 	}
 	
 	private void playSound(){
-		Game.soundPool.play(sound, 0.5f, 0.5f, 0, 0, 1);
+		Game.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class Cow extends Sprite {
 		this.x = this.view.getWidth() / 6;
 		
 		if(speedY < 0){
-			speedY = speedY * 2 / 3 + getSpeedTimeDecrease() / 4;
+			speedY = speedY * 2 / 3 + getSpeedTimeDecrease() / 2;
 		}else{
 			this.speedY += getSpeedTimeDecrease();
 		}
@@ -37,19 +37,17 @@ public class Cow extends Sprite {
 		if(this.speedY > getMaxSpeed()){
 			this.speedY = getMaxSpeed();
 		}
-		if(this.speedY < getMinSpeed()){
-			this.speedY = getMinSpeed();
-		}
 		
-		if(this.y + this.height > this.view.getHeight()) {
-			this.y = this.view.getHeight() - this.height;
-			// Game over ?
+		if(this.y + this.height > this.view.getHeight() - this.view.getHeight() * Frontground.GROUND_HEIGHT) {
+			// Touching ground
+			view.gameOver();
 		}
 		if(this.y < 0){
-			this.y = 0;
+			// Touching sky
+			view.gameOver();
 		}
 		
-		if(speedY > getTabSpeed() * 1/3 && speedY < getMaxSpeed() * 1/3){
+		if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
 			row = 0;
 		}else if(speedY > 0){
 			row = 1;
@@ -66,11 +64,6 @@ public class Cow extends Sprite {
 		playSound();
 	}
 	
-	private float getMinSpeed(){
-		// -50 @ 720x1280 px
-		return - view.getHeight() / 25.6f;
-	}
-	
 	private float getMaxSpeed(){
 		// 25 @ 720x1280 px
 		return view.getHeight() / 51.2f;
@@ -82,13 +75,13 @@ public class Cow extends Sprite {
 	}
 	
 	private float getTabSpeed(){
-		// -35 @ 720x1280 px
-		return - view.getHeight() / 36.5f;
+		// -80 @ 720x1280 px
+		return - view.getHeight() / 16f;
 	}
 	
 	private int getPosTabIncrease(){
-		// -7 @ 720x1280 px
-		return - view.getHeight() / 180;
+		// -12 @ 720x1280 px
+		return - view.getHeight() / 100;
 	}
 
 }

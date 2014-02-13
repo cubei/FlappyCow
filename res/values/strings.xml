@@ -4,6 +4,7 @@
     <string name="app_name">FlappyCow</string>
     <string name="action_settings">Settings</string>
     <string name="ad_unit_id">ca-app-pub-5615758120938208/1207416779</string>
+<<<<<<< HEAD
     <string name="current_score">Your score is</string>
     <string name="best_score">Your best score is</string>
     <string name="defaultscore">42</string>
@@ -22,3 +23,15 @@
     </style>
 
 </resources>
+=======
+    
+	<string name="current_score">Your score is</string>
+	<string name="best_score">Your best score is</string>
+	
+	<string name="developer">Developer - Lars Harmsen</string>
+	<string name="graphics">Graphics - Lars Harmsen</string>
+	<string name="consulting">Consulting - repat</string>
+	<string name="license">License - MIT</string>
+	
+</resources>
+>>>>>>> upstream/master

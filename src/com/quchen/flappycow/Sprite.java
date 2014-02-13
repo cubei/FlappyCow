@@ -1,3 +1,7 @@
+/**
+ * The template for every game object
+ */
+
 package com.quchen.flappycow;
 
 import android.content.Context;
@@ -92,11 +96,8 @@ public abstract class Sprite {
 	}
 	
 	public boolean isTouching(int x, int y){
-		if(	x /* + Util.ATTACK_AREA_EFFECT */ > this.x && x /* - Util.ATTACK_AREA_EFFECT */ < this.x + width
-			&& y /* + Util.ATTACK_AREA_EFFECT */ > this.y && y /* - Util.ATTACK_AREA_EFFECT */ < this.y + height){
-			return true;
-		}
-		return false;
+		return (x  > this.x && x  < this.x + width
+			&& y  > this.y && y < this.y + height);
 	}
 	
 	public void onCollision(){
@@ -144,22 +145,26 @@ public abstract class Sprite {
 	}
 	
 	public Bitmap createBitmap(Drawable drawable){
+		return createBitmap(drawable, context);
+	}
+	
+	public static Bitmap createBitmap(Drawable drawable, Context context){
 		BitmapDrawable bd = (BitmapDrawable) drawable;
 		Bitmap bm = bd.getBitmap();
 		return Bitmap.createScaledBitmap(bm,
-				(int)(bm.getWidth() /* * getScaleFactor() */),
-				(int)(bm.getHeight() /* * getScaleFactor() */),
+				(int)(bm.getWidth() * getScaleFactor(context)),
+				(int)(bm.getHeight() * getScaleFactor(context)),
 				false);
 	}
 	
-	public float getScaleFactor(){
-		// 1.0 @ 720x1280 px
-		return context.getResources().getDisplayMetrics().heightPixels / 1280f;
+	public static float getScaleFactor(Context context){
+		// 1.2 @ 720x1280 px
+		return context.getResources().getDisplayMetrics().heightPixels / 1066f;
 	}
 	
 	private int getCollisionTolerance(){
-		// 25 @ 720x1280 px
-		return context.getResources().getDisplayMetrics().heightPixels / 50;
+		// 30 @ 720x1280 px
+		return context.getResources().getDisplayMetrics().heightPixels / 42;
 	}
 
 }

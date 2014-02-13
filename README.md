@@ -24,8 +24,9 @@ Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details
 * [MIT](http://opensource.org/licenses/MIT), see LICENSE file
 
 ## Version 
-* 0.9
+* 1.7
 
 ## Contact
 #### quchen
 * email: Quchen@outlook.com
+
