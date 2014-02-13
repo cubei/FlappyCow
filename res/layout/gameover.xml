@@ -21,13 +21,30 @@
         android:text="1337"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <ImageView
+        android:id="@+id/medaille"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_best_score_value"
+        android:layout_below="@+id/tv_current_score_value"
+        android:src="@drawable/gold" />
+
+    <Button
+        android:id="@+id/b_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_best_score_value"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="  OK  " />
+
     <TextView
         android:id="@+id/tv_best_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_current_score_value"
+        android:layout_below="@+id/medaille"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="24dp"
         android:text="@string/best_score"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -37,25 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
         android:text="@string/current_score"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/b_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="140dp"
-        android:text="  OK  " />
-
-    <ImageView
-        android:id="@+id/medaille"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tv_best_score_value"
-        android:layout_below="@+id/tv_current_score_value"
-        android:src="@drawable/gold" />
 
 </RelativeLayout>

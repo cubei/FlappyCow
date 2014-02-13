@@ -225,23 +225,26 @@ containing a value of this type.
         public static final int ic_plusone_standard_off_client=0x7f020020;
         public static final int ic_plusone_tall_off_client=0x7f020021;
         public static final int log_full=0x7f020022;
-        public static final int pause_button=0x7f020023;
-        public static final int play_button=0x7f020024;
-        public static final int silver=0x7f020025;
-        public static final int socket=0x7f020026;
-        public static final int socket_bronce=0x7f020027;
-        public static final int socket_gold=0x7f020028;
-        public static final int socket_silver=0x7f020029;
-        public static final int speaker=0x7f02002a;
-        public static final int speaker_mute=0x7f02002b;
-        public static final int spider_full=0x7f02002c;
-        public static final int splash=0x7f02002d;
-        public static final int tutorial=0x7f02002e;
+        public static final int nyan_cat=0x7f020023;
+        public static final int pause_button=0x7f020024;
+        public static final int play_button=0x7f020025;
+        public static final int rainbow=0x7f020026;
+        public static final int silver=0x7f020027;
+        public static final int socket=0x7f020028;
+        public static final int socket_bronce=0x7f020029;
+        public static final int socket_gold=0x7f02002a;
+        public static final int socket_silver=0x7f02002b;
+        public static final int speaker=0x7f02002c;
+        public static final int speaker_mute=0x7f02002d;
+        public static final int spider_full=0x7f02002e;
+        public static final int splash=0x7f02002f;
+        public static final int toast=0x7f020030;
+        public static final int tutorial=0x7f020031;
     }
     public static final class id {
-        public static final int about_button=0x7f06000c;
-        public static final int action_settings=0x7f060015;
-        public static final int b_ok=0x7f060013;
+        public static final int about_button=0x7f06000d;
+        public static final int action_settings=0x7f060016;
+        public static final int b_ok=0x7f060015;
         public static final int back_button=0x7f060005;
         public static final int consulting_tv=0x7f060008;
         public static final int developer_tv=0x7f060006;
@@ -249,17 +252,18 @@ containing a value of this type.
         public static final int hybrid=0x7f060004;
         public static final int licence_tv=0x7f060009;
         public static final int medaille=0x7f060014;
-        public static final int medaille_socket=0x7f06000e;
-        public static final int mute_button=0x7f06000d;
+        public static final int medaille_socket=0x7f06000f;
+        public static final int mute_button=0x7f06000e;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int play_button=0x7f06000b;
+        public static final int nyan_cat_tv=0x7f06000b;
+        public static final int play_button=0x7f06000c;
         public static final int satellite=0x7f060002;
         public static final int terrain=0x7f060003;
-        public static final int tv_best_score=0x7f060012;
-        public static final int tv_best_score_value=0x7f060011;
-        public static final int tv_current_score=0x7f060010;
-        public static final int tv_current_score_value=0x7f06000f;
+        public static final int tv_best_score=0x7f060013;
+        public static final int tv_best_score_value=0x7f060012;
+        public static final int tv_current_score=0x7f060011;
+        public static final int tv_current_score_value=0x7f060010;
         public static final int version_tv=0x7f06000a;
     }
     public static final class integer {
@@ -275,6 +279,7 @@ containing a value of this type.
     }
     public static final class raw {
         public static final int cow=0x7f040000;
+        public static final int nyan_cat_theme=0x7f040001;
     }
     public static final class string {
         public static final int action_settings=0x7f07001b;
@@ -380,6 +385,7 @@ containing a value of this type.
         public static final int developer=0x7f07001f;
         public static final int graphics=0x7f070020;
         public static final int license=0x7f070022;
+        public static final int nyan_cat=0x7f070023;
     }
     public static final class style {
         /** 

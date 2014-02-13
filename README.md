@@ -22,9 +22,10 @@ Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details
 
 ## License 
 * [MIT](http://opensource.org/licenses/MIT), see LICENSE file
+* Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell
 
 ## Version 
-* 1.7
+* 1.8
 
 ## Contact
 #### quchen

@@ -15,18 +15,20 @@ import android.view.View.OnTouchListener;
 
 public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
-	public static final long UPDATE_INTERVAL = 30;
-	
+	public static final long UPDATE_INTERVAL = 30;	// milliseconds the thread sleeps after drawing
+
 	Game game;
 	private Thread t;
 	private SurfaceHolder holder;
 	volatile private boolean shouldRun = true;
 	private boolean showedTutorial = false;
 	
-	Cow cow;
+	PlayableCharacter player;
 	private Background bg;
 	private Frontground fg;
 	private List<Obstacle> obstacles = new ArrayList<Obstacle>();
+	private List<PowerUp> powerUps = new ArrayList<PowerUp>();
+	
 	private PauseButton pauseButton;
 	private Tutorial tutorial;
 
@@ -35,7 +37,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		this.game = (Game) context;
 
 		holder = getHolder();
-		cow = new Cow(this, context);
+		player = new Cow(this, context);
 		bg = new Background(this, context);
 		fg = new Frontground(this, context);
 		pauseButton = new PauseButton(this, context);
@@ -51,30 +53,26 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 				// Start game if it's paused
 				resumeAndKeepRunning();
 			}
+			
 			if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && this.shouldRun){
 				pause();
 			}else{
 				// Cow flap
-				this.cow.onTab();
+				this.player.onTab();
 			}
 		}
+		
 		return true;
 	}
 	
 	public void run() {
-		
 		//draw at least once
 		draw();
 		
 		while(shouldRun || !showedTutorial){
-			if(!holder.getSurface().isValid()){
-				continue;
-			}
-			
 			if(!showedTutorial){
 				showTutorial();
 			}else{
-			
 				// check
 				checkPasses();
 				checkOutOfRange();
@@ -84,7 +82,8 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
 				draw();
 	
-//				Log.i("FlappyCow", "GameViewRun: " + System.currentTimeMillis());
+//				Log.i("FlappyCow", "GameViewRun: " + (System.currentTimeMillis() - t1));
+//				t1 = System.currentTimeMillis();
 				
 				// sleep
 				try {
@@ -103,7 +102,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	public void showTutorial(){
 		showedTutorial = true;
 		
-		cow.move();
+		player.move();
 		pauseButton.move();
 		
 		while(!holder.getSurface().isValid()){/*wait*/}
@@ -152,7 +151,10 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		for(Obstacle r : obstacles){
 			r.draw(canvas);
 		}
-		cow.draw(canvas);
+		for(PowerUp p : powerUps){
+			p.draw(canvas);
+		}
+		player.draw(canvas);
 		fg.draw(canvas);
 		pauseButton.draw(canvas);
 		
@@ -172,6 +174,19 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		for(Obstacle o : obstacles){
 			if(o.isPassed()){
 				o.onPass();
+				createToast();
+			}
+		}
+	}
+	
+	/**
+	 * Creates a toast with a certain chance
+	 */
+	private void createToast(){
+		// If no powerUp is present and you have more than / equal 40 points
+		if(game.points >= 40 && powerUps.size() < 1 && !(player instanceof NyanCat)){
+			if(Math.random()*100 < 33){	// 33% chance
+				powerUps.add(new Toast(this, game));
 			}
 		}
 	}
@@ -186,17 +201,29 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 				i--;
 			}
 		}
+		for(int i=0; i<powerUps.size(); i++){
+			if(this.powerUps.get(i).isOutOfRange()){
+				this.powerUps.remove(i);
+				i--;
+			}
+		}
 	}
 	
 	/**
 	 * Checks collisions and performs the action
 	 */
 	private void checkCollision(){
-		for(Obstacle r : obstacles){
-			if(r.isColliding(cow)){
-				r.onCollision();
-				this.shouldRun = false;
+		for(Obstacle o : obstacles){
+			if(o.isColliding(player)){
+				o.onCollision();
 				gameOver();
+			}
+		}
+		for(int i=0; i<powerUps.size(); i++){
+			if(this.powerUps.get(i).isColliding(player)){
+				this.powerUps.get(i).onCollision();
+				this.powerUps.remove(i);
+				i--;
 			}
 		}
 	}
@@ -218,6 +245,9 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 			o.setSpeedX(-getSpeedX());
 			o.move();
 		}
+		for(PowerUp p : powerUps){
+			p.move();
+		}
 		
 		bg.setSpeedX(-getSpeedX()/2);
 		bg.move();
@@ -227,7 +257,17 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		
 		pauseButton.move();
 		
-		cow.move();
+		player.move();
+	}
+	
+	public void changeToNyanCat(){
+		PlayableCharacter tmp = this.player;
+		this.player = new NyanCat(this, game);
+		this.player.setX(tmp.x);
+		this.player.setY(tmp.y);
+		
+		Game.musicShouldPlay = true;
+		Game.musicPlayer.start();
 	}
 	
 	/**
@@ -236,8 +276,8 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	public int getSpeedX(){
 		// 16 @ 720x1280 px
 		int speedDefault = this.getWidth() / 45;
-		// 1,2 every 3 points @ 720x1280 px
-		int speedIncrease = (int) (this.getWidth() / 600f * (game.points / 3));
+		// 1,2 every 4 points @ 720x1280 px
+		int speedIncrease = (int) (this.getWidth() / 600f * (game.points / 4));
 		
 		int speed = speedDefault + speedIncrease;
 		
@@ -249,6 +289,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	}
 	
 	public void gameOver(){
+		this.shouldRun = false;
 		game.gameOver();
 	}
 	

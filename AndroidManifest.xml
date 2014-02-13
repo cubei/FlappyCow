@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quchen.flappycow"
-    android:versionCode="8"
-    android:versionName="1.7" >
+    android:versionCode="9"
+    android:versionName="1.8" >
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -50,16 +50,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.quchen.flappycow.About" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-        <activity
-            android:name=".GameOverScreen"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="com.quchen.flappycow.GameOverScreen" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

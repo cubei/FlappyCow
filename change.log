@@ -1,3 +1,7 @@
+Version 1.8
+- The GameOverScreen is now a dialog instead of an activity	(Stupid UI Thread changes)
+- Added Toast, NyanCat, NyanCat music
+
 Version 1.7
 - To Exit the game you need to double press the back button
 - When you resume the game (after homebutton) the game will be on pause

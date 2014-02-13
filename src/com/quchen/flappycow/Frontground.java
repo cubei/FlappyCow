@@ -21,4 +21,5 @@ public class Frontground extends Background {
 		}
 		this.bitmap = globalBitmap;
 	}
+	
 }

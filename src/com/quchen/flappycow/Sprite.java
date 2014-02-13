@@ -7,7 +7,6 @@ package com.quchen.flappycow;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -28,7 +27,7 @@ public abstract class Sprite {
 	protected Rect dst;
 	protected byte col, row;	// Spritesheet kords
 	protected byte colNr = 1;
-	protected short frameTime;
+	protected short frameTime = (short) (GameView.UPDATE_INTERVAL);
 	protected short frameTimeCounter;
 	
 	protected GameView view;
@@ -47,13 +46,11 @@ public abstract class Sprite {
 	}
 	
 	public void move(){
-		/*
 		this.frameTimeCounter++;
 		if(this.frameTimeCounter >= this.frameTime){
 			this.col = (byte) ((this.col+1) % this.colNr);
 			this.frameTimeCounter = 0;
 		}
-		*/
 		x+= speedX;
 		y+= speedY;
 	}
@@ -105,7 +102,7 @@ public abstract class Sprite {
 	}
 	
 	public boolean isPassed(){
-		return this.x + this.width < view.cow.getX();
+		return this.x + this.width < view.player.getX();
 	}
 	
 	public void onPass(){
@@ -163,8 +160,8 @@ public abstract class Sprite {
 	}
 	
 	private int getCollisionTolerance(){
-		// 30 @ 720x1280 px
-		return context.getResources().getDisplayMetrics().heightPixels / 42;
+		// 25 @ 720x1280 px
+		return context.getResources().getDisplayMetrics().heightPixels / 50;
 	}
 
 }

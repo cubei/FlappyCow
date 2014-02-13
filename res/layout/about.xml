@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:text="@string/developer"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/developer_tv"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:text="@string/graphics"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/graphics_tv"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:text="@string/consulting"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/consulting_tv"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:text="@string/license"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -57,6 +57,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="1.7" />
+        android:text="1.8" />
+
+    <TextView
+        android:id="@+id/nyan_cat_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/licence_tv"
+        android:layout_marginTop="50dp"
+        android:text="@string/nyan_cat"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
 
 </RelativeLayout>

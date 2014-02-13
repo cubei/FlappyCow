@@ -1,16 +1,19 @@
 package com.quchen.flappycow;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.SoundPool;
+import android.graphics.Bitmap;
 
-public class Cow extends Sprite {
+public class Cow extends PlayableCharacter {
 	
+	public static Bitmap globalBitmap;
 	private static int sound = -1;
 
 	public Cow(GameView view, Context context) {
 		super(view, context);
-		this.bitmap = createBitmap(context.getResources().getDrawable(R.drawable.cow));
+		if(globalBitmap == null){
+			globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.cow));
+		}
+		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth();
 		this.height = this.bitmap.getHeight()/3;
 		this.y = context.getResources().getDisplayMetrics().heightPixels / 2;
@@ -23,30 +26,18 @@ public class Cow extends Sprite {
 	private void playSound(){
 		Game.soundPool.play(sound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
 	}
+
+	@Override
+	public void onTab(){
+		super.onTab();
+		playSound();
+	}
 	
 	@Override
 	public void move(){
-		this.x = this.view.getWidth() / 6;
+		super.move();
 		
-		if(speedY < 0){
-			speedY = speedY * 2 / 3 + getSpeedTimeDecrease() / 2;
-		}else{
-			this.speedY += getSpeedTimeDecrease();
-		}
-		
-		if(this.speedY > getMaxSpeed()){
-			this.speedY = getMaxSpeed();
-		}
-		
-		if(this.y + this.height > this.view.getHeight() - this.view.getHeight() * Frontground.GROUND_HEIGHT) {
-			// Touching ground
-			view.gameOver();
-		}
-		if(this.y < 0){
-			// Touching sky
-			view.gameOver();
-		}
-		
+		// manage frames
 		if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
 			row = 0;
 		}else if(speedY > 0){
@@ -54,34 +45,5 @@ public class Cow extends Sprite {
 		}else{
 			row = 2;
 		}
-		
-		super.move();
 	}
-	
-	public void onTab(){
-		this.speedY = getTabSpeed();
-		this.y += getPosTabIncrease();
-		playSound();
-	}
-	
-	private float getMaxSpeed(){
-		// 25 @ 720x1280 px
-		return view.getHeight() / 51.2f;
-	}
-	
-	private float getSpeedTimeDecrease(){
-		// 4 @ 720x1280 px
-		return view.getHeight() / 320;
-	}
-	
-	private float getTabSpeed(){
-		// -80 @ 720x1280 px
-		return - view.getHeight() / 16f;
-	}
-	
-	private int getPosTabIncrease(){
-		// -12 @ 720x1280 px
-		return - view.getHeight() / 100;
-	}
-
 }
