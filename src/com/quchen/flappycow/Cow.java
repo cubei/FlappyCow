@@ -1,8 +1,6 @@
 package com.quchen.flappycow;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.SoundPool;
 
 public class Cow extends Sprite {
 	

@@ -4,18 +4,28 @@
     <string name="app_name">FlappyCow</string>
     <string name="action_settings">Settings</string>
     <string name="ad_unit_id">ca-app-pub-5615758120938208/1207416779</string>
-<<<<<<< HEAD
     <string name="current_score">Your score is</string>
     <string name="best_score">Your best score is</string>
     <string name="defaultscore">42</string>
+    <string name="medaille">Medaille</string>
+    <string name="play_button">Start to play</string>
+    <string name="about_button">about</string>
+    <string name="about_back_button">back</string>
+    <string name="medaille_image">Medaillenimage</string>
+    <string name="mute_button">Mutes the sound</string>
+    <string name="developer">Developer - Lars Harmsen</string>
+    <string name="graphics">Graphics - Lars Harmsen</string>
+    <string name="consulting">Consulting - repat</string>
+    <string name="license">License - MIT</string>
+    <string name="version">1.7</string>
 
     <style name="PrettyButton">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#000000</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:shadowColor">#000000</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
@@ -23,15 +33,3 @@
     </style>
 
 </resources>
-=======
-    
-	<string name="current_score">Your score is</string>
-	<string name="best_score">Your best score is</string>
-	
-	<string name="developer">Developer - Lars Harmsen</string>
-	<string name="graphics">Graphics - Lars Harmsen</string>
-	<string name="consulting">Consulting - repat</string>
-	<string name="license">License - MIT</string>
-	
-</resources>
->>>>>>> upstream/master
