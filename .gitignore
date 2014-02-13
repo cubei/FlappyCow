@@ -2,3 +2,4 @@
 .classpath
 bin/
 gen/
+.project.properties
