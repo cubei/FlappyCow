@@ -25,7 +25,7 @@ Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details
 * Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell
 
 ## Version 
-* 1.8
+* 1.81
 
 ## Contact
 #### quchen
