@@ -1,3 +1,7 @@
+Version 1.81
+- Some Designchanges by contributor repat
+- Added german file for externalized strings
+
 Version 1.8
 - The GameOverScreen is now a dialog instead of an activity	(Stupid UI Thread changes)
 - Added Toast, NyanCat, NyanCat music

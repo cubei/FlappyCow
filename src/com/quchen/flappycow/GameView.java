@@ -162,7 +162,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		Paint paint = new Paint();
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(getScoreTextMetrics());
-		canvas.drawText("Score: " + game.points, getScoreTextMetrics(), getScoreTextMetrics(), paint);
+		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.points, getScoreTextMetrics(), getScoreTextMetrics(), paint);
 	}
 	
 	private void drawTutorial(Canvas canvas) {

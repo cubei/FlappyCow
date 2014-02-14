@@ -28,12 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/developer_tv"
-<<<<<<< HEAD
-        android:layout_marginTop="50dp"
-=======
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
->>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
+        android:layout_marginTop="50dp"
         android:text="@string/graphics"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -42,12 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/graphics_tv"
-<<<<<<< HEAD
-        android:layout_marginTop="50dp"
-=======
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
->>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
+        android:layout_marginTop="50dp"
         android:text="@string/consulting"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -60,16 +52,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/license"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/version_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-<<<<<<< HEAD
-        android:text="1.8" />
-
+    
     <TextView
         android:id="@+id/nyan_cat_tv"
         android:layout_width="wrap_content"
@@ -80,8 +63,13 @@
         android:text="@string/nyan_cat"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp" />
-=======
+
+    <TextView
+        android:id="@+id/version_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:text="@string/version" />
->>>>>>> 869acbc96e2369968204b407a58da2c0c159e4d9
 
 </RelativeLayout>
