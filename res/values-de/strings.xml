@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--	@author Lars Harmsen
+		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
 <resources>
 
     <string name="app_name">FlappyCow</string>

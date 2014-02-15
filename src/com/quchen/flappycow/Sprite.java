@@ -1,5 +1,8 @@
 /**
  * The template for every game object
+ * 
+ * @author Lars Harmsen
+ * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
 package com.quchen.flappycow;
@@ -12,39 +15,67 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 public abstract class Sprite {
-	public static final short SPEED_DEFAULT = 5;
-	public static final short ANIMATION_TIME = 50;
-	public static final byte NUMBER_OF_ROWS = 1;
-	public static final byte NUMBER_OF_COLUMNS = 1;
 
+	/** The bitmaps that holds the frames that should be drawn */
 	protected Bitmap bitmap;
+	
+	/** Height and width of one frame of the bitmap */
 	protected int height, width;
-	protected int x;
-	protected int y;
-	protected float speedX;
-	protected float speedY;
+	
+	/** x and y coordinates on the canvas */
+	protected int x, y;
+	
+	/** Horizontal and vertical speed of the sprite */
+	protected float speedX, speedY;
+	
+	/** The source frame of the bitmap that should be drawn */
 	protected Rect src;
+	
+	/** The destination area that the frame should be drawn to */
 	protected Rect dst;
-	protected byte col, row;	// Spritesheet kords
+	
+	/** Coordinates of the frame in the spritesheet */
+	protected byte col, row;
+	
+	/** Number of columns the sprite has */
 	protected byte colNr = 1;
-	protected short frameTime = 1;
+	
+	/** How long a frame should be displayed */
+	protected short frameTime;
+	
+	/**
+	 * Counter for the frames
+	 * Cycling through the columns
+	 */
 	protected short frameTimeCounter;
 	
+	/** The GameView that holds this Sprite */
 	protected GameView view;
-	protected Context context;
 	
-	public Sprite(GameView view, Context context){
+	/** The context */
+	protected Game game;
+	
+	public Sprite(GameView view, Game game){
 		this.view = view;
-		this.context = context;
-		frameTime = ANIMATION_TIME / /*Util.UPDATE_INTERVAL*/ 50;
+		this.game = game;
+		frameTime = 1;
 	}
 	
+	/**
+	 * Draws the frame of the bitmap specified by col and row
+	 * at the position given by x and y
+	 * @param canvas Canvas that should be drawn on
+	 */
 	public void draw(Canvas canvas){
 		src = new Rect(col*width, row*height, (col+1)*width, (row+1)*height);
 		dst = new Rect(x, y, x+width, y+height);
 		canvas.drawBitmap(bitmap, src, dst, null);
 	}
 	
+	/**
+	 * Modifies the x and y coordinates according to the speedX and speedY value
+	 * Also changes the frame by cycling through the columns.
+	 */
 	public void move(){
 		this.frameTimeCounter++;
 		if(this.frameTimeCounter >= this.frameTime){
@@ -55,13 +86,17 @@ public abstract class Sprite {
 		y+= speedY;
 	}
 	
+	/**
+	 * Checks whether this sprite is so far to the left, it's not visible anymore.
+	 * @return
+	 */
 	public boolean isOutOfRange(){
 		return this.x + width < 0;
 	}
 	
 	/**
-	 * checks whether the sprite is touching this.
-	 * with the distance of the 2 centers.
+	 * Checks whether the sprite is touching this.
+	 * Seeing the sprites as rectangles.
 	 * @param sprite
 	 * @return
 	 */
@@ -75,6 +110,12 @@ public abstract class Sprite {
 		return false;
 	}
 	
+	/**
+	 * Checks whether the sprite is touching this.
+	 * With the distance of the 2 centers.
+	 * @param sprite
+	 * @return
+	 */
 	public boolean isCollidingRadius(Sprite sprite, float factor){
 		int m1x = this.x+(this.width>>1);
 		int m1y = this.y+(this.height>>1);
@@ -92,31 +133,59 @@ public abstract class Sprite {
 		}
 	}
 	
+	/**
+	 * Checks whether the point specified by the x and y coordinates is touching the sprite.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean isTouching(int x, int y){
 		return (x  > this.x && x  < this.x + width
 			&& y  > this.y && y < this.y + height);
 	}
 	
+	/**
+	 * What should be done, when the player collide with this sprite?
+	 */
 	public void onCollision(){
 		
 	}
 	
+	/**
+	 * Checks whether the sprite is touching the ground or the sky.
+	 * @return
+	 */
 	public boolean isTouchingEdge(){
 		return isTouchingGround() || isTouchingSky();
 	}
 	
+	/**
+	 * Checks whether the sprite is touching the ground.
+	 * @return
+	 */
 	public boolean isTouchingGround(){
 		return this.y + this.height > this.view.getHeight() - this.view.getHeight() * Frontground.GROUND_HEIGHT;
 	}
 	
+	/**
+	 * Checks whether the sprite is touching the sky.
+	 * @return
+	 */
 	public boolean isTouchingSky(){
 		return this.y < 0;
 	}
 	
+	/**
+	 * Checks whether the play has passed this sprite.
+	 * @return
+	 */
 	public boolean isPassed(){
-		return this.x + this.width < view.player.getX();
+		return this.x + this.width < view.getPlayer().getX();
 	}
 	
+	/**
+	 * What should be done, when the player passes this sprite?
+	 */
 	public void onPass(){
 		
 	}
@@ -153,10 +222,21 @@ public abstract class Sprite {
 		this.speedY = speedY;
 	}
 	
+	/**
+	 * Creates a bitmap that is scales with the getScaleFactor method.
+	 * @param drawable
+	 * @return
+	 */
 	public Bitmap createBitmap(Drawable drawable){
-		return createBitmap(drawable, context);
+		return createBitmap(drawable, game);
 	}
 	
+	/**
+	 * Creates a bitmap that is scales with the getScaleFactor method.
+	 * Static so everyone, who provides a Context, can use it.
+	 * @param drawable
+	 * @return
+	 */
 	public static Bitmap createBitmap(Drawable drawable, Context context){
 		BitmapDrawable bd = (BitmapDrawable) drawable;
 		Bitmap bm = bd.getBitmap();
@@ -166,14 +246,24 @@ public abstract class Sprite {
 				false);
 	}
 	
+	/**
+	 * Returns a scale factor related to the screen resolution that is used for scaling bitmaps.
+	 * @param context
+	 * @return
+	 */
 	public static float getScaleFactor(Context context){
 		// 1.2 @ 720x1280 px
 		return context.getResources().getDisplayMetrics().heightPixels / 1066f;
 	}
 	
+	/**
+	 * Gives a value that will be tolerated when touching a sprite.
+	 * Because my images have some whitespace to the edge.
+	 * @return
+	 */
 	private int getCollisionTolerance(){
 		// 25 @ 720x1280 px
-		return context.getResources().getDisplayMetrics().heightPixels / 50;
+		return game.getResources().getDisplayMetrics().heightPixels / 50;
 	}
 
 }

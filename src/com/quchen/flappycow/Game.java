@@ -1,5 +1,8 @@
 /**
  * The Game
+ * 
+ * @author Lars Harmsen
+ * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
 package com.quchen.flappycow;
@@ -11,8 +14,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -22,19 +23,41 @@ import android.os.Message;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class Game extends Activity implements OnDismissListener{
+public class Game extends Activity{
+	/** Will play things like mooing */
 	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
+	
+	/**
+	 * Will play songs like:
+	 * nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan
+	 * nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan
+	 * nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan
+	 * nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan nyan
+	 * Does someone know the second verse ???
+	 */
 	public static MediaPlayer musicPlayer = null;
+	
+	/**
+	 * Whether the music should play or not
+	 */
 	public boolean musicShouldPlay = false;
 	
-	/** time interval (ms) you have to press the backbutton twice in to exit */
+	/** Time interval (ms) you have to press the backbutton twice in to exit */
 	private static final long DOUBLE_BACK_TIME = 1000;
+	
+	/** Saves the time of the last backbutton press*/
 	private long backPressed;
 	
-	private MyHandler handler;	// To do UI things from different threads
+	/** To do UI things from different threads */
+	private MyHandler handler;
 	
+	/** The view that handles all kind of stuff */
 	GameView view;
+	
+	/** The amount of passed obstacles */
 	int points;
+	
+	/** The dialog displayed when the game is over*/
 	GameOverDialog gameOverDialog;
 	
 	@Override
@@ -43,15 +66,11 @@ public class Game extends Activity implements OnDismissListener{
 		points = 0;
 		view = new GameView(this);
 		gameOverDialog = new GameOverDialog(this);
+		handler = new MyHandler(this);
 		setLayouts();
-		initHandler();
 		initMusicPlayer();
 	}
-	
-	private void initHandler(){
-		handler = new MyHandler(this);
-	}
-	
+
 	public void initMusicPlayer(){
 		if(musicPlayer == null){
 			// to avoid unnecessary reinitialisation
@@ -59,9 +78,12 @@ public class Game extends Activity implements OnDismissListener{
 			musicPlayer.setLooping(true);
 			musicPlayer.setVolume(MainActivity.volume, MainActivity.volume);
 		}
-		musicPlayer.seekTo(0);
+		musicPlayer.seekTo(0);	// Reset song to position 0
 	}
 	
+	/**
+	 * Creates the layout containing a layout for ads and the GameView
+	 */
 	private void setLayouts(){
 		LinearLayout mainLayout = new LinearLayout(this);
 		mainLayout.setOrientation(LinearLayout.VERTICAL);
@@ -80,13 +102,23 @@ public class Game extends Activity implements OnDismissListener{
 		adView.loadAd(new AdRequest.Builder().build());
 	}
 	
+	/**
+	 * Pauses the view and the music
+	 */
 	@Override
 	protected void onPause() {
 		view.pause();
-		musicPlayer.pause();
+		if(musicPlayer.isPlaying()){
+			musicPlayer.pause();
+		}
 		super.onPause();
 	}
 
+	/**
+	 * Resumes the view (but waits the view waits for a tap)
+	 * and starts the music if it should be running.
+	 * Also checks whether the Google Play Services are available.
+	 */
 	@Override
 	protected void onResume() {
 		view.resume();
@@ -100,6 +132,9 @@ public class Game extends Activity implements OnDismissListener{
 		super.onResume();
 	}
 	
+	/**
+	 * Prevent accidental exits by requiring a double press.
+	 */
 	@Override
 	public void onBackPressed() {
 		if(System.currentTimeMillis() - backPressed < DOUBLE_BACK_TIME){
@@ -110,19 +145,24 @@ public class Game extends Activity implements OnDismissListener{
 		}
 	}
 
+	/**
+	 * Sends the handler the command to show the GameOverDialog.
+	 * Because it needs an UI thread.
+	 */
 	public void gameOver(){
-//		Intent intent = new Intent("com.quchen.flappycow.GameOverScreen");
-//		intent.putExtra("points", points);
-//		startActivity(intent);
-//		finish();
 		handler.sendMessage(Message.obtain(handler,0));
-//		view.pause();
 	}
 
-	public void obsticalPassed(){
+	/**
+	 * What should happen, when an obstacle is passed?
+	 */
+	public void obstaclePassed(){
 		points++;
 	}
 	
+	/**
+	 * Shows the GameOverDialog when a message with code 0 is received.
+	 */
 	static class MyHandler extends Handler{
 		private Game game;
 		
@@ -139,10 +179,5 @@ public class Game extends Activity implements OnDismissListener{
 					break;
 			}
 		}
-	}
-
-	@Override
-	public void onDismiss(DialogInterface dialog) {
-		finish();
 	}
 }

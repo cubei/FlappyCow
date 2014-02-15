@@ -24,7 +24,7 @@ Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details
 * ACCESS_NETWORK_STATE, for avoiding sending ad requests if there's not internet connection
 
 ## License 
-* [MIT](http://opensource.org/licenses/MIT), see LICENSE file
+* [MIT](http://opensource.org/licenses/MIT), see [LICENSE file](/LICENSE)
 * Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell
 
 ## Version 
