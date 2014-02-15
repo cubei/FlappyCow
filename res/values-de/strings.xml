@@ -12,4 +12,5 @@
     <string name="license">Lizenz - MIT</string>
     <string name="nyan_cat">Nyan Cat wurde von Christopher Torres gezeichnet und もももも remixte die Musik von daniwell </string>
     <string name="onscreen_score_text">Punkte:</string>
+    <string name="on_back_press">Zum Beenden nochmal den Zurückknopf drücken</string>
 </resources>

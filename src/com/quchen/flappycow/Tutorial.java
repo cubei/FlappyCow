@@ -21,6 +21,5 @@ public class Tutorial extends Sprite {
 		this.x = view.getWidth() / 2 - this.width / 2;
 		this.y = view.getHeight() / 2 - this.height / 2;
 	}
-	
-	
+
 }

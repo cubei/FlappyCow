@@ -93,7 +93,6 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 				}
 			}
 		}
-		
 	}
 	
 	/**
@@ -170,11 +169,22 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		tutorial.draw(canvas);
 	}
 	
+	/**
+	 * Let the cow fall to the ground
+	 */
+	private void playerDeadFall(){
+		player.dead();
+		do{
+			player.move();
+			draw();
+		}while(!player.isTouchingGround());
+	}
+	
 	private void checkPasses(){
 		for(Obstacle o : obstacles){
 			if(o.isPassed()){
 				o.onPass();
-				createToast();
+				createPowerUp();
 			}
 		}
 	}
@@ -182,9 +192,10 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	/**
 	 * Creates a toast with a certain chance
 	 */
-	private void createToast(){
-		// If no powerUp is present and you have more than / equal 40 points
+	private void createPowerUp(){
+		// Toast
 		if(game.points >= 40 && powerUps.size() < 1 && !(player instanceof NyanCat)){
+			// If no powerUp is present and you have more than / equal 40 points
 			if(Math.random()*100 < 33){	// 33% chance
 				powerUps.add(new Toast(this, game));
 			}
@@ -226,6 +237,9 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 				i--;
 			}
 		}
+		if(player.isTouchingEdge()){
+			gameOver();
+		}
 	}
 	
 	/**
@@ -266,7 +280,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		this.player.setX(tmp.x);
 		this.player.setY(tmp.y);
 		
-		Game.musicShouldPlay = true;
+		game.musicShouldPlay = true;
 		Game.musicPlayer.start();
 	}
 	
@@ -290,6 +304,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
 	public void gameOver(){
 		this.shouldRun = false;
+		playerDeadFall();
 		game.gameOver();
 	}
 	

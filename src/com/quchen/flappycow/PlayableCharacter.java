@@ -2,7 +2,7 @@ package com.quchen.flappycow;
 
 import android.content.Context;
 
-public class PlayableCharacter extends Sprite {
+public abstract class PlayableCharacter extends Sprite {
 	
 	public PlayableCharacter(GameView view, Context context) {
 		super(view, context);
@@ -22,16 +22,11 @@ public class PlayableCharacter extends Sprite {
 			this.speedY = getMaxSpeed();
 		}
 		
-		if(this.y + this.height > this.view.getHeight() - this.view.getHeight() * Frontground.GROUND_HEIGHT) {
-			// Touching ground
-			view.gameOver();
-		}
-		if(this.y < 0){
-			// Touching sky
-			view.gameOver();
-		}
-		
 		super.move();
+	}
+
+	public void dead(){
+		this.speedY = getMaxSpeed()/2;
 	}
 	
 	public void onTab(){

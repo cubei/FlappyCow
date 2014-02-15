@@ -16,7 +16,7 @@ public class NyanCat extends PlayableCharacter {
 		}
 		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth();
-		this.height = this.bitmap.getHeight();
+		this.height = this.bitmap.getHeight()/2;
 		this.y = context.getResources().getDisplayMetrics().heightPixels / 2;
 		
 		this.rainbow = new Rainbow(view, context);
@@ -26,18 +26,21 @@ public class NyanCat extends PlayableCharacter {
 	public void move(){
 		super.move();
 		
-		// move rainbow
-		rainbow.y = this.y;
-		rainbow.x = this.x - rainbow.width;
-		rainbow.move();
-		
-		// manage frames of the rainbow
-		if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
-			rainbow.row = 0;
-		}else if(speedY > 0){
-			rainbow.row = 1;
-		}else{
-			rainbow.row = 2;
+		if(rainbow != null){
+			
+			// move rainbow
+			rainbow.y = this.y;
+			rainbow.x = this.x - rainbow.width;
+			rainbow.move();
+			
+			// manage frames of the rainbow
+			if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
+				rainbow.row = 0;
+			}else if(speedY > 0){
+				rainbow.row = 1;
+			}else{
+				rainbow.row = 2;
+			}
 		}
 	}
 	
@@ -50,7 +53,18 @@ public class NyanCat extends PlayableCharacter {
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
-		rainbow.draw(canvas);
+		if(rainbow != null){
+			rainbow.draw(canvas);
+		}
+	}
+
+	@Override
+	public void dead() {
+		super.dead();
+		rainbow = null;
+		this.row = 1;
+		
+		// Maybe an explosion
 	}
 
 }

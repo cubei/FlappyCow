@@ -14,8 +14,10 @@ public class Cow extends PlayableCharacter {
 			globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.cow));
 		}
 		this.bitmap = globalBitmap;
-		this.width = this.bitmap.getWidth();
-		this.height = this.bitmap.getHeight()/3;
+		this.colNr = 8;
+		this.width = this.bitmap.getWidth()/colNr;
+		this.height = this.bitmap.getHeight()/4;
+		this.frameTime = 3;
 		this.y = context.getResources().getDisplayMetrics().heightPixels / 2;
 		
 		if(sound == -1){
@@ -38,12 +40,22 @@ public class Cow extends PlayableCharacter {
 		super.move();
 		
 		// manage frames
-		if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
-			row = 0;
-		}else if(speedY > 0){
-			row = 1;
-		}else{
-			row = 2;
+		if(row != 3){
+			// not dead
+			if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
+				row = 0;
+			}else if(speedY > 0){
+				row = 1;
+			}else{
+				row = 2;
+			}
 		}
+	}
+
+	@Override
+	public void dead() {
+		this.row = 3;
+		this.frameTime = 3;
+		super.dead();
 	}
 }

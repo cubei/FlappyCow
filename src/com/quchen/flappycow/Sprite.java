@@ -27,7 +27,7 @@ public abstract class Sprite {
 	protected Rect dst;
 	protected byte col, row;	// Spritesheet kords
 	protected byte colNr = 1;
-	protected short frameTime = (short) (GameView.UPDATE_INTERVAL);
+	protected short frameTime = 1;
 	protected short frameTimeCounter;
 	
 	protected GameView view;
@@ -99,6 +99,18 @@ public abstract class Sprite {
 	
 	public void onCollision(){
 		
+	}
+	
+	public boolean isTouchingEdge(){
+		return isTouchingGround() || isTouchingSky();
+	}
+	
+	public boolean isTouchingGround(){
+		return this.y + this.height > this.view.getHeight() - this.view.getHeight() * Frontground.GROUND_HEIGHT;
+	}
+	
+	public boolean isTouchingSky(){
+		return this.y < 0;
 	}
 	
 	public boolean isPassed(){
