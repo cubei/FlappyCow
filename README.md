@@ -12,9 +12,12 @@ Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details
 #### Google Play Store
 [![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=com.quchen.flappycow)
 
-## How-to
+## How-to play
 * Tap screen to increase altitude
 * Tap ad to increase money
+
+## How-to use the code
+* read the instruction from [instructions.txt](/instructions.txt)
 
 ## Permissions
 * INTERNET, for ads
