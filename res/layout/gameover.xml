@@ -51,7 +51,7 @@
         android:layout_below="@+id/tv_best_score_value"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp"
-        android:background="@drawable/brownbutton"
+        android:background="@drawable/greybutton"
         android:text="@android:string/ok" />
 
     <TextView

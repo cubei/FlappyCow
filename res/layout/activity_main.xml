@@ -21,6 +21,8 @@
 
     <ImageButton
         android:id="@+id/mute_button"
+        style="@style/PrettyButton"
+        android:background="@drawable/brownbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/medaille_socket"
