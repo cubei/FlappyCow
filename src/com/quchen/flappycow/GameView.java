@@ -1,3 +1,11 @@
+/**
+ * GameView
+ * Probably the most important class for the game
+ * 
+ * @author Lars Harmsen
+ * Copyright (c) <2014> <Lars Harmsen - Quchen>
+ */
+
 package com.quchen.flappycow;
 
 import java.util.ArrayList;
@@ -15,15 +23,23 @@ import android.view.View.OnTouchListener;
 
 public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
-	public static final long UPDATE_INTERVAL = 30;	// milliseconds the thread sleeps after drawing
+	/** Milliseconds the thread sleeps after drawing */
+	public static final long UPDATE_INTERVAL = 30;
 
-	Game game;
-	private Thread t;
+	/** The thread that checks, moves and draws */
+	private Thread thread;
+	
+	/** The surfaceholder needed for the canvas drawing */
 	private SurfaceHolder holder;
+	
+	/** Whether the thread should run or not */
 	volatile private boolean shouldRun = true;
+	
+	/** Whether the tutorial was already shown */
 	private boolean showedTutorial = false;
 	
-	PlayableCharacter player;
+	private Game game;
+	private PlayableCharacter player;
 	private Background bg;
 	private Frontground fg;
 	private List<Obstacle> obstacles = new ArrayList<Obstacle>();
@@ -37,15 +53,18 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		this.game = (Game) context;
 
 		holder = getHolder();
-		player = new Cow(this, context);
-		bg = new Background(this, context);
-		fg = new Frontground(this, context);
-		pauseButton = new PauseButton(this, context);
-		tutorial = new Tutorial(this, context);
+		player = new Cow(this, game);
+		bg = new Background(this, game);
+		fg = new Frontground(this, game);
+		pauseButton = new PauseButton(this, game);
+		tutorial = new Tutorial(this, game);
 		
 		setOnTouchListener(this);
 	}
 	
+	/**
+	 * Manages the touchevent
+	 */
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
@@ -58,16 +77,18 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 				pause();
 			}else{
 				// Cow flap
-				this.player.onTab();
+				this.player.onTap();
 			}
 		}
 		
 		return true;
 	}
 	
+	/**
+	 * The thread runs this method
+	 */
 	public void run() {
-		//draw at least once
-		draw();
+		draw();		//draw at least once
 		
 		while(shouldRun || !showedTutorial){
 			if(!showedTutorial){
@@ -77,7 +98,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 				checkPasses();
 				checkOutOfRange();
 				checkCollision();
-				createNew();
+				createObstacle();
 				move();
 	
 				draw();
@@ -112,32 +133,47 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		holder.unlockCanvasAndPost(canvas);
 	}
 	
+	/**
+	 * Joins the thread
+	 */
 	public void pause(){
 		shouldRun = false;
-		while(t != null){
+		while(thread != null){
 			try {
-				t.join();
+				thread.join();
 				break;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		t = null;
+		thread = null;
 	}
 	
+	/**
+	 * Activates the thread.
+	 * But shouldRun will be false.
+	 * This means the canvas will be drawn once.
+	 * If this is the first start of a game, the tutorial will be drawn.
+	 */
 	public void resume(){
 		pause();	// make sure the old thread isn't running
-		t = new Thread(this);
-		t.start();
+		thread = new Thread(this);
+		thread.start();
 	}
 	
+	/**
+	 * Start the thread and let it run.
+	 */
 	public void resumeAndKeepRunning(){
 		pause();	// make sure the old thread isn't running
 		shouldRun = true;
-		t = new Thread(this);
-		t.start();
+		thread = new Thread(this);
+		thread.start();
 	}
 	
+	/**
+	 * Draws all gameobjects on the surface
+	 */
 	private void draw() {
 		while(!holder.getSurface().isValid()){/*wait*/}
 		Canvas canvas = holder.lockCanvas();
@@ -145,6 +181,10 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		holder.unlockCanvasAndPost(canvas);
 	}
 	
+	/**
+	 * Draws all gameobjects on the canvas
+	 * @param canvas
+	 */
 	private void drawCanvas(Canvas canvas) {
 		bg.draw(canvas);
 		for(Obstacle r : obstacles){
@@ -164,13 +204,17 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.points, getScoreTextMetrics(), getScoreTextMetrics(), paint);
 	}
 	
+	/**
+	 * Draws the tutorial on the canvas
+	 * @param canvas
+	 */
 	private void drawTutorial(Canvas canvas) {
 		tutorial.move();
 		tutorial.draw(canvas);
 	}
 	
 	/**
-	 * Let the cow fall to the ground
+	 * Let the player fall to the ground
 	 */
 	private void playerDeadFall(){
 		player.dead();
@@ -180,6 +224,9 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		}while(!player.isTouchingGround());
 	}
 	
+	/**
+	 * Checks whether a obstacle is passed.
+	 */
 	private void checkPasses(){
 		for(Obstacle o : obstacles){
 			if(o.isPassed()){
@@ -203,7 +250,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	}
 	
 	/**
-	 * Checks whether sprites are out of range and deletes them
+	 * Checks whether the obstacles or powerUps are out of range and deletes them
 	 */
 	private void checkOutOfRange(){
 		for(int i=0; i<obstacles.size(); i++){
@@ -245,7 +292,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	/**
 	 * if no obstacle is present a new one is created
 	 */
-	private void createNew(){
+	private void createObstacle(){
 		if(obstacles.size() < 1){
 			obstacles.add(new Obstacle(this, game));
 		}
@@ -274,6 +321,9 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		player.move();
 	}
 	
+	/**
+	 * Changes the player to Nyan Cat
+	 */
 	public void changeToNyanCat(){
 		PlayableCharacter tmp = this.player;
 		this.player = new NyanCat(this, game);
@@ -302,6 +352,10 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		}
 	}
 	
+	/**
+	 * Let's the player fall down dead, makes sure the runcycle stops
+	 * and invokes the next method for the dialog and stuff.
+	 */
 	public void gameOver(){
 		this.shouldRun = false;
 		playerDeadFall();
@@ -314,6 +368,14 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	public int getScoreTextMetrics(){
 		// 106 @ 720x1280 px
 		return this.getHeight() / 12;
+	}
+	
+	public PlayableCharacter getPlayer(){
+		return this.player;
+	}
+	
+	public Game getGame(){
+		return this.game;
 	}
 
 }

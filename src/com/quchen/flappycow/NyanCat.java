@@ -1,27 +1,42 @@
+/**
+ * Nyan Cat character
+ * 
+ * @author Lars Harmsen
+ * Copyright (c) <2014> <Lars Harmsen - Quchen>
+ * 
+ * Nyan Cat was drawn by Christopher Torres and momo momo remixed the music by daniwell
+ */
+
 package com.quchen.flappycow;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 public class NyanCat extends PlayableCharacter {
 	
+	/** Static bitmap to reduce memory usage */
 	public static Bitmap globalBitmap;
+	
+	/** The rainbow tail behind the cat */
 	private Rainbow rainbow;
 	
-	public NyanCat(GameView view, Context context) {
-		super(view, context);
+	public NyanCat(GameView view, Game game) {
+		super(view, game);
 		if(globalBitmap == null){
-			globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.nyan_cat));
+			globalBitmap = createBitmap(game.getResources().getDrawable(R.drawable.nyan_cat));
 		}
 		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth();
 		this.height = this.bitmap.getHeight()/2;
-		this.y = context.getResources().getDisplayMetrics().heightPixels / 2;
+		this.y = game.getResources().getDisplayMetrics().heightPixels / 2;
 		
-		this.rainbow = new Rainbow(view, context);
+		this.rainbow = new Rainbow(view, game);
 	}
 	
+	/**
+	 * Moves itself via super.move
+	 * and moves the rainbow and manages its frames
+	 */
 	@Override
 	public void move(){
 		super.move();
@@ -43,13 +58,11 @@ public class NyanCat extends PlayableCharacter {
 			}
 		}
 	}
-	
-	@Override
-	public void onTab(){
-		super.onTab();
-		rainbow.col = 0;
-	}
 
+	/**
+	 * Draws itself via super.draw
+	 * and the rainbow.
+	 */
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
@@ -58,6 +71,11 @@ public class NyanCat extends PlayableCharacter {
 		}
 	}
 
+	/**
+	 * Calls super.dead,
+	 * removes the rainbow tail
+	 * and set the bitmapframe to a dead cat -.-
+	 */
 	@Override
 	public void dead() {
 		super.dead();

@@ -1,27 +1,35 @@
+/**
+ * The cow that is controlled by the player
+ * 
+ * @author Lars Harmsen
+ * Copyright (c) <2014> <Lars Harmsen - Quchen>
+ */
+
 package com.quchen.flappycow;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 
 public class Cow extends PlayableCharacter {
 	
+	/** Static bitmap to reduce memory usage. */
 	public static Bitmap globalBitmap;
+	
+	/** The moo sound */
 	private static int sound = -1;
 
-	public Cow(GameView view, Context context) {
-		super(view, context);
+	public Cow(GameView view, Game game) {
+		super(view, game);
 		if(globalBitmap == null){
-			globalBitmap = createBitmap(context.getResources().getDrawable(R.drawable.cow));
+			globalBitmap = createBitmap(game.getResources().getDrawable(R.drawable.cow));
 		}
 		this.bitmap = globalBitmap;
-		this.colNr = 8;
-		this.width = this.bitmap.getWidth()/colNr;
-		this.height = this.bitmap.getHeight()/4;
-		this.frameTime = 3;
-		this.y = context.getResources().getDisplayMetrics().heightPixels / 2;
+		this.width = this.bitmap.getWidth()/(colNr = 8);	// The image has 8 frames in a row
+		this.height = this.bitmap.getHeight()/4;			// and 4 in a column
+		this.frameTime = 3;		// the frame will change every 3 runs
+		this.y = game.getResources().getDisplayMetrics().heightPixels / 2;	// Startposition in in the middle of the screen
 		
 		if(sound == -1){
-			sound = Game.soundPool.load(context, R.raw.cow, 1);
+			sound = Game.soundPool.load(game, R.raw.cow, 1);
 		}
 	}
 	
@@ -30,11 +38,15 @@ public class Cow extends PlayableCharacter {
 	}
 
 	@Override
-	public void onTab(){
-		super.onTab();
+	public void onTap(){
+		super.onTap();
 		playSound();
 	}
 	
+	/**
+	 * Calls super.move
+	 * and manages the frames. (flattering cape)
+	 */
 	@Override
 	public void move(){
 		super.move();
@@ -52,6 +64,10 @@ public class Cow extends PlayableCharacter {
 		}
 	}
 
+	/**
+	 * Calls super.dead
+	 * And changes the frame to a dead cow -.-
+	 */
 	@Override
 	public void dead() {
 		this.row = 3;

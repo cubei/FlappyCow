@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--	@author Lars Harmsen
+		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
 <resources>
-
-    <string name="app_name">FlappyCow</string>
+    <string name="app_name">FlutterCow</string>
     <string name="ad_unit_id">ca-app-pub-5615758120938208/1207416779</string>
     <string name="current_score">Your score is</string>
     <string name="best_score">Your best score is</string>
@@ -16,10 +17,10 @@
     <string name="graphics">Graphics - Lars Harmsen</string>
     <string name="consulting">Consulting - repat</string>
     <string name="license">License - MIT</string>
-    <string name="nyan_cat">Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell </string>
+    <string name="nyan_cat">Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell</string>
     <string name="onscreen_score_text">Score:</string>
     <string name="on_back_press">Press backbutton again to exit</string>
-    <string name="version">1.82</string>
+    <string name="version">1.83</string>
 
     <style name="PrettyButton">
         <item name="android:layout_width">fill_parent</item>

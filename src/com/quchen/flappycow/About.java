@@ -1,5 +1,8 @@
 /**
  * About Activity for credits
+ * 
+ * @author Lars Harmsen
+ * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
 package com.quchen.flappycow;
@@ -15,6 +18,7 @@ public class About extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
         
+        // Backbutton
         ((Button)findViewById(R.id.back_button)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
