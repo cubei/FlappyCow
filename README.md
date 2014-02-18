@@ -4,6 +4,8 @@ Flappy Cow
 
 **Flappy Cow** is an Android game in "Flappy Bird" Style. Since Nguyen Ha Dong, the developer of "Flappy Bird", anounced [the end](http://www.forbes.com/sites/insertcoin/2014/02/08/flappy-bird-creator-says-hes-taking-the-game-down/) of his loved but also hated game I uploaded this Open Source game, so you have an alternative to fulfill your addiction.
 
+Initially called Flappy Cow, it has now(v.1.83) been renamed to *FlutterCow* because of [Googles policy on the word *Flappy* in app names](http://edition.cnn.com/2014/02/17/tech/mobile/flappy-apps-banned/)
+
 Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details?id=com.quchen.spacecowboy) too!
 
 #### Screenshot
@@ -28,7 +30,7 @@ Make sure to check out [Space Cowboy](https://play.google.com/store/apps/details
 * Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell
 
 ## Version 
-* 1.82
+* 1.83
 
 ## Contact
 #### quchen

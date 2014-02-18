@@ -11,4 +11,4 @@
 * a) The ads need the Google Play Services. You can set up a library project [like this](https://developers.google.com/mobile-ads-sdk/docs/). Android Studio should have this already built in.
 * b) Remove the ads: Go into the `AndroidManifest.xml` and delete the ad related stuff. They should be marked as an error. Now you will see only remaining errors in the `Game.java` file. Delete the faulty lines in *setLayouts()*, *onResume()* and the ad imports.
 
-5. Enjoy the code.
+Enjoy the code.
