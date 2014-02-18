@@ -26,4 +26,12 @@ public class Rainbow extends Sprite {
 		this.height = this.bitmap.getHeight()/3;
 		this.y = game.getResources().getDisplayMetrics().heightPixels / 2;
 	}
+
+	@Override
+	public void move() {
+		changeToNextFrame();
+		super.move();
+	}
+	
+	
 }

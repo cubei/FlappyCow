@@ -74,16 +74,24 @@ public abstract class Sprite {
 	
 	/**
 	 * Modifies the x and y coordinates according to the speedX and speedY value
-	 * Also changes the frame by cycling through the columns.
 	 */
 	public void move(){
+		// changeToNextFrame();
+		// Its more efficient if only the classes that need this implement it in their move method.
+		
+		x+= speedX;
+		y+= speedY;
+	}
+	
+	/**
+	 * Changes the frame by cycling through the columns.
+	 */
+	protected void changeToNextFrame(){
 		this.frameTimeCounter++;
 		if(this.frameTimeCounter >= this.frameTime){
 			this.col = (byte) ((this.col+1) % this.colNr);
 			this.frameTimeCounter = 0;
 		}
-		x+= speedX;
-		y+= speedY;
 	}
 	
 	/**
@@ -148,7 +156,7 @@ public abstract class Sprite {
 	 * What should be done, when the player collide with this sprite?
 	 */
 	public void onCollision(){
-		
+		// Every subclass has to specify this itself
 	}
 	
 	/**
@@ -187,7 +195,7 @@ public abstract class Sprite {
 	 * What should be done, when the player passes this sprite?
 	 */
 	public void onPass(){
-		
+		// Every subclass has to specify this itself
 	}
 
 	public int getX() {

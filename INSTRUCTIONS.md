@@ -12,3 +12,9 @@
 * b) Remove the ads: Go into the `AndroidManifest.xml` and delete the ad related stuff. They should be marked as an error. Now you will see only remaining errors in the `Game.java` file. Delete the faulty lines in *setLayouts()*, *onResume()* and the ad imports.
 
 Enjoy the code.
+
+Suggestions:
+* Not familiar with java programming:
+** Change images to create "Flappy Fish" or other themes. If you keep the image sizes the same, you won't need to change any code.
+* Java programmer
+** Follow Justin Bieber on Twitter or do what ever you want.

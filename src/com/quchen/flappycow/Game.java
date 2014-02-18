@@ -7,11 +7,14 @@
 
 package com.quchen.flappycow;
 
+// Remove the imports below, if you don't want ads
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.sec.android.ad.*;
+// Remove the lines above, if you don't want ads
 
 import android.app.Activity;
 import android.media.AudioManager;
@@ -20,10 +23,13 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Game extends Activity{
+	private int WHICH_AD = 0; 	// 0 = google, 1 = samsung
+	
 	/** Will play things like mooing */
 	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
 	
@@ -71,6 +77,10 @@ public class Game extends Activity{
 		initMusicPlayer();
 	}
 
+	/**
+	 * Initializes the player with the nyan cat song
+	 * and sets the position to 0.
+	 */
 	public void initMusicPlayer(){
 		if(musicPlayer == null){
 			// to avoid unnecessary reinitialisation
@@ -87,21 +97,43 @@ public class Game extends Activity{
 	private void setLayouts(){
 		LinearLayout mainLayout = new LinearLayout(this);
 		mainLayout.setOrientation(LinearLayout.VERTICAL);
+
+		// Remove the lines below, if you don't want ads
+		View ad;
+		if(WHICH_AD == 0){
+			ad = createAdMob();
+		}else{
+			ad = createAdHub();
+		}
+		mainLayout.addView(ad);
+		// Remove the lines above, if you don't want ads
 		
-		//------------ Ad ---------------
+		mainLayout.addView(view);
+
+		setContentView(mainLayout);
+	}
+	
+	// Remove the method below, if you don't want ads
+	/** Samsung AdHub */
+	private View createAdHub(){
+		AdHubView adhubView = new AdHubView(this);
+		adhubView.init(this, getResources().getString(R.string.inventory_id), com.sec.android.ad.info.AdSize.BANNER_320x50);
+		adhubView.startAd();
+		
+		return adhubView;
+	}
+	
+	// Remove the method below, if you don't want ads
+	/** Google AdMob */
+	private AdView createAdMob(){
 		AdView adView = new AdView(this);
 		adView.setAdUnitId(getResources().getString(R.string.ad_unit_id));
 		adView.setAdSize(AdSize.BANNER);
-		//-------------------------------
-
-		mainLayout.addView(adView);
-		mainLayout.addView(view);
-		
-		setContentView(mainLayout);
 		
 		adView.loadAd(new AdRequest.Builder().build());
+		return adView;
 	}
-	
+
 	/**
 	 * Pauses the view and the music
 	 */

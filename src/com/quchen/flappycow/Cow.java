@@ -13,7 +13,7 @@ public class Cow extends PlayableCharacter {
 	
 	/** Static bitmap to reduce memory usage. */
 	public static Bitmap globalBitmap;
-	
+
 	/** The moo sound */
 	private static int sound = -1;
 
@@ -49,6 +49,7 @@ public class Cow extends PlayableCharacter {
 	 */
 	@Override
 	public void move(){
+		changeToNextFrame();
 		super.move();
 		
 		// manage frames

@@ -44,7 +44,7 @@ public class NyanCat extends PlayableCharacter {
 		if(rainbow != null){
 			
 			// move rainbow
-			rainbow.y = this.y;
+			rainbow.y = this.y;		// nyan cat and rainbow bitmap have the same height
 			rainbow.x = this.x - rainbow.width;
 			rainbow.move();
 			

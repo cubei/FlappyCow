@@ -63,7 +63,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	}
 	
 	/**
-	 * Manages the touchevent
+	 * Manages the touchevents
 	 */
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {

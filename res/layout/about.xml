@@ -56,11 +56,21 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
     <TextView
+        android:id="@+id/source_code_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/licence_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/source_code"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
         android:id="@+id/nyan_cat_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/licence_tv"
+        android:layout_below="@+id/source_code_tv"
         android:layout_marginTop="50dp"
         android:text="@string/nyan_cat"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -72,6 +82,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/version" />
+        android:text="x.x" /> <!-- The Version will be set in java code -->
 
 </RelativeLayout>

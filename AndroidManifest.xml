@@ -3,18 +3,26 @@
 		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quchen.flappycow"
-    android:versionCode="12"
-    android:versionName="1.83" >
+    android:versionCode="13"
+    android:versionName="1.84" >
 
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="19" />
     
-    <!-- Used to request banner and interstitial ads. -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Used to avoid sending an ad request if there is no connectivity. -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Remove the following permissions, if you don't want ads -->
+	    <!-- Used to request banner and interstitial ads. -->
+	    <uses-permission android:name="android.permission.INTERNET" />
+	
+	    <!-- Used to avoid sending an ad request if there is no connectivity. -->
+	    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	    
+	    <!-- Samsung AdHub needs these -->
+	    <!--
+	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+		<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+		 -->
+	<!-- Remove the lines above, if you don't want ads -->
 
     <application
         android:allowBackup="true"
@@ -56,11 +64,17 @@
             </intent-filter>
         </activity>
         
-        <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version"/>
-        <activity
-            android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        
+        <!-- Remove the lines below, if you don't want ads -->
+	        <meta-data android:name="com.google.android.gms.version"
+	           android:value="@integer/google_play_services_version"/>
+	        <activity
+	            android:name="com.google.android.gms.ads.AdActivity"
+	            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+	        
+	        <activity android:name="com.sec.android.ad.AdActivity" 
+	             android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <!-- Remove the lines above, if you don't want ads -->
         
     </application>
 

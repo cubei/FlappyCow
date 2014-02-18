@@ -11,6 +11,7 @@
     <string name="consulting">Beratung - repat</string>
     <string name="license">Lizenz - MIT</string>
     <string name="nyan_cat">Nyan Cat wurde von Christopher Torres gezeichnet und もももも remixte die Musik von daniwell </string>
+    <string name="source_code">Hol dir den Quellcode hier:\nhttps://github.com/cubei/FlappyCow</string>
     <string name="onscreen_score_text">Punkte:</string>
     <string name="on_back_press">Zum Beenden nochmal den Zurückknopf drücken</string>
 </resources>
