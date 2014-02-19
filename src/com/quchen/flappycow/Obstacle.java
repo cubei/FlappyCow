@@ -14,7 +14,7 @@ public class Obstacle extends Sprite{
 	private WoodLog log;
 	
 	/** Necessary so the onPass method is just called once */
-	private boolean isPassed = false;
+	public boolean isAlreadyPassed = false;
 
 	public Obstacle(GameView view, Game game) {
 		super(view, game);
@@ -99,8 +99,8 @@ public class Obstacle extends Sprite{
 	 */
 	@Override
 	public void onPass(){
-		if(!isPassed){
-			isPassed = true;
+		if(!isAlreadyPassed){
+			isAlreadyPassed = true;
 			view.getGame().obstaclePassed();
 		}
 	}

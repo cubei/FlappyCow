@@ -22,6 +22,6 @@ public abstract class PowerUp extends Sprite {
 		this.x = view.getWidth() * 4/5;
 		this.y = 0 - this.height;
 		this.speedX = - view.getSpeedX();
-		this.speedY = view.getSpeedX();
+		this.speedY = (int) (view.getSpeedX() * (Math.random() + 0.5));
 	}
 }

@@ -14,9 +14,9 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.sec.android.ad.*;
-// Remove the lines above, if you don't want ads
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -28,6 +28,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Game extends Activity{
+	/** Name of the SharedPreference that saves the medals */
+	public static final String coin_save = "coin_save";
+	
+	/** Key that saves the medal */
+	public static final String coin_key = "coin_key";
+	
 	private int WHICH_AD = 0; 	// 0 = google, 1 = samsung
 	
 	/** Will play things like mooing */
@@ -63,6 +69,12 @@ public class Game extends Activity{
 	/** The amount of passed obstacles */
 	int points;
 	
+	/** The amount of collected coins */
+	int coins;
+	
+	/** This will increase the revive price */
+	public int numberOfRevive = 1;
+	
 	/** The dialog displayed when the game is over*/
 	GameOverDialog gameOverDialog;
 	
@@ -75,6 +87,7 @@ public class Game extends Activity{
 		handler = new MyHandler(this);
 		setLayouts();
 		initMusicPlayer();
+		loadCoins();
 	}
 
 	/**
@@ -132,6 +145,11 @@ public class Game extends Activity{
 		
 		adView.loadAd(new AdRequest.Builder().build());
 		return adView;
+	}
+	
+	private void loadCoins(){
+		SharedPreferences saves = this.getSharedPreferences(coin_save, 0);
+        this.coins = saves.getInt(coin_key, 0);
 	}
 
 	/**
@@ -206,7 +224,7 @@ public class Game extends Activity{
 		public void handleMessage(Message msg) {
 			switch(msg.what){
 				case 0:
-					game.gameOverDialog.init(game.points);
+					game.gameOverDialog.init();
 					game.gameOverDialog.show();
 					break;
 			}

@@ -10,6 +10,8 @@
     <string name="play_button">Start to play</string>
     <string name="about_button">about</string>
     <string name="about_back_button">back</string>
+    <string name="revive_button">Revive for</string>
+    <string name="coins">coins</string>
     <string name="medaille_image">Medaillenimage</string>
     <string name="mute_button">Mutes the sound</string>
     <string name="developer">Developer: Lars Harmsen</string>
@@ -19,6 +21,7 @@
     <string name="nyan_cat">Nyan Cat was drawn by Christopher Torres and もももも remixed the music by daniwell</string>
     <string name="source_code">Get the source code here:\nhttps://github.com/cubei/FlappyCow</string>
     <string name="onscreen_score_text">Score:</string>
+    <string name="onscreen_coin_text">Coins:</string>
     <string name="on_back_press">Press backbutton again to exit</string>
     
     <string name="ad_unit_id">ca-app-pub-5615758120938208/1207416779</string>

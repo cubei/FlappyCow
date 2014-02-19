@@ -201,7 +201,9 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		Paint paint = new Paint();
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(getScoreTextMetrics());
-		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.points, getScoreTextMetrics(), getScoreTextMetrics(), paint);
+		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.points
+						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
+						getScoreTextMetrics(), getScoreTextMetrics(), paint);
 	}
 	
 	/**
@@ -221,7 +223,44 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		do{
 			player.move();
 			draw();
+			// sleep
+			try {
+				Thread.sleep(UPDATE_INTERVAL/4);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}while(!player.isTouchingGround());
+	}
+	
+	/**
+	 * Draws everything normal,
+	 * except the player will only be drawn, when the parameter is true
+	 * @param drawPlayer
+	 */
+	private void drawBlinking(boolean drawPlayer){
+		while(!holder.getSurface().isValid()){/*wait*/}
+		Canvas canvas = holder.lockCanvas();
+		bg.draw(canvas);
+		for(Obstacle r : obstacles){
+			r.draw(canvas);
+		}
+		for(PowerUp p : powerUps){
+			p.draw(canvas);
+		}
+		if(drawPlayer){
+			player.draw(canvas);
+		}
+		fg.draw(canvas);
+		pauseButton.draw(canvas);
+		
+		// Score Text
+		Paint paint = new Paint();
+		paint.setColor(Color.BLACK);
+		paint.setTextSize(getScoreTextMetrics());
+		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.points
+						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
+						getScoreTextMetrics(), getScoreTextMetrics(), paint);
+		holder.unlockCanvasAndPost(canvas);
 	}
 	
 	/**
@@ -230,8 +269,10 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	private void checkPasses(){
 		for(Obstacle o : obstacles){
 			if(o.isPassed()){
-				o.onPass();
-				createPowerUp();
+				if(!o.isAlreadyPassed){
+					o.onPass();
+					createPowerUp();
+				}
 			}
 		}
 	}
@@ -240,6 +281,10 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 * Creates a toast with a certain chance
 	 */
 	private void createPowerUp(){
+		if((powerUps.size() < 1) && (Math.random()*100 < 20)){
+			// If no powerUp is present and 20% chance
+			powerUps.add(new Coin(this, game));
+		}
 		// Toast
 		if(game.points >= 40 && powerUps.size() < 1 && !(player instanceof NyanCat)){
 			// If no powerUp is present and you have more than / equal 40 points
@@ -329,6 +374,8 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		this.player = new NyanCat(this, game);
 		this.player.setX(tmp.x);
 		this.player.setY(tmp.y);
+		this.player.setSpeedX(tmp.speedX);
+		this.player.setSpeedY(tmp.speedY);
 		
 		game.musicShouldPlay = true;
 		Game.musicPlayer.start();
@@ -362,12 +409,50 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		game.gameOver();
 	}
 	
+	public void revive() {
+		pause();	// make sure the old thread isn't running
+		
+		game.numberOfRevive++;
+		
+		// This needs to run another thread, so the dialog can close.
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				setupRevive();
+			}
+		}).start();
+	}
+	
+	/**
+	 * Sets the player into startposition
+	 * Removes obstacles.
+	 * Let's the character blink a few times.
+	 */
+	private void setupRevive(){
+		game.gameOverDialog.hide();
+		player.setY(this.getHeight()/2 - player.width/2);
+		player.setX(this.getWidth()/6);
+		obstacles.clear();
+		powerUps.clear();
+		player.row = 0;
+		for(int i = 0; i < 6; ++i){
+			drawBlinking(i%2 == 0);
+			// sleep
+			try {
+				Thread.sleep(UPDATE_INTERVAL*5);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		resumeAndKeepRunning();
+	}
+	
 	/**
 	 * A value for the position and size of the onScreen score Text
 	 */
 	public int getScoreTextMetrics(){
-		// 106 @ 720x1280 px
-		return this.getHeight() / 12;
+		// 64 @ 720x1280 px
+		return this.getHeight() / 20;
 	}
 	
 	public PlayableCharacter getPlayer(){

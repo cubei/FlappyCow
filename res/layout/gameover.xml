@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    android:padding="40dp" >
+    android:padding="30dp" >
 
     <TextView
         android:id="@+id/tv_current_score_value"
@@ -25,13 +25,23 @@
         android:text="@string/defaultscore"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <TextView
+        android:id="@+id/tv_current_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:text="@string/current_score"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <ImageView
         android:id="@+id/medaille"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_current_score_value"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="17dp"
         android:contentDescription="@string/medaille"
         android:src="@drawable/gold" />
 
@@ -41,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/medaille"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="22dp"
         android:text="@string/best_score"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -52,17 +62,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_best_score_value"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/greybutton"
         android:text="@android:string/ok" />
 
-    <TextView
-        android:id="@+id/tv_current_score"
+    <Button
+        android:id="@+id/b_revive"
+        style="@style/PrettyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/current_score"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_below="@+id/b_ok"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/greybutton"
+        android:text="@string/revive_button" />
 
 </RelativeLayout>

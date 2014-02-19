@@ -3,8 +3,8 @@
 		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quchen.flappycow"
-    android:versionCode="13"
-    android:versionName="1.84" >
+    android:versionCode="14"
+    android:versionName="1.9" >
 
     <uses-sdk
         android:minSdkVersion="10"

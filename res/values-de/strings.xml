@@ -6,6 +6,8 @@
     <string name="best_score">Dein Rekord</string>
     <string name="about_button">Über</string>
     <string name="about_back_button">Zurück</string>
+     <string name="revive_button">Widerbeleben für</string>
+    <string name="coins">Münzen</string>
     <string name="developer">Entwickler - Lars Harmsen</string>
     <string name="graphics">Grafiken - Lars Harmsen</string>
     <string name="consulting">Beratung - repat</string>
@@ -13,5 +15,6 @@
     <string name="nyan_cat">Nyan Cat wurde von Christopher Torres gezeichnet und もももも remixte die Musik von daniwell </string>
     <string name="source_code">Hol dir den Quellcode hier:\nhttps://github.com/cubei/FlappyCow</string>
     <string name="onscreen_score_text">Punkte:</string>
+    <string name="onscreen_coin_text">Münzen:</string>
     <string name="on_back_press">Zum Beenden nochmal den Zurückknopf drücken</string>
 </resources>
