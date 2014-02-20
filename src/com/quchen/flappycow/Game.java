@@ -13,9 +13,10 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.games.GamesClient;
+import com.google.example.games.basegameutils.BaseGameActivity;
 import com.sec.android.ad.*;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -27,7 +28,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class Game extends Activity{
+public class Game extends BaseGameActivity{
 	/** Name of the SharedPreference that saves the medals */
 	public static final String coin_save = "coin_save";
 	
@@ -63,11 +64,11 @@ public class Game extends Activity{
 	/** To do UI things from different threads */
 	private MyHandler handler;
 	
+	/** Hold all accomplishments */
+	AccomplishmentBox accomplishmentBox;
+	
 	/** The view that handles all kind of stuff */
 	GameView view;
-	
-	/** The amount of passed obstacles */
-	int points;
 	
 	/** The amount of collected coins */
 	int coins;
@@ -81,7 +82,7 @@ public class Game extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		points = 0;
+		accomplishmentBox = new AccomplishmentBox();
 		view = new GameView(this);
 		gameOverDialog = new GameOverDialog(this);
 		handler = new MyHandler(this);
@@ -207,7 +208,11 @@ public class Game extends Activity{
 	 * What should happen, when an obstacle is passed?
 	 */
 	public void obstaclePassed(){
-		points++;
+		accomplishmentBox.points++;
+	}
+	
+	public GamesClient getGamesClient(){
+		return this.mHelper.getGamesClient();
 	}
 	
 	/**
@@ -230,4 +235,10 @@ public class Game extends Activity{
 			}
 		}
 	}
+
+	@Override
+	public void onSignInFailed() {}
+
+	@Override
+	public void onSignInSucceeded() {}
 }

@@ -3,8 +3,8 @@
 		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quchen.flappycow"
-    android:versionCode="14"
-    android:versionName="1.9" >
+    android:versionCode="15"
+    android:versionName="1.95" >
 
     <uses-sdk
         android:minSdkVersion="10"
@@ -30,8 +30,9 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"> >
         
-        <meta-data android:name="com.google.android.gms.version"
-           android:value="@integer/google_play_services_version" />
+        <!-- For Google Play Services -->       
+        <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/app_id" />
+        
         
         <activity
             android:name="com.quchen.flappycow.MainActivity"

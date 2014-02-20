@@ -53,5 +53,47 @@
         
         android:background="@drawable/brownbutton"
         android:text="@string/about_button" />
+    
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/play_button"
+        android:layout_centerHorizontal="true"
+        android:text="Sign Out"
+        android:visibility="gone" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/play_button"
+        android:layout_centerHorizontal="true" >
+    </com.google.android.gms.common.SignInButton>
+
+    <TextView
+        android:id="@+id/view_middle_invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/play_button"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:id="@+id/highscore_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/view_middle_invisible"
+        android:layout_toRightOf="@+id/view_middle_invisible"
+        android:contentDescription="highscorebutton"
+        android:src="@drawable/highscore_button" />
+
+    <ImageButton
+        android:id="@+id/achievement_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/view_middle_invisible"
+        android:layout_toLeftOf="@+id/view_middle_invisible"
+        android:contentDescription="achievementbutton"
+        android:src="@drawable/achievement_button" />
 
 </RelativeLayout>

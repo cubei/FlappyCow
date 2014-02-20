@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--	@author Lars Harmsen
+		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
+<resources>
+    <string name="app_id">508732765831</string>
+    
+    <string name="ad_unit_id">ca-app-pub-5615758120938208/1207416779</string>	<!-- Google Admob -->
+    <string name="inventory_id">xv0e00000003c0</string>							<!-- Samsung Adhub -->
+    
+    <string name="leaderboard_highscore">CgkIh-3XlucOEAIQAQ</string>
+    
+    <string name="achievement_survive_5_minutes">CgkIh-3XlucOEAIQAg</string>
+    <string name="achievement_toastification">CgkIh-3XlucOEAIQAw</string>
+    <string name="achievement_bronze">CgkIh-3XlucOEAIQBA</string>
+    <string name="achievement_silver">CgkIh-3XlucOEAIQBQ</string>
+    <string name="achievement_gold">CgkIh-3XlucOEAIQBg</string>
+</resources>

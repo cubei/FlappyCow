@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--	@author Lars Harmsen
+		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
+<resources>
+    <string name="current_score">あなた の スコア</string>
+    <string name="best_score">あなた の いちばん スコア</string>
+    <!-- <string name="about_button">watashi</string> -->
+    <!-- <string name="about_back_button">bakku</string> -->
+    <!-- <string name="revive_button">Widerbeleben für</string> -->
+    <string name="coins">おかね</string>
+	<!-- <string name="developer">Entwickler - Lars Harmsen</string> -->
+    <!-- <string name="graphics">Grafiken - Lars Harmsen</string> -->
+    <!-- <string name="consulting">Beratung - repat</string> -->
+    <!-- <string name="license">Lizenz - MIT</string> -->
+    <!-- <string name="nyan_cat">Nyan Cat wurde von Christopher Torres gezeichnet und もももも remixte die Musik von daniwell </string> -->
+    <!-- <string name="source_code">Hol dir den Quellcode hier:\nhttps://github.com/cubei/FlappyCow</string> -->
+    <string name="onscreen_score_text">スコア:</string>
+    <string name="onscreen_coin_text">おかね:</string>
+    <!-- <string name="on_back_press">Zum Beenden nochmal den Zurückknopf drücken</string> -->
+</resources>

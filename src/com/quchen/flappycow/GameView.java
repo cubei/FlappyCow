@@ -201,7 +201,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		Paint paint = new Paint();
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(getScoreTextMetrics());
-		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.points
+		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.accomplishmentBox.points
 						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
 						getScoreTextMetrics(), getScoreTextMetrics(), paint);
 	}
@@ -257,7 +257,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		Paint paint = new Paint();
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(getScoreTextMetrics());
-		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.points
+		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.accomplishmentBox.points
 						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
 						getScoreTextMetrics(), getScoreTextMetrics(), paint);
 		holder.unlockCanvasAndPost(canvas);
@@ -286,7 +286,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 			powerUps.add(new Coin(this, game));
 		}
 		// Toast
-		if(game.points >= 40 && powerUps.size() < 1 && !(player instanceof NyanCat)){
+		if(game.accomplishmentBox.points >= 40 && powerUps.size() < 1 && !(player instanceof NyanCat)){
 			// If no powerUp is present and you have more than / equal 40 points
 			if(Math.random()*100 < 33){	// 33% chance
 				powerUps.add(new Toast(this, game));
@@ -370,6 +370,8 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 * Changes the player to Nyan Cat
 	 */
 	public void changeToNyanCat(){
+		game.accomplishmentBox.achievement_toastification = true;
+		
 		PlayableCharacter tmp = this.player;
 		this.player = new NyanCat(this, game);
 		this.player.setX(tmp.x);
@@ -388,7 +390,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		// 16 @ 720x1280 px
 		int speedDefault = this.getWidth() / 45;
 		// 1,2 every 4 points @ 720x1280 px
-		int speedIncrease = (int) (this.getWidth() / 600f * (game.points / 4));
+		int speedIncrease = (int) (this.getWidth() / 600f * (game.accomplishmentBox.points / 4));
 		
 		int speed = speedDefault + speedIncrease;
 		

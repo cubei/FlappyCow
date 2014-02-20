@@ -23,20 +23,4 @@
     <string name="onscreen_score_text">Score:</string>
     <string name="onscreen_coin_text">Coins:</string>
     <string name="on_back_press">Press backbutton again to exit</string>
-    
-    <string name="ad_unit_id">ca-app-pub-5615758120938208/1207416779</string>
-    <string name="inventory_id">xv0e00000003c0</string>
-
-    <style name="PrettyButton">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#000000</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">13sp</item>
-        <item name="android:shadowColor">#000000</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">2</item>
-    </style>
-
 </resources>

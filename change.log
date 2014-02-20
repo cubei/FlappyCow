@@ -1,3 +1,7 @@
+Version 1.95
+- Started to implement leaderboard and achievements via Google Play Services
+(Needs a little more testing and the time achievement is missing)
+
 Version 1.9
 - Added coins that can be used to revive the player suggested by Govind Narayan (check out ThemeBowlApp)
 

@@ -59,8 +59,18 @@ public class GameOverDialog extends Dialog {
 		okButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
 				saveCoins();
+				if(game.numberOfRevive <= 1){
+					game.accomplishmentBox.saveLocal(game);
+					if(game.getGamesClient().isConnected()){
+						game.accomplishmentBox.submitScore(game, game.getGamesClient());
+						AccomplishmentBox.savesAreOnline(game);
+					}else{
+						AccomplishmentBox.savesAreOffline(game);
+					}
+				}
+				
+				dismiss();
 				game.finish();
 			}
 		});
@@ -91,14 +101,14 @@ public class GameOverDialog extends Dialog {
 	private void manageScore(){
 		SharedPreferences saves = game.getSharedPreferences(score_save_name, 0);
 		int oldPoints = saves.getInt(best_score_key, 0);
-		if(game.points > oldPoints){
+		if(game.accomplishmentBox.points > oldPoints){
 			// Save new highscore
 			SharedPreferences.Editor editor = saves.edit();
-			editor.putInt(best_score_key, game.points);
+			editor.putInt(best_score_key, game.accomplishmentBox.points);
 			tvBestScoreVal.setTextColor(Color.RED);
 			editor.commit();
 		}
-		tvCurrentScoreVal.setText("" + game.points);
+		tvCurrentScoreVal.setText("" + game.accomplishmentBox.points);
 		tvBestScoreVal.setText("" + oldPoints);
 	}
 	
@@ -108,19 +118,25 @@ public class GameOverDialog extends Dialog {
       
 		SharedPreferences.Editor editor = medaille_save.edit();
 
-		if(game.points >= GOLD_POINTS){
+		if(game.accomplishmentBox.points >= GOLD_POINTS){
+			game.accomplishmentBox.achievement_gold = true;
+			game.accomplishmentBox.achievement_silver = true;
+			game.accomplishmentBox.achievement_bronze = true;
 			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.gold), game));
 			if(medaille < 3){
 				editor.putInt(MainActivity.medaille_key, 3);
 				editor.commit();
 			}
-		}else if(game.points >= SILVER_POINTS){
+		}else if(game.accomplishmentBox.points >= SILVER_POINTS){
+			game.accomplishmentBox.achievement_silver = true;
+			game.accomplishmentBox.achievement_bronze = true;
 			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.silver), game));
 			if(medaille < 2){
 				editor.putInt(MainActivity.medaille_key, 2);
 				editor.commit();
 			}
-		}else if(game.points >= BRONZE_POINTS){
+		}else if(game.accomplishmentBox.points >= BRONZE_POINTS){
+			game.accomplishmentBox.achievement_bronze = true;
 			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.bronce), game));
 			if(medaille < 1){
 				editor.putInt(MainActivity.medaille_key, 1);
