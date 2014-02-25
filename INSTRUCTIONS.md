@@ -21,7 +21,9 @@ To get this running in eclipse you'll need 2 additional library projects: Google
 
 
 Suggestions:
+
 Not familiar with java programming:
 * Change images to create "Flappy Fish" or other themes. If you keep the image sizes the same, you won't need to change any code.
+
 Java programmer
 * Follow Justin Bieber on Twitter or do what ever you want.
