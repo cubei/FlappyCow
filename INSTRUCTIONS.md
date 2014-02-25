@@ -6,15 +6,22 @@
 
 3. `Import Android Code` -> choose the cloned folder "FlappyCow"
 
-4. Get rid of the the ad errors. Choose option a or b.
+4. This app contains ads via Samsung Admob with should be functional with the included jar file.
+The adds via Google Admob require the Google Play Services. Since Version 1.95 the Google Play Services are also needed for leaderboard and achievement.
+To get this running in eclipse you'll need 2 additional library projects: Google-Play-Services and BaseGameUtil
+(Android Studio should have the Google Play Services already built in)
+* a) Go in the cloned repository folder ./FlappyCow/lib_projects and unpack both zip archive files
+* b) In your IDE (eclipse) import both projects like done before.
+* c) Make sure in both project properties "is library" is checked under "Android"
+* d) In the BaseGameUtil project add google-play-services_lib as a library in properties/android
+* e) In the FlappyCow project add BaseGameUtil as a library in properties/android
 
-* a) The ads need the Google Play Services. You can set up a library project [like this](https://developers.google.com/mobile-ads-sdk/docs/). Android Studio should have this already built in.
-* b) Remove the ads: Go into the `AndroidManifest.xml` and delete the ad related stuff. They should be marked as an error. Now you will see only remaining errors in the `Game.java` file. Delete the faulty lines in *setLayouts()*, *onResume()* and the ad imports.
+5. Enjoy the code.
 
-Enjoy the code.
+
 
 Suggestions:
-* Not familiar with java programming:
-** Change images to create "Flappy Fish" or other themes. If you keep the image sizes the same, you won't need to change any code.
-* Java programmer
-** Follow Justin Bieber on Twitter or do what ever you want.
+Not familiar with java programming:
+* Change images to create "Flappy Fish" or other themes. If you keep the image sizes the same, you won't need to change any code.
+Java programmer
+* Follow Justin Bieber on Twitter or do what ever you want.
