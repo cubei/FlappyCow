@@ -37,7 +37,7 @@ public class Coin extends PowerUp {
 	public void onCollision() {
 		super.onCollision();
 		playSound();
-		game.coins++;
+		game.increaseCoin();
 	}
 	
 	private void playSound(){

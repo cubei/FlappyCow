@@ -11,6 +11,7 @@
     <string name="about_button">about</string>
     <string name="about_back_button">back</string>
     <string name="revive_button">Revive for</string>
+    <string name="revive_notice">Points won\'t be uploaded to the leaderboard</string>
     <string name="coins">coins</string>
     <string name="medaille_image">Medaillenimage</string>
     <string name="mute_button">Mutes the sound</string>

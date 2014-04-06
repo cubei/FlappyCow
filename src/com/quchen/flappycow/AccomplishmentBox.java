@@ -12,14 +12,14 @@ public class AccomplishmentBox{
 	public static final String ONLINE_STATUS_KEY = "online_status";
 	
 	public static final String KEY_POINTS = "points";
-	public static final String ACHIEVEMENT_KEY_SURVIVE_5_MINUTES = "achievement_survive_5_minutes";
+	public static final String ACHIEVEMENT_KEY_50_COINS = "achievement_survive_5_minutes";
 	public static final String ACHIEVEMENT_KEY_TOASTIFICATION = "achievement_toastification";
 	public static final String ACHIEVEMENT_KEY_BRONZE = "achievement_bronze";
 	public static final String ACHIEVEMENT_KEY_SILVER = "achievement_silver";
 	public static final String ACHIEVEMENT_KEY_GOLD = "achievement_gold";
 	
 	int points;
-	boolean achievement_survive_5_minutes;
+	boolean achievement_50_coins;
 	boolean achievement_toastification;
 	boolean achievement_bronze;
 	boolean achievement_silver;
@@ -41,8 +41,8 @@ public class AccomplishmentBox{
 		if(points > saves.getInt(KEY_POINTS, 0)){
 			editor.putInt(KEY_POINTS, points);
 		}
-		if(achievement_survive_5_minutes){
-			editor.putBoolean(ACHIEVEMENT_KEY_SURVIVE_5_MINUTES, true);
+		if(achievement_50_coins){
+			editor.putBoolean(ACHIEVEMENT_KEY_50_COINS, true);
 		}
 		if(achievement_toastification){
 			editor.putBoolean(ACHIEVEMENT_KEY_TOASTIFICATION, true);
@@ -68,8 +68,8 @@ public class AccomplishmentBox{
 	public void submitScore(Activity activity, GamesClient gamesClient){
 		gamesClient.submitScore(activity.getResources().getString(R.string.leaderboard_highscore), this.points);
 		
-		if(this.achievement_survive_5_minutes){
-			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_survive_5_minutes));
+		if(this.achievement_50_coins){
+			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_50_coins));
 		}
 		if(this.achievement_toastification){
 			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_toastification));
@@ -99,7 +99,7 @@ public class AccomplishmentBox{
 		SharedPreferences saves = activity.getSharedPreferences(SAVE_NAME, 0);
 		
 		box.points = saves.getInt(KEY_POINTS, 0);
-		box.achievement_survive_5_minutes = saves.getBoolean(ACHIEVEMENT_KEY_SURVIVE_5_MINUTES, false);
+		box.achievement_50_coins = saves.getBoolean(ACHIEVEMENT_KEY_50_COINS, false);
 		box.achievement_toastification = saves.getBoolean(ACHIEVEMENT_KEY_TOASTIFICATION, false);
 		box.achievement_bronze = saves.getBoolean(ACHIEVEMENT_KEY_BRONZE, false);
 		box.achievement_silver = saves.getBoolean(ACHIEVEMENT_KEY_SILVER, false);

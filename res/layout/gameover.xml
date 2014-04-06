@@ -77,4 +77,13 @@
         android:background="@drawable/greybutton"
         android:text="@string/revive_button" />
 
+    <TextView
+        android:id="@+id/revive_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b_revive"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="@string/revive_notice" />
+
 </RelativeLayout>

@@ -203,6 +203,14 @@ public class Game extends BaseGameActivity{
 	public void gameOver(){
 		handler.sendMessage(Message.obtain(handler,0));
 	}
+	
+	public void increaseCoin(){
+		this.coins++;
+		if(coins >= 50){
+			accomplishmentBox.achievement_50_coins = true;
+			getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_50_coins));
+		}
+	}
 
 	/**
 	 * What should happen, when an obstacle is passed?

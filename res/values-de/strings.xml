@@ -6,7 +6,8 @@
     <string name="best_score">Dein Rekord</string>
     <string name="about_button">Über</string>
     <string name="about_back_button">Zurück</string>
-     <string name="revive_button">Widerbeleben für</string>
+    <string name="revive_button">Widerbeleben für</string>
+    <string name="revive_notice">Punkte werden nicht in der Highscore veröffentlicht</string>
     <string name="coins">Münzen</string>
     <string name="developer">Entwickler - Lars Harmsen</string>
     <string name="graphics">Grafiken - Lars Harmsen</string>
