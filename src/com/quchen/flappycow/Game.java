@@ -208,7 +208,9 @@ public class Game extends BaseGameActivity{
 		this.coins++;
 		if(coins >= 50){
 			accomplishmentBox.achievement_50_coins = true;
-			getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_50_coins));
+			if(getGamesClient().isConnected()){
+				getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_50_coins));
+			}
 		}
 	}
 

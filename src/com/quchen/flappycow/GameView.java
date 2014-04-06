@@ -203,7 +203,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		paint.setTextSize(getScoreTextMetrics());
 		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.accomplishmentBox.points
 						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
-						getScoreTextMetrics(), getScoreTextMetrics(), paint);
+						0, getScoreTextMetrics(), paint);
 	}
 	
 	/**
@@ -259,7 +259,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		paint.setTextSize(getScoreTextMetrics());
 		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.accomplishmentBox.points
 						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
-						getScoreTextMetrics(), getScoreTextMetrics(), paint);
+						0, getScoreTextMetrics(), paint);
 		holder.unlockCanvasAndPost(canvas);
 	}
 	
@@ -453,8 +453,8 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 * A value for the position and size of the onScreen score Text
 	 */
 	public int getScoreTextMetrics(){
-		// 64 @ 720x1280 px
-		return this.getHeight() / 20;
+		return (int) (this.getHeight() / 21.0f);
+		/*/ game.getResources().getDisplayMetrics().density)*/
 	}
 	
 	public PlayableCharacter getPlayer(){

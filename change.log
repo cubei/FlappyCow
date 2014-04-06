@@ -1,3 +1,8 @@
+Version 1.97
+- Scaled text for points and coins down to fit on more devices
+- Renamed japanese resource folder
+- Fixed crash on coin collection when not signed in.
+
 Version 1.96
 - Changed the 5 minute achievement to 50 coins achievement and implemented it.
 
