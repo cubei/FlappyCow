@@ -24,15 +24,6 @@ public class GameOverDialog extends Dialog {
 	/** Key that saves the score */
 	public static final String best_score_key = "score";
 	
-	/** Points needed for a gold medal */
-	public static final int GOLD_POINTS = 100;
-	
-	/** Points needed for a silver medal */
-	public static final int SILVER_POINTS = 50;
-	
-	/** Points needed for a bronze medal */
-	public static final int BRONZE_POINTS = 10;
-	
 	/** The game that invokes this dialog */
 	private Game game;
 	
@@ -118,33 +109,25 @@ public class GameOverDialog extends Dialog {
       
 		SharedPreferences.Editor editor = medaille_save.edit();
 
-		if(game.accomplishmentBox.points >= GOLD_POINTS){
-			game.accomplishmentBox.achievement_gold = true;
-			game.accomplishmentBox.achievement_silver = true;
-			game.accomplishmentBox.achievement_bronze = true;
+		if(game.accomplishmentBox.achievement_gold){
 			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.gold), game));
 			if(medaille < 3){
 				editor.putInt(MainActivity.medaille_key, 3);
-				editor.commit();
 			}
-		}else if(game.accomplishmentBox.points >= SILVER_POINTS){
-			game.accomplishmentBox.achievement_silver = true;
-			game.accomplishmentBox.achievement_bronze = true;
+		}else if(game.accomplishmentBox.achievement_silver){
 			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.silver), game));
 			if(medaille < 2){
 				editor.putInt(MainActivity.medaille_key, 2);
-				editor.commit();
 			}
-		}else if(game.accomplishmentBox.points >= BRONZE_POINTS){
-			game.accomplishmentBox.achievement_bronze = true;
+		}else if(game.accomplishmentBox.achievement_bronze){
 			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.bronce), game));
 			if(medaille < 1){
 				editor.putInt(MainActivity.medaille_key, 1);
-				editor.commit();
 			}
 		}else{
 			((ImageView)findViewById(R.id.medaille)).setVisibility(View.INVISIBLE);
 		}
+		editor.commit();
 	}
 	
 	private void saveCoins(){

@@ -24,4 +24,10 @@
     <string name="onscreen_score_text">Score:</string>
     <string name="onscreen_coin_text">Coins:</string>
     <string name="on_back_press">Press backbutton again to exit</string>
+    
+    <string name="toast_achievement_50_coins">Achievement unlocked: 50 coins</string>
+    <string name="toast_achievement_toastification">Achievement unlocked: Toastification</string>
+    <string name="toast_achievement_bronze">Achievement unlocked: Bronze</string>
+    <string name="toast_achievement_silver">Achievement unlocked: Silver</string>
+    <string name="toast_achievement_gold">Achievement unlocked: Gold</string>
 </resources>

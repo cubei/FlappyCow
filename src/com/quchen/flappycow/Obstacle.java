@@ -101,7 +101,7 @@ public class Obstacle extends Sprite{
 	public void onPass(){
 		if(!isAlreadyPassed){
 			isAlreadyPassed = true;
-			view.getGame().obstaclePassed();
+			view.getGame().increasePoints();
 		}
 	}
 

@@ -47,6 +47,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	
 	private PauseButton pauseButton;
 	private Tutorial tutorial;
+	private boolean tutorialIsShown = false;;
 
 	public GameView(Context context) {
 		super(context);
@@ -68,16 +69,20 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
-			if(!shouldRun){
+			if(tutorialIsShown){
+				tutorialIsShown = false;
+				resumeAndKeepRunning();
+				this.player.onTap();
+			}else if(!shouldRun){
 				// Start game if it's paused
 				resumeAndKeepRunning();
-			}
-			
-			if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && this.shouldRun){
-				pause();
 			}else{
-				// Cow flap
-				this.player.onTap();
+				if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && this.shouldRun){
+					pause();
+				}else{
+					// Cow flap
+					this.player.onTap();
+				}
 			}
 		}
 		
@@ -121,6 +126,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 */
 	public void showTutorial(){
 		showedTutorial = true;
+		tutorialIsShown = true;
 		
 		player.move();
 		pauseButton.move();
@@ -371,6 +377,11 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 	 */
 	public void changeToNyanCat(){
 		game.accomplishmentBox.achievement_toastification = true;
+		if(game.getGamesClient().isConnected()){
+			game.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_toastification));
+		}else{
+			android.widget.Toast.makeText(game, R.string.toast_achievement_toastification, android.widget.Toast.LENGTH_SHORT).show();
+		}
 		
 		PlayableCharacter tmp = this.player;
 		this.player = new NyanCat(this, game);

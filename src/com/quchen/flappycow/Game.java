@@ -206,10 +206,12 @@ public class Game extends BaseGameActivity{
 	
 	public void increaseCoin(){
 		this.coins++;
-		if(coins >= 50){
+		if(coins >= 50 && !accomplishmentBox.achievement_50_coins){
 			accomplishmentBox.achievement_50_coins = true;
 			if(getGamesClient().isConnected()){
 				getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_50_coins));
+			}else{
+				Toast.makeText(this, R.string.toast_achievement_50_coins, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
@@ -217,8 +219,40 @@ public class Game extends BaseGameActivity{
 	/**
 	 * What should happen, when an obstacle is passed?
 	 */
-	public void obstaclePassed(){
+	public void increasePoints(){
 		accomplishmentBox.points++;
+		if(accomplishmentBox.points >= AccomplishmentBox.BRONZE_POINTS){
+			if(!accomplishmentBox.achievement_bronze){
+				accomplishmentBox.achievement_bronze = true;
+				if(getGamesClient().isConnected()){
+					getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_bronze));
+				}else{
+					Toast.makeText(this, R.string.toast_achievement_bronze, Toast.LENGTH_SHORT).show();
+				}
+			}
+			
+			if(accomplishmentBox.points >= AccomplishmentBox.SILVER_POINTS){
+				if(!accomplishmentBox.achievement_silver){
+					accomplishmentBox.achievement_silver = true;
+					if(getGamesClient().isConnected()){
+						getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_silver));
+					}else{
+						Toast.makeText(this, R.string.toast_achievement_silver, Toast.LENGTH_SHORT).show();
+					}
+				}
+				
+				if(accomplishmentBox.points >= AccomplishmentBox.GOLD_POINTS){
+					if(!accomplishmentBox.achievement_gold){
+						accomplishmentBox.achievement_gold = true;
+						if(getGamesClient().isConnected()){
+							getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_gold));
+						}else{
+							Toast.makeText(this, R.string.toast_achievement_gold, Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	public GamesClient getGamesClient(){
