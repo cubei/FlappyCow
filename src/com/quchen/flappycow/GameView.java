@@ -15,6 +15,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -380,7 +381,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		if(game.getGamesClient().isConnected()){
 			game.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_toastification));
 		}else{
-			android.widget.Toast.makeText(game, R.string.toast_achievement_toastification, android.widget.Toast.LENGTH_SHORT).show();
+			game.handler.sendMessage(Message.obtain(game.handler,1,R.string.toast_achievement_toastification, 0));
 		}
 		
 		PlayableCharacter tmp = this.player;

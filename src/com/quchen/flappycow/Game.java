@@ -23,6 +23,7 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -62,7 +63,7 @@ public class Game extends BaseGameActivity{
 	private long backPressed;
 	
 	/** To do UI things from different threads */
-	private MyHandler handler;
+	public MyHandler handler;
 	
 	/** Hold all accomplishments */
 	AccomplishmentBox accomplishmentBox;
@@ -211,7 +212,7 @@ public class Game extends BaseGameActivity{
 			if(getGamesClient().isConnected()){
 				getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_50_coins));
 			}else{
-				Toast.makeText(this, R.string.toast_achievement_50_coins, Toast.LENGTH_SHORT).show();
+				handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_50_coins, 0));
 			}
 		}
 	}
@@ -227,7 +228,7 @@ public class Game extends BaseGameActivity{
 				if(getGamesClient().isConnected()){
 					getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_bronze));
 				}else{
-					Toast.makeText(this, R.string.toast_achievement_bronze, Toast.LENGTH_SHORT).show();
+					handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_bronze, 0));
 				}
 			}
 			
@@ -237,7 +238,7 @@ public class Game extends BaseGameActivity{
 					if(getGamesClient().isConnected()){
 						getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_silver));
 					}else{
-						Toast.makeText(this, R.string.toast_achievement_silver, Toast.LENGTH_SHORT).show();
+						handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_silver, 0));
 					}
 				}
 				
@@ -247,7 +248,7 @@ public class Game extends BaseGameActivity{
 						if(getGamesClient().isConnected()){
 							getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_gold));
 						}else{
-							Toast.makeText(this, R.string.toast_achievement_gold, Toast.LENGTH_SHORT).show();
+							handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_gold, 0));
 						}
 					}
 				}
@@ -276,6 +277,8 @@ public class Game extends BaseGameActivity{
 					game.gameOverDialog.init();
 					game.gameOverDialog.show();
 					break;
+				case 1:
+					Toast.makeText(game, msg.arg1, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
