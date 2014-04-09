@@ -88,4 +88,8 @@ public abstract class PlayableCharacter extends Sprite {
 		// -12 @ 720x1280 px
 		return - view.getHeight() / 100;
 	}
+	
+	public void revive(){
+		this.row = 0;
+	}
 }

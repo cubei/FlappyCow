@@ -448,7 +448,7 @@ public class GameView extends SurfaceView implements Runnable, OnTouchListener{
 		player.setX(this.getWidth()/6);
 		obstacles.clear();
 		powerUps.clear();
-		player.row = 0;
+		player.revive();
 		for(int i = 0; i < 6; ++i){
 			drawBlinking(i%2 == 0);
 			// sleep

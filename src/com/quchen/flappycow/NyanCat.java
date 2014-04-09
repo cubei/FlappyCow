@@ -42,20 +42,22 @@ public class NyanCat extends PlayableCharacter {
 		super.move();
 		
 		if(rainbow != null){
-			
-			// move rainbow
-			rainbow.y = this.y;		// nyan cat and rainbow bitmap have the same height
-			rainbow.x = this.x - rainbow.width;
-			rainbow.move();
-			
-			// manage frames of the rainbow
-			if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
-				rainbow.row = 0;
-			}else if(speedY > 0){
-				rainbow.row = 1;
-			}else{
-				rainbow.row = 2;
-			}
+			manageRainbowMovement();			
+		}
+	}
+	
+	private void manageRainbowMovement(){
+		rainbow.y = this.y;		// nyan cat and rainbow bitmap have the same height
+		rainbow.x = this.x - rainbow.width;
+		rainbow.move();
+		
+		// manage frames of the rainbow
+		if(speedY > getTabSpeed() / 3 && speedY < getMaxSpeed() * 1/3){
+			rainbow.row = 0;
+		}else if(speedY > 0){
+			rainbow.row = 1;
+		}else{
+			rainbow.row = 2;
 		}
 	}
 
@@ -83,6 +85,13 @@ public class NyanCat extends PlayableCharacter {
 		this.row = 1;
 		
 		// Maybe an explosion
+	}
+
+	@Override
+	public void revive() {
+		super.revive();
+		this.rainbow = new Rainbow(view, game);
+		manageRainbowMovement();
 	}
 
 }
