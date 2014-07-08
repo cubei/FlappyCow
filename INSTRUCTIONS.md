@@ -20,6 +20,13 @@ To get this running in Eclipse you'll need 2 additional library projects: *Googl
 
 ---
 
+This game features the Google Play Services with a leaderboard and achievements. Those will not work out of the box for you. Because the ids for that features (res/values/ids.xml) come from my google developer account and will only work with the apk signed by me. (You will get an error when trying to sign in)
+
+So you need to add your own game to the play services in the [Google Play developer
+console](https://play.google.com/apps/publish/) or remove this feature from the game. The easiest way to do so, would be to remove the sign in button.
+
+---
+
 Suggestions:
 
 * Not familiar with Java programming:
