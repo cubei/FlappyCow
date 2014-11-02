@@ -48,6 +48,7 @@
         <activity
             android:name=".Game"
             android:label="@string/app_name"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.quchen.flappycow.Game" />
