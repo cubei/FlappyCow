@@ -13,6 +13,19 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.quchen.flappycow.Game.MyHandler;
+import com.quchen.flappycow.sprites.Background;
+import com.quchen.flappycow.sprites.Coin;
+import com.quchen.flappycow.sprites.Cow;
+import com.quchen.flappycow.sprites.Frontground;
+import com.quchen.flappycow.sprites.NyanCat;
+import com.quchen.flappycow.sprites.Obstacle;
+import com.quchen.flappycow.sprites.PauseButton;
+import com.quchen.flappycow.sprites.PlayableCharacter;
+import com.quchen.flappycow.sprites.PowerUp;
+import com.quchen.flappycow.sprites.Toast;
+import com.quchen.flappycow.sprites.Tutorial;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,7 +39,7 @@ import android.view.View.OnTouchListener;
 
 public class GameView extends SurfaceView implements OnTouchListener{
 	
-	/** Milliseconds the thread sleeps after drawing */
+	/** Milliseconds for game timer tick */
 	public static final long UPDATE_INTERVAL = 50;
 	
 	private Timer timer = new Timer();
@@ -91,6 +104,7 @@ public class GameView extends SurfaceView implements OnTouchListener{
 	@Override
 	public boolean performClick() {
 		return super.performClick();
+		// Just to remove the stupid warning
 	}
 	
 	/**
@@ -101,26 +115,25 @@ public class GameView extends SurfaceView implements OnTouchListener{
 		v.performClick();
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
 			if(tutorialIsShown){
+				// dismiss tutorial
 				tutorialIsShown = false;
 				resume();
 				this.player.onTap();
 			}else if(paused){
 				resume();
 			}else{
-				if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && this.paused){
+				if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && !this.paused){
 					pause();
 				}else{
-					// Cow flap
 					this.player.onTap();
 				}
 			}
 		}
-		
 		return true;
 	}
 	
 	/**
-	 * The thread runs this method
+	 * content of the timertask
 	 */
 	public void run() {
 		checkPasses();
@@ -139,10 +152,13 @@ public class GameView extends SurfaceView implements OnTouchListener{
 		player.move();
 		pauseButton.move();
 		
-		while(!holder.getSurface().isValid()){/*wait*/}
+		while(!holder.getSurface().isValid()){
+			/*wait*/
+			try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
+		}
 		
 		Canvas canvas = holder.lockCanvas();
-		drawCanvas(canvas);
+		drawCanvas(canvas, true);
 		tutorial.move();
 		tutorial.draw(canvas);
 		holder.unlockCanvasAndPost(canvas);
@@ -175,63 +191,21 @@ public class GameView extends SurfaceView implements OnTouchListener{
 	 * Draws all gameobjects on the surface
 	 */
 	private void draw() {
-		while(!holder.getSurface().isValid()){/*wait*/}
+		while(!holder.getSurface().isValid()){
+			/*wait*/
+			try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
+		}
 		Canvas canvas = holder.lockCanvas();
-		drawCanvas(canvas);
+		drawCanvas(canvas, true);
 		holder.unlockCanvasAndPost(canvas);
 	}
-	
-	/**
-	 * Draws all gameobjects on the canvas
-	 * @param canvas
-	 */
-	private void drawCanvas(Canvas canvas) {
-		bg.draw(canvas);
-		for(Obstacle r : obstacles){
-			r.draw(canvas);
-		}
-		for(PowerUp p : powerUps){
-			p.draw(canvas);
-		}
-		player.draw(canvas);
-		fg.draw(canvas);
-		pauseButton.move();
-		pauseButton.draw(canvas);
-		
-		// Score Text
-		Paint paint = new Paint();
-		paint.setColor(Color.BLACK);
-		paint.setTextSize(getScoreTextMetrics());
-		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.accomplishmentBox.points
-						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
-						0, getScoreTextMetrics(), paint);
-	}
-	
-	/**
-	 * Let the player fall to the ground
-	 */
-	private void playerDeadFall(){
-		player.dead();
-		do{
-			player.move();
-			draw();
-			// sleep
-			try {
-				Thread.sleep(UPDATE_INTERVAL/4);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}while(!player.isTouchingGround());
-	}
-	
+
 	/**
 	 * Draws everything normal,
 	 * except the player will only be drawn, when the parameter is true
 	 * @param drawPlayer
 	 */
-	private void drawBlinking(boolean drawPlayer){
-		while(!holder.getSurface().isValid()){/*wait*/}
-		Canvas canvas = holder.lockCanvas();
+	private void drawCanvas(Canvas canvas, boolean drawPlayer){
 		bg.draw(canvas);
 		for(Obstacle r : obstacles){
 			r.draw(canvas);
@@ -252,11 +226,23 @@ public class GameView extends SurfaceView implements OnTouchListener{
 		canvas.drawText(game.getResources().getString(R.string.onscreen_score_text) + " " + game.accomplishmentBox.points
 						+ " / " + game.getResources().getString(R.string.onscreen_coin_text) + " " + game.coins,
 						0, getScoreTextMetrics(), paint);
-		holder.unlockCanvasAndPost(canvas);
 	}
 	
 	/**
-	 * Checks whether a obstacle is passed.
+	 * Let the player fall to the ground
+	 */
+	private void playerDeadFall(){
+		player.dead();
+		do{
+			player.move();
+			draw();
+			// sleep
+			try { Thread.sleep(UPDATE_INTERVAL/4); } catch (InterruptedException e) { e.printStackTrace(); }
+		}while(!player.isTouchingGround());
+	}
+	
+	/**
+	 * Checks whether an obstacle is passed.
 	 */
 	private void checkPasses(){
 		for(Obstacle o : obstacles){
@@ -366,15 +352,15 @@ public class GameView extends SurfaceView implements OnTouchListener{
 		if(game.getGamesClient().isConnected()){
 			game.getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_toastification));
 		}else{
-			game.handler.sendMessage(Message.obtain(game.handler,1,R.string.toast_achievement_toastification, 0));
+			game.handler.sendMessage(Message.obtain(game.handler,1,R.string.toast_achievement_toastification, MyHandler.SHOW_TOAST));
 		}
 		
 		PlayableCharacter tmp = this.player;
 		this.player = new NyanCat(this, game);
-		this.player.setX(tmp.x);
-		this.player.setY(tmp.y);
-		this.player.setSpeedX(tmp.speedX);
-		this.player.setSpeedY(tmp.speedY);
+		this.player.setX(tmp.getX());
+		this.player.setY(tmp.getY());
+		this.player.setSpeedX(tmp.getSpeedX());
+		this.player.setSpeedY(tmp.getSpeedY());
 		
 		game.musicShouldPlay = true;
 		Game.musicPlayer.start();
@@ -386,16 +372,13 @@ public class GameView extends SurfaceView implements OnTouchListener{
 	public int getSpeedX(){
 		// 16 @ 720x1280 px
 		int speedDefault = this.getWidth() / 45;
+		
 		// 1,2 every 4 points @ 720x1280 px
 		int speedIncrease = (int) (this.getWidth() / 600f * (game.accomplishmentBox.points / 4));
 		
 		int speed = speedDefault + speedIncrease;
 		
-		if(speed > 2*speedDefault){
-			return 2*speedDefault;
-		}else{
-			return speed;
-		}
+		return Math.min(speed, 2*speedDefault);
 	}
 	
 	/**
@@ -409,8 +392,6 @@ public class GameView extends SurfaceView implements OnTouchListener{
 	}
 	
 	public void revive() {
-		pause();	// make sure the old thread isn't running
-		
 		game.numberOfRevive++;
 		
 		// This needs to run another thread, so the dialog can close.
@@ -429,19 +410,18 @@ public class GameView extends SurfaceView implements OnTouchListener{
 	 */
 	private void setupRevive(){
 		game.gameOverDialog.hide();
-		player.setY(this.getHeight()/2 - player.width/2);
+		player.setY(this.getHeight()/2 - player.getWidth()/2);
 		player.setX(this.getWidth()/6);
 		obstacles.clear();
 		powerUps.clear();
 		player.revive();
 		for(int i = 0; i < 6; ++i){
-			drawBlinking(i%2 == 0);
+			while(!holder.getSurface().isValid()){/*wait*/}
+			Canvas canvas = holder.lockCanvas();
+			drawCanvas(canvas, i%2 == 0);
+			holder.unlockCanvasAndPost(canvas);
 			// sleep
-			try {
-				Thread.sleep(UPDATE_INTERVAL*5);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			try { Thread.sleep(UPDATE_INTERVAL*6); } catch (InterruptedException e) { e.printStackTrace(); }
 		}
 		resume();
 	}

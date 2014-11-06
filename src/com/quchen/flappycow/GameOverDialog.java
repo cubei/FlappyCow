@@ -41,7 +41,6 @@ public class GameOverDialog extends Dialog {
 	}
 	
 	public void init(){
-		
 		Button okButton = (Button) findViewById(R.id.b_ok);
 		okButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -106,17 +105,17 @@ public class GameOverDialog extends Dialog {
 		SharedPreferences.Editor editor = medaille_save.edit();
 
 		if(game.accomplishmentBox.achievement_gold){
-			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.getScaledBitmapAlpha8(game, R.drawable.gold));
+			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.gold));
 			if(medaille < 3){
 				editor.putInt(MainActivity.medaille_key, 3);
 			}
 		}else if(game.accomplishmentBox.achievement_silver){
-			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.getScaledBitmapAlpha8(game, R.drawable.silver));
+			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.silver));
 			if(medaille < 2){
 				editor.putInt(MainActivity.medaille_key, 2);
 			}
 		}else if(game.accomplishmentBox.achievement_bronze){
-			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.getScaledBitmapAlpha8(game, R.drawable.bronce));
+			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.bronce));
 			if(medaille < 1){
 				editor.putInt(MainActivity.medaille_key, 1);
 			}

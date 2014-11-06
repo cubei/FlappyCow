@@ -1,3 +1,11 @@
+/**
+ * Saves achievements and score in shared preferences.
+ * You should use a SQLite DB instead, but I'm too lazy to chance it now.
+ * 
+ * @author Lars Harmsen
+ * Copyright (c) <2014> <Lars Harmsen - Quchen>
+ */
+
 package com.quchen.flappycow;
 
 import com.google.android.gms.games.GamesClient;

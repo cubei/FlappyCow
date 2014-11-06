@@ -172,7 +172,7 @@ public class Game extends BaseGameActivity{
 			if(getGamesClient().isConnected()){
 				getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_50_coins));
 			}else{
-				handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_50_coins, 0));
+				handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_50_coins, MyHandler.SHOW_TOAST));
 			}
 		}
 	}
@@ -188,7 +188,7 @@ public class Game extends BaseGameActivity{
 				if(getGamesClient().isConnected()){
 					getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_bronze));
 				}else{
-					handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_bronze, 0));
+					handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_bronze, MyHandler.SHOW_TOAST));
 				}
 			}
 			
@@ -198,7 +198,7 @@ public class Game extends BaseGameActivity{
 					if(getGamesClient().isConnected()){
 						getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_silver));
 					}else{
-						handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_silver, 0));
+						handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_silver, MyHandler.SHOW_TOAST));
 					}
 				}
 				
@@ -208,7 +208,7 @@ public class Game extends BaseGameActivity{
 						if(getGamesClient().isConnected()){
 							getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_gold));
 						}else{
-							handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_gold, 0));
+							handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_gold, MyHandler.SHOW_TOAST));
 						}
 					}
 				}

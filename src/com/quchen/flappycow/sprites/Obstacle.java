@@ -5,7 +5,10 @@
  * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
-package com.quchen.flappycow;
+package com.quchen.flappycow.sprites;
+
+import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameView;
 
 import android.graphics.Canvas;
 
@@ -97,7 +100,6 @@ public class Obstacle extends Sprite{
 	/**
 	 * Will call obstaclePassed of the game, if this is the first pass of this obstacle.
 	 */
-	@Override
 	public void onPass(){
 		if(!isAlreadyPassed){
 			isAlreadyPassed = true;

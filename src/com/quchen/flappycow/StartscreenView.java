@@ -58,33 +58,33 @@ public class StartscreenView extends View implements OnTouchListener {
 		super(context);
 		this.mainActivity = context;
 		if(splash == null) {
-			splash = Sprite.getBitmapAlpha8(mainActivity, R.drawable.splash);
+			splash = Util.getBitmapAlpha8(mainActivity, R.drawable.splash);
 		}
 		srcSplash = new Rect(0, 0, splash.getWidth(), splash.getHeight());
 		if(logInOut == null) {
-			logInOut = Sprite.getBitmapAlpha8(mainActivity, R.drawable.signinout);
+			logInOut = Util.getBitmapAlpha8(mainActivity, R.drawable.signinout);
 		}
 		if(play == null) {
-			play = Sprite.getBitmapAlpha8(mainActivity, R.drawable.play_button);
+			play = Util.getBitmapAlpha8(mainActivity, R.drawable.play_button);
 		}
 		srcPlay = new Rect(0, 0, play.getWidth(), play.getHeight());
 		if(achievements == null) {
-			achievements = Sprite.getBitmapAlpha8(mainActivity, R.drawable.achievement_button);
+			achievements = Util.getBitmapAlpha8(mainActivity, R.drawable.achievement_button);
 		}
 		srcAchievements = new Rect(0, 0, achievements.getWidth(), achievements.getHeight());
 		if(leaderboard == null) {
-			leaderboard = Sprite.getBitmapAlpha8(mainActivity, R.drawable.highscore_button);
+			leaderboard = Util.getBitmapAlpha8(mainActivity, R.drawable.highscore_button);
 		}
 		srcLeaderboard = new Rect(0, 0, leaderboard.getWidth(), leaderboard.getHeight());
 		if(speaker == null) {
-			speaker = Sprite.getBitmapAlpha8(mainActivity, R.drawable.speaker);
+			speaker = Util.getBitmapAlpha8(mainActivity, R.drawable.speaker);
 		}
 		if(info == null) {
-			info = Sprite.getBitmapAlpha8(mainActivity, R.drawable.about);
+			info = Util.getBitmapAlpha8(mainActivity, R.drawable.about);
 		}
 		srcInfo = new Rect(0, 0, info.getWidth(), info.getHeight());
 		if(socket == null) {
-			socket = Sprite.getBitmapAlpha8(mainActivity, R.drawable.socket);
+			socket = Util.getBitmapAlpha8(mainActivity, R.drawable.socket);
 		}
 		
 		this.setOnTouchListener(this);

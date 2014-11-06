@@ -5,7 +5,13 @@
  * Copyright (c) <2014> <Lars Harmsen - Quchen>
  */
 
-package com.quchen.flappycow;
+package com.quchen.flappycow.sprites;
+
+import com.quchen.flappycow.Game;
+import com.quchen.flappycow.GameView;
+import com.quchen.flappycow.MainActivity;
+import com.quchen.flappycow.R;
+import com.quchen.flappycow.Util;
 
 import android.graphics.Bitmap;
 
@@ -20,7 +26,7 @@ public class Cow extends PlayableCharacter {
 	public Cow(GameView view, Game game) {
 		super(view, game);
 		if(globalBitmap == null){
-			globalBitmap = Sprite.getScaledBitmapAlpha8(game, R.drawable.cow);
+			globalBitmap = Util.getScaledBitmapAlpha8(game, R.drawable.cow);
 		}
 		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth()/(colNr = 8);	// The image has 8 frames in a row
