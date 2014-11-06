@@ -19,7 +19,7 @@ public class Coin extends PowerUp {
 	public Coin(GameView view, Game game) {
 		super(view, game);
 		if(globalBitmap == null){
-			globalBitmap = createBitmap(game.getResources().getDrawable(R.drawable.coin));
+			globalBitmap = Sprite.getScaledBitmapAlpha8(game, R.drawable.coin);
 		}
 		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth()/(colNr = 12);

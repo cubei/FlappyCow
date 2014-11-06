@@ -11,6 +11,7 @@ public abstract class PlayableCharacter extends Sprite {
 	
 	public PlayableCharacter(GameView view, Game game) {
 		super(view, game);
+		move();
 	}
 	
 	/**

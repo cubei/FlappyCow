@@ -23,7 +23,7 @@ public class NyanCat extends PlayableCharacter {
 	public NyanCat(GameView view, Game game) {
 		super(view, game);
 		if(globalBitmap == null){
-			globalBitmap = createBitmap(game.getResources().getDrawable(R.drawable.nyan_cat));
+			globalBitmap = Sprite.getScaledBitmapAlpha8(game, R.drawable.nyan_cat);
 		}
 		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth();

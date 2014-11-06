@@ -19,7 +19,7 @@ public class Rainbow extends Sprite {
 	public Rainbow(GameView view, Game game) {
 		super(view, game);
 		if(globalBitmap == null){
-			globalBitmap = createBitmap(game.getResources().getDrawable(R.drawable.rainbow));
+			globalBitmap = Sprite.getScaledBitmapAlpha8(game, R.drawable.rainbow);
 		}
 		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth()/(colNr = 4);

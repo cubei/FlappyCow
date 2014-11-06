@@ -7,15 +7,11 @@
 
 package com.quchen.flappycow;
 
-// Remove the imports below, if you don't want ads
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.games.GamesClient;
 import com.google.example.games.basegameutils.BaseGameActivity;
-import com.sec.android.ad.*;
+import com.google.android.gms.ads.*;
 
 import android.content.SharedPreferences;
 import android.media.AudioManager;
@@ -23,10 +19,7 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Game extends BaseGameActivity{
@@ -36,10 +29,12 @@ public class Game extends BaseGameActivity{
 	/** Key that saves the medal */
 	public static final String coin_key = "coin_key";
 	
-	private int WHICH_AD = 0; 	// 0 = google, 1 = samsung
-	
 	/** Will play things like mooing */
-	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
+	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+	
+	private static final int GAMES_PER_AD = 3;
+	private static int gameOverCounter = 1;
+	private InterstitialAd interstitial;
 	
 	/**
 	 * Will play songs like:
@@ -87,10 +82,14 @@ public class Game extends BaseGameActivity{
 		view = new GameView(this);
 		gameOverDialog = new GameOverDialog(this);
 		handler = new MyHandler(this);
-		setLayouts();
+		setContentView(view);
 		initMusicPlayer();
 		loadCoins();
+		if(gameOverCounter % GAMES_PER_AD == 0) {
+			setupAd();
+		}
 	}
+	
 
 	/**
 	 * Initializes the player with the nyan cat song
@@ -104,49 +103,6 @@ public class Game extends BaseGameActivity{
 			musicPlayer.setVolume(MainActivity.volume, MainActivity.volume);
 		}
 		musicPlayer.seekTo(0);	// Reset song to position 0
-	}
-	
-	/**
-	 * Creates the layout containing a layout for ads and the GameView
-	 */
-	private void setLayouts(){
-		LinearLayout mainLayout = new LinearLayout(this);
-		mainLayout.setOrientation(LinearLayout.VERTICAL);
-
-		// Remove the lines below, if you don't want ads
-		View ad;
-		if(WHICH_AD == 0){
-			ad = createAdMob();
-		}else{
-			ad = createAdHub();
-		}
-		mainLayout.addView(ad);
-		// Remove the lines above, if you don't want ads
-		
-		mainLayout.addView(view);
-
-		setContentView(mainLayout);
-	}
-	
-	// Remove the method below, if you don't want ads
-	/** Samsung AdHub */
-	private View createAdHub(){
-		AdHubView adhubView = new AdHubView(this);
-		adhubView.init(this, getResources().getString(R.string.inventory_id), com.sec.android.ad.info.AdSize.BANNER_320x50);
-		adhubView.startAd();
-		
-		return adhubView;
-	}
-	
-	// Remove the method below, if you don't want ads
-	/** Google AdMob */
-	private AdView createAdMob(){
-		AdView adView = new AdView(this);
-		adView.setAdUnitId(getResources().getString(R.string.ad_unit_id));
-		adView.setAdSize(AdSize.BANNER);
-		
-		adView.loadAd(new AdRequest.Builder().build());
-		return adView;
 	}
 	
 	private void loadCoins(){
@@ -173,13 +129,12 @@ public class Game extends BaseGameActivity{
 	 */
 	@Override
 	protected void onResume() {
-		view.resume();
+		view.drawOnce();
 		if(musicShouldPlay){
 			musicPlayer.start();
 		}
 		if(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS){
 			Toast.makeText(this, "Please check your Google Services", Toast.LENGTH_LONG).show();
-//			finish();
 		}
 		super.onResume();
 	}
@@ -202,7 +157,12 @@ public class Game extends BaseGameActivity{
 	 * Because it needs an UI thread.
 	 */
 	public void gameOver(){
-		handler.sendMessage(Message.obtain(handler,0));
+		if(gameOverCounter % GAMES_PER_AD == 0) {
+			handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_AD));
+		} else {
+			handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
+		}
+		
 	}
 	
 	public void increaseCoin(){
@@ -228,7 +188,7 @@ public class Game extends BaseGameActivity{
 				if(getGamesClient().isConnected()){
 					getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_bronze));
 				}else{
-					handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_bronze, 0));
+					handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_bronze, 0));
 				}
 			}
 			
@@ -238,7 +198,7 @@ public class Game extends BaseGameActivity{
 					if(getGamesClient().isConnected()){
 						getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_silver));
 					}else{
-						handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_silver, 0));
+						handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_silver, 0));
 					}
 				}
 				
@@ -248,7 +208,7 @@ public class Game extends BaseGameActivity{
 						if(getGamesClient().isConnected()){
 							getGamesClient().unlockAchievement(getResources().getString(R.string.achievement_gold));
 						}else{
-							handler.sendMessage(Message.obtain(handler,1,R.string.toast_achievement_gold, 0));
+							handler.sendMessage(Message.obtain(handler, MyHandler.SHOW_TOAST, R.string.toast_achievement_gold, 0));
 						}
 					}
 				}
@@ -264,6 +224,10 @@ public class Game extends BaseGameActivity{
 	 * Shows the GameOverDialog when a message with code 0 is received.
 	 */
 	static class MyHandler extends Handler{
+		public static final int GAME_OVER_DIALOG = 0;
+		public static final int SHOW_TOAST = 1;
+		public static final int SHOW_AD = 2;
+		
 		private Game game;
 		
 		public MyHandler(Game game){
@@ -273,19 +237,57 @@ public class Game extends BaseGameActivity{
 		@Override
 		public void handleMessage(Message msg) {
 			switch(msg.what){
-				case 0:
-					game.gameOverDialog.init();
-					game.gameOverDialog.show();
+				case GAME_OVER_DIALOG:
+					showGameOverDialog();
 					break;
-				case 1:
+				case SHOW_TOAST:
 					Toast.makeText(game, msg.arg1, Toast.LENGTH_SHORT).show();
+					break;
+				case SHOW_AD:
+					showAd();
+					break;
 			}
 		}
+		
+		private void showAd() {
+			if(game.interstitial == null) {
+				showGameOverDialog();
+			} else {
+				if(game.interstitial.isLoaded()) {
+					game.interstitial.show();
+				} else {
+					showGameOverDialog();
+				}
+			}
+		}
+		
+		private void showGameOverDialog() {
+			++Game.gameOverCounter;
+			game.gameOverDialog.init();
+			game.gameOverDialog.show();
+		}
 	}
+	
+
 
 	@Override
 	public void onSignInFailed() {}
 
 	@Override
 	public void onSignInSucceeded() {}
+	
+	private void setupAd() {
+		interstitial = new InterstitialAd(this);
+		interstitial.setAdUnitId(getResources().getString(R.string.ad_unit_id));
+		AdRequest adRequest = new AdRequest.Builder().build();
+		interstitial.loadAd(adRequest);
+		interstitial.setAdListener(new MyAdListener());
+	}
+	
+	
+	private class MyAdListener extends AdListener{
+		public void onAdClosed () {
+			handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
+		}
+	}
 }

@@ -20,7 +20,7 @@ public class Cow extends PlayableCharacter {
 	public Cow(GameView view, Game game) {
 		super(view, game);
 		if(globalBitmap == null){
-			globalBitmap = createBitmap(game.getResources().getDrawable(R.drawable.cow));
+			globalBitmap = Sprite.getScaledBitmapAlpha8(game, R.drawable.cow);
 		}
 		this.bitmap = globalBitmap;
 		this.width = this.bitmap.getWidth()/(colNr = 8);	// The image has 8 frames in a row

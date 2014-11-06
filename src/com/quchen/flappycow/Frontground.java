@@ -8,7 +8,6 @@
 package com.quchen.flappycow;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 
 public class Frontground extends Background {
 	/**
@@ -24,8 +23,7 @@ public class Frontground extends Background {
 	public Frontground(GameView view, Game game) {
 		super(view, game);
 		if(globalBitmap == null){
-			BitmapDrawable bd = (BitmapDrawable) game.getResources().getDrawable(R.drawable.fg);
-			globalBitmap = bd.getBitmap();
+			globalBitmap = Sprite.getDownScaledBitmapAlpha8(game, R.drawable.fg);
 		}
 		this.bitmap = globalBitmap;
 	}

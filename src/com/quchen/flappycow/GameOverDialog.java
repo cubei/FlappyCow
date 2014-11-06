@@ -29,8 +29,6 @@ public class GameOverDialog extends Dialog {
 	
 	private TextView tvCurrentScoreVal;
 	private TextView tvBestScoreVal;
-//	private TextView tvCurrentScore;
-//  private TextView tvBestScore;
 
 	public GameOverDialog(Game game) {
 		super(game);
@@ -40,8 +38,6 @@ public class GameOverDialog extends Dialog {
 		
 		tvCurrentScoreVal = (TextView) findViewById(R.id.tv_current_score_value);
 		tvBestScoreVal = (TextView) findViewById(R.id.tv_best_score_value);
-//		tvCurrentScore = (TextView) findViewById(R.id.tv_current_score);
-//  	tvBestScore = (TextView) findViewById(R.id.tv_best_score);
 	}
 	
 	public void init(){
@@ -110,17 +106,17 @@ public class GameOverDialog extends Dialog {
 		SharedPreferences.Editor editor = medaille_save.edit();
 
 		if(game.accomplishmentBox.achievement_gold){
-			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.gold), game));
+			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.getScaledBitmapAlpha8(game, R.drawable.gold));
 			if(medaille < 3){
 				editor.putInt(MainActivity.medaille_key, 3);
 			}
 		}else if(game.accomplishmentBox.achievement_silver){
-			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.silver), game));
+			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.getScaledBitmapAlpha8(game, R.drawable.silver));
 			if(medaille < 2){
 				editor.putInt(MainActivity.medaille_key, 2);
 			}
 		}else if(game.accomplishmentBox.achievement_bronze){
-			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.createBitmap(game.getResources().getDrawable(R.drawable.bronce), game));
+			((ImageView)findViewById(R.id.medaille)).setImageBitmap(Sprite.getScaledBitmapAlpha8(game, R.drawable.bronce));
 			if(medaille < 1){
 				editor.putInt(MainActivity.medaille_key, 1);
 			}

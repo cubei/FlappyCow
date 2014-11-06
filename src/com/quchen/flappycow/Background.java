@@ -10,7 +10,6 @@ package com.quchen.flappycow;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 
 public class Background extends Sprite {
 
@@ -20,8 +19,7 @@ public class Background extends Sprite {
 	public Background(GameView view, Game game) {
 		super(view, game);
 		if(globalBitmap == null){
-			BitmapDrawable bd = (BitmapDrawable) game.getResources().getDrawable(R.drawable.bg);
-			globalBitmap = bd.getBitmap();
+			globalBitmap = Sprite.getDownScaledBitmapAlpha8(game, R.drawable.bg);
 		}
 		this.bitmap = globalBitmap;
 	}

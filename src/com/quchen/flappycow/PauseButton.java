@@ -10,7 +10,7 @@ package com.quchen.flappycow;
 public class PauseButton extends Sprite{
 	public PauseButton(GameView view, Game game) {
 		super(view, game);
-		this.bitmap = createBitmap(game.getResources().getDrawable(R.drawable.pause_button));
+		this.bitmap = Sprite.getScaledBitmapAlpha8(game, R.drawable.pause_button);
 		this.width = this.bitmap.getWidth();
 		this.height = this.bitmap.getHeight();
 	}

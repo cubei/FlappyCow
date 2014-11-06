@@ -9,10 +9,9 @@ package com.quchen.flappycow;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
 public abstract class Sprite {
 
@@ -230,28 +229,30 @@ public abstract class Sprite {
 		this.speedY = speedY;
 	}
 	
-	/**
-	 * Creates a bitmap that is scales with the getScaleFactor method.
-	 * @param drawable
-	 * @return
-	 */
-	public Bitmap createBitmap(Drawable drawable){
-		return createBitmap(drawable, game);
+	private static final int DEFAULT_DENSITY = 1024;
+	
+	public static Bitmap getScaledBitmapAlpha8(Context context, int id) {
+		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+		bitmapOptions.inPreferredConfig = Bitmap.Config.ALPHA_8;
+		bitmapOptions.inScaled = true;
+		bitmapOptions.inDensity = DEFAULT_DENSITY;
+		bitmapOptions.inTargetDensity = (int)(getScaleFactor(context)*DEFAULT_DENSITY);
+		return BitmapFactory.decodeResource(context.getResources(), id, bitmapOptions);
 	}
 	
-	/**
-	 * Creates a bitmap that is scales with the getScaleFactor method.
-	 * Static so everyone, who provides a Context, can use it.
-	 * @param drawable
-	 * @return
-	 */
-	public static Bitmap createBitmap(Drawable drawable, Context context){
-		BitmapDrawable bd = (BitmapDrawable) drawable;
-		Bitmap bm = bd.getBitmap();
-		return Bitmap.createScaledBitmap(bm,
-				(int)(bm.getWidth() * getScaleFactor(context)),
-				(int)(bm.getHeight() * getScaleFactor(context)),
-				false);
+	public static Bitmap getDownScaledBitmapAlpha8(Context context, int id) {
+		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+		bitmapOptions.inPreferredConfig = Bitmap.Config.ALPHA_8;
+		bitmapOptions.inScaled = true;
+		bitmapOptions.inDensity = DEFAULT_DENSITY;
+		bitmapOptions.inTargetDensity = Math.min((int)(getScaleFactor(context)*DEFAULT_DENSITY), DEFAULT_DENSITY);
+		return BitmapFactory.decodeResource(context.getResources(), id, bitmapOptions);
+	}
+	
+	public static Bitmap getBitmapAlpha8(Context context, int id) {
+		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+		bitmapOptions.inPreferredConfig = Bitmap.Config.ALPHA_8;
+		return BitmapFactory.decodeResource(context.getResources(), id, bitmapOptions);
 	}
 	
 	/**
