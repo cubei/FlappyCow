@@ -1,4 +1,4 @@
-0. You should have the Android SDK installed and download important stuff via SDK Manager. I suggest you use an IDE like Eclipse (Android Studio might work too, but I didn't try)
+0. You need: Java SDK, Android SDK installed and download important stuff via SDK Manager (like newest Android API). I suggest you use an IDE like Eclipse with ADT Plugin (Android Studio might work too, but I didn't try)
 
 1. Clone this repository to your local harddrive: `git clone https://github.com/cubei/FlappyCow.git`
 
@@ -17,6 +17,13 @@ To get this running in Eclipse you'll need 2 additional library projects: *Googl
   * e) In the `FlappyCow` project add `BaseGameUtil` as a library in `properties/android`
 
 5. Enjoy the code.
+
+---
+
+This game features the Google Play Services with a leaderboard and achievements. Those will not work out of the box for you. Because the ids for that features (res/values/ids.xml) come from my google developer account and will only work with the apk signed by me. (You will get an error when trying to sign in)
+
+So you need to add your own game to the play services in the [Google Play developer
+console](https://play.google.com/apps/publish/) or remove this feature from the game. The easiest way to do so, would be to remove the sign in button.
 
 ---
 
