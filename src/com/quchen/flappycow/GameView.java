@@ -34,10 +34,8 @@ import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.View.OnTouchListener;
 
-public class GameView extends SurfaceView implements OnTouchListener{
+public class GameView extends SurfaceView{
 	
 	/** Milliseconds for game timer tick */
 	public static final long UPDATE_INTERVAL = 50;
@@ -64,6 +62,7 @@ public class GameView extends SurfaceView implements OnTouchListener{
 	public GameView(Context context) {
 		super(context);
 		this.game = (Game) context;
+		setFocusable(true);
 
 		holder = getHolder();
 		player = new Cow(this, game);
@@ -71,8 +70,6 @@ public class GameView extends SurfaceView implements OnTouchListener{
 		fg = new Frontground(this, game);
 		pauseButton = new PauseButton(this, game);
 		tutorial = new Tutorial(this, game);
-		
-		setOnTouchListener(this);
 	}
 	
 	private void startTimer() {
@@ -107,12 +104,9 @@ public class GameView extends SurfaceView implements OnTouchListener{
 		// Just to remove the stupid warning
 	}
 	
-	/**
-	 * Manages the touchevents
-	 */
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		v.performClick();
+	public boolean onTouchEvent(MotionEvent event) {
+		performClick();
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
 			if(tutorialIsShown){
 				// dismiss tutorial

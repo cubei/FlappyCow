@@ -12,9 +12,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 
-public class StartscreenView extends View implements OnTouchListener {
+public class StartscreenView extends View{
 	
 	private static Bitmap splash = null;
 	private static Bitmap logInOut = null;
@@ -87,7 +86,6 @@ public class StartscreenView extends View implements OnTouchListener {
 			socket = Util.getBitmapAlpha8(mainActivity, R.drawable.socket);
 		}
 		
-		this.setOnTouchListener(this);
 		setWillNotDraw(false);
 		setOnline(false);
 		setSpeaker(true);
@@ -169,43 +167,43 @@ public class StartscreenView extends View implements OnTouchListener {
 	}
 
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {
+	public boolean onTouchEvent(MotionEvent event) {
+		performClick();
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
-			v.performClick();
-			if(	(event.getX() > REGION_LOG_IN_OUT[0] * v.getWidth())
-					&& (event.getX() < REGION_LOG_IN_OUT[2] * v.getWidth())
-					&& (event.getY() > REGION_LOG_IN_OUT[1] * v.getHeight())
-					&& (event.getY() < REGION_LOG_IN_OUT[3] * v.getHeight()) ) {
+			if(	(event.getX() > REGION_LOG_IN_OUT[0] * getWidth())
+					&& (event.getX() < REGION_LOG_IN_OUT[2] * getWidth())
+					&& (event.getY() > REGION_LOG_IN_OUT[1] * getHeight())
+					&& (event.getY() < REGION_LOG_IN_OUT[3] * getHeight()) ) {
 				if(online) {
 					mainActivity.logout();
 				} else {
 					mainActivity.login();
 				}
-			} else if(	(event.getX() > REGION_PLAY[0] * v.getWidth())
-					&& (event.getX() < REGION_PLAY[2] * v.getWidth())
-					&& (event.getY() > REGION_PLAY[1] * v.getHeight())
-					&& (event.getY() < REGION_PLAY[3] * v.getHeight()) ) {
+			} else if(	(event.getX() > REGION_PLAY[0] * getWidth())
+					&& (event.getX() < REGION_PLAY[2] * getWidth())
+					&& (event.getY() > REGION_PLAY[1] * getHeight())
+					&& (event.getY() < REGION_PLAY[3] * getHeight()) ) {
 				mainActivity.startActivity(new Intent("com.quchen.flappycow.Game"));
-			} else if(	(event.getX() > REGION_ACHIEVEMENT[0] * v.getWidth())
-					&& (event.getX() < REGION_ACHIEVEMENT[2] * v.getWidth())
-					&& (event.getY() > REGION_ACHIEVEMENT[1] * v.getHeight())
-					&& (event.getY() < REGION_ACHIEVEMENT[3] * v.getHeight()) ) {
+			} else if(	(event.getX() > REGION_ACHIEVEMENT[0] * getWidth())
+					&& (event.getX() < REGION_ACHIEVEMENT[2] * getWidth())
+					&& (event.getY() > REGION_ACHIEVEMENT[1] * getHeight())
+					&& (event.getY() < REGION_ACHIEVEMENT[3] * getHeight()) ) {
 				mainActivity.startActivityForResult(mainActivity.getGamesClient().getAchievementsIntent(),0);
-			} else if(	(event.getX() > REGION_LEADERBOARD[0] * v.getWidth())
-					&& (event.getX() < REGION_LEADERBOARD[2] * v.getWidth())
-					&& (event.getY() > REGION_LEADERBOARD[1] * v.getHeight())
-					&& (event.getY() < REGION_LEADERBOARD[3] * v.getHeight()) ) {
+			} else if(	(event.getX() > REGION_LEADERBOARD[0] * getWidth())
+					&& (event.getX() < REGION_LEADERBOARD[2] * getWidth())
+					&& (event.getY() > REGION_LEADERBOARD[1] * getHeight())
+					&& (event.getY() < REGION_LEADERBOARD[3] * getHeight()) ) {
 				mainActivity.startActivityForResult(mainActivity.getGamesClient().getLeaderboardIntent(
 						getResources().getString(R.string.leaderboard_highscore)), 0);
-			} else if(	(event.getX() > REGION_SPEAKER[0] * v.getWidth())
-					&& (event.getX() < REGION_SPEAKER[2] * v.getWidth())
-					&& (event.getY() > REGION_SPEAKER[1] * v.getHeight())
-					&& (event.getY() < REGION_SPEAKER[3] * v.getHeight()) ) {
+			} else if(	(event.getX() > REGION_SPEAKER[0] * getWidth())
+					&& (event.getX() < REGION_SPEAKER[2] * getWidth())
+					&& (event.getY() > REGION_SPEAKER[1] * getHeight())
+					&& (event.getY() < REGION_SPEAKER[3] * getHeight()) ) {
 				mainActivity.muteToggle();
-			} else if(	(event.getX() > REGION_INFO[0] * v.getWidth())
-					&& (event.getX() < REGION_INFO[2] * v.getWidth())
-					&& (event.getY() > REGION_INFO[1] * v.getHeight())
-					&& (event.getY() < REGION_INFO[3] * v.getHeight()) ) {
+			} else if(	(event.getX() > REGION_INFO[0] * getWidth())
+					&& (event.getX() < REGION_INFO[2] * getWidth())
+					&& (event.getY() > REGION_INFO[1] * getHeight())
+					&& (event.getY() < REGION_INFO[3] * getHeight()) ) {
 				mainActivity.startActivity(new Intent("com.quchen.flappycow.About"));
 			}
 		}
