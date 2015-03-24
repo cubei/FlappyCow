@@ -12,6 +12,8 @@ import com.quchen.flappycow.GameView;
 
 public abstract class PlayableCharacter extends Sprite {
 	
+	protected boolean isDead = false;
+	
 	public PlayableCharacter(GameView view, Game game) {
 		super(view, game);
 		move();
@@ -46,6 +48,7 @@ public abstract class PlayableCharacter extends Sprite {
 	 * A dead character falls slowly to the ground.
 	 */
 	public void dead(){
+		this.isDead = true;
 		this.speedY = getMaxSpeed()/2;
 	}
 	
@@ -94,6 +97,11 @@ public abstract class PlayableCharacter extends Sprite {
 	}
 	
 	public void revive(){
+		this.isDead = false;
 		this.row = 0;
+	}
+	
+	public void upgradeBitmap(int points){
+		// Change bitmap, maybe when a certain amount of point is reached.
 	}
 }

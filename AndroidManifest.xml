@@ -3,12 +3,12 @@
 		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.quchen.flappycow"
-    android:versionCode="21"
-    android:versionName="2.1" >
+    android:versionCode="22"
+    android:versionName="2.2" >
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="22" />
     
     <!-- Remove the following permissions, if you don't want ads -->
 	    <!-- Used to request banner and interstitial ads. -->

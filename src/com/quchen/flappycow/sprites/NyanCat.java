@@ -73,7 +73,7 @@ public class NyanCat extends PlayableCharacter {
 	@Override
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
-		if(rainbow != null){
+		if(rainbow != null && !isDead){
 			rainbow.draw(canvas);
 		}
 	}
@@ -86,7 +86,6 @@ public class NyanCat extends PlayableCharacter {
 	@Override
 	public void dead() {
 		super.dead();
-		rainbow = null;
 		this.row = 1;
 		
 		// Maybe an explosion
@@ -95,7 +94,6 @@ public class NyanCat extends PlayableCharacter {
 	@Override
 	public void revive() {
 		super.revive();
-		this.rainbow = new Rainbow(view, game);
 		manageRainbowMovement();
 	}
 

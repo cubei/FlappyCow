@@ -182,6 +182,9 @@ public class Game extends BaseGameActivity{
 	 */
 	public void increasePoints(){
 		accomplishmentBox.points++;
+		
+		this.view.getPlayer().upgradeBitmap(accomplishmentBox.points);
+		
 		if(accomplishmentBox.points >= AccomplishmentBox.BRONZE_POINTS){
 			if(!accomplishmentBox.achievement_bronze){
 				accomplishmentBox.achievement_bronze = true;

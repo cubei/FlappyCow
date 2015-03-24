@@ -20,6 +20,8 @@ public class Toast extends PowerUp {
 	 * Static bitmap to reduce memory usage.
 	 */
 	public static Bitmap globalBitmap;
+	
+	public static final int POINTS_TO_TOAST = 42;
 
 	public Toast(GameView view, Game game) {
 		super(view, game);

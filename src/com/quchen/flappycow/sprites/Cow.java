@@ -14,14 +14,21 @@ import com.quchen.flappycow.R;
 import com.quchen.flappycow.Util;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 public class Cow extends PlayableCharacter {
 	
+	private static final int POINTS_TO_SIR = 23;
+	private static final int POINTS_TO_COOL = 35;
+
 	/** Static bitmap to reduce memory usage. */
 	public static Bitmap globalBitmap;
 
 	/** The moo sound */
 	private static int sound = -1;
+	
+	/** sunglasses, hats and stuff */
+	private Accessory accessory;
 
 	public Cow(GameView view, Game game) {
 		super(view, game);
@@ -37,6 +44,8 @@ public class Cow extends PlayableCharacter {
 		if(sound == -1){
 			sound = Game.soundPool.load(game, R.raw.cow, 1);
 		}
+		
+		this.accessory = new Accessory(view, game);
 	}
 	
 	private void playSound(){
@@ -69,6 +78,18 @@ public class Cow extends PlayableCharacter {
 				row = 2;
 			}
 		}
+		
+		if(this.accessory != null){
+			this.accessory.moveTo(this.x, this.y);
+		}
+	}
+
+	@Override
+	public void draw(Canvas canvas) {
+		super.draw(canvas);
+		if(this.accessory != null && !isDead){
+			this.accessory.draw(canvas);
+		}
 	}
 
 	/**
@@ -81,4 +102,21 @@ public class Cow extends PlayableCharacter {
 		this.frameTime = 3;
 		super.dead();
 	}
+	
+	@Override
+	public void revive() {
+		super.revive();
+		this.accessory.setBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.accessory_scumbag));
+	}
+
+	@Override
+	public void upgradeBitmap(int points) {
+		super.upgradeBitmap(points);
+		if(points == POINTS_TO_SIR){
+			this.accessory.setBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.accessory_sir));
+		}else if(points == POINTS_TO_COOL){
+			this.accessory.setBitmap(Util.getScaledBitmapAlpha8(game, R.drawable.accessory_sunglasses));
+		}
+	}
+	
 }

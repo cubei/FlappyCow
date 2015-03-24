@@ -253,16 +253,19 @@ public class GameView extends SurfaceView{
 	 * Creates a toast with a certain chance
 	 */
 	private void createPowerUp(){
+		// Toast
+		if(game.accomplishmentBox.points >= Toast.POINTS_TO_TOAST /*&& powerUps.size() < 1*/ && !(player instanceof NyanCat)){
+			// If no powerUp is present and you have more than / equal 42 points
+			if(game.accomplishmentBox.points == Toast.POINTS_TO_TOAST){	// First time 100 % chance
+				powerUps.add(new Toast(this, game));
+			} else if(Math.random()*100 < 33){	// 33% chance
+				powerUps.add(new Toast(this, game));
+			}
+		}
+		
 		if((powerUps.size() < 1) && (Math.random()*100 < 20)){
 			// If no powerUp is present and 20% chance
 			powerUps.add(new Coin(this, game));
-		}
-		// Toast
-		if(game.accomplishmentBox.points >= 40 && powerUps.size() < 1 && !(player instanceof NyanCat)){
-			// If no powerUp is present and you have more than / equal 40 points
-			if(Math.random()*100 < 33){	// 33% chance
-				powerUps.add(new Toast(this, game));
-			}
 		}
 	}
 	
