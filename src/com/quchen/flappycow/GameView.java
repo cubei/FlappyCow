@@ -241,7 +241,7 @@ public class GameView extends SurfaceView{
 	private void checkPasses(){
 		for(Obstacle o : obstacles){
 			if(o.isPassed()){
-				if(!o.isAlreadyPassed){
+				if(!o.isAlreadyPassed){	// probably not needed
 					o.onPass();
 					createPowerUp();
 				}
