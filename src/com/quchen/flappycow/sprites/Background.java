@@ -14,7 +14,6 @@ import com.quchen.flappycow.Util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 
 public class Background extends Sprite {
 
@@ -23,6 +22,7 @@ public class Background extends Sprite {
 	
 	public Background(GameView view, Game game) {
 		super(view, game);
+		
 		if(globalBitmap == null){
 			globalBitmap = Util.getDownScaledBitmapAlpha8(game, R.drawable.bg);
 		}
@@ -46,14 +46,14 @@ public class Background extends Sprite {
 		
 		int endBitmap = Math.min(-x + (int) (canvas.getWidth() / factor), bitmap.getWidth());
 		int endCanvas = (int) ((endBitmap + x) * factor) + 1;
-		src = new Rect(-x, 0, endBitmap, bitmap.getHeight());
-		dst = new Rect(0, 0, endCanvas, canvas.getHeight());
+		src.set(-x, 0, endBitmap, bitmap.getHeight());
+		dst.set(0, 0, endCanvas, canvas.getHeight());
 		canvas.drawBitmap(this.bitmap, src, dst, null);
 		
 		if(endBitmap == bitmap.getWidth()){
 			// draw second bitmap
-			src = new Rect(0, 0, (int) (canvas.getWidth() / factor), bitmap.getHeight());
-			dst = new Rect(endCanvas, 0, endCanvas + canvas.getWidth(), canvas.getHeight());
+			src.set(0, 0, (int) (canvas.getWidth() / factor), bitmap.getHeight());
+			dst.set(endCanvas, 0, endCanvas + canvas.getWidth(), canvas.getHeight());
 			canvas.drawBitmap(this.bitmap, src, dst, null);
 		}
 	}

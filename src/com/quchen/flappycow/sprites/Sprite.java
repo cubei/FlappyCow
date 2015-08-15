@@ -59,6 +59,8 @@ public abstract class Sprite {
 		this.view = view;
 		this.game = game;
 		frameTime = 1;
+		src = new Rect();
+		dst = new Rect();
 	}
 	
 	/**
@@ -67,8 +69,8 @@ public abstract class Sprite {
 	 * @param canvas Canvas that should be drawn on
 	 */
 	public void draw(Canvas canvas){
-		src = new Rect(col*width, row*height, (col+1)*width, (row+1)*height);
-		dst = new Rect(x, y, x+width, y+height);
+		src.set(col*width, row*height, (col+1)*width, (row+1)*height);
+		dst.set(x, y, x+width, y+height);
 		canvas.drawBitmap(bitmap, src, dst, null);
 	}
 	

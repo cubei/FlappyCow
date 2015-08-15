@@ -104,4 +104,8 @@ public abstract class PlayableCharacter extends Sprite {
 	public void upgradeBitmap(int points){
 		// Change bitmap, maybe when a certain amount of point is reached.
 	}
+	
+	public boolean isDead(){
+		return this.isDead;
+	}
 }

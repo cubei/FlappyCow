@@ -33,6 +33,7 @@ public class Game extends BaseGameActivity{
 	public static SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
 	
 	private static final int GAMES_PER_AD = 3;
+	/** Counts number of played games */
 	private static int gameOverCounter = 1;
 	private InterstitialAd interstitial;
 	

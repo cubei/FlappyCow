@@ -38,7 +38,7 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView{
 	
 	/** Milliseconds for game timer tick */
-	public static final long UPDATE_INTERVAL = 50;
+	public static final long UPDATE_INTERVAL = 50;		// = 20 FPS
 	
 	private Timer timer = new Timer();
 	private TimerTask timerTask;
@@ -48,8 +48,8 @@ public class GameView extends SurfaceView{
 	
 	private Game game;
 	private PlayableCharacter player;
-	private Background bg;
-	private Frontground fg;
+	private Background background;
+	private Frontground frontground;
 	private List<Obstacle> obstacles = new ArrayList<Obstacle>();
 	private List<PowerUp> powerUps = new ArrayList<PowerUp>();
 	
@@ -66,8 +66,8 @@ public class GameView extends SurfaceView{
 
 		holder = getHolder();
 		player = new Cow(this, game);
-		bg = new Background(this, game);
-		fg = new Frontground(this, game);
+		background = new Background(this, game);
+		frontground = new Frontground(this, game);
 		pauseButton = new PauseButton(this, game);
 		tutorial = new Tutorial(this, game);
 	}
@@ -107,7 +107,8 @@ public class GameView extends SurfaceView{
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		performClick();
-		if(event.getAction() == MotionEvent.ACTION_DOWN){
+		if(event.getAction() == MotionEvent.ACTION_DOWN  // Only for "touchdowns"
+				&& !this.player.isDead()){ // No support for dead players
 			if(tutorialIsShown){
 				// dismiss tutorial
 				tutorialIsShown = false;
@@ -115,12 +116,10 @@ public class GameView extends SurfaceView{
 				this.player.onTap();
 			}else if(paused){
 				resume();
+			}else if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && !this.paused){
+				pause();
 			}else{
-				if(pauseButton.isTouching((int) event.getX(), (int) event.getY()) && !this.paused){
-					pause();
-				}else{
-					this.player.onTap();
-				}
+				this.player.onTap();
 			}
 		}
 		return true;
@@ -200,7 +199,7 @@ public class GameView extends SurfaceView{
 	 * @param drawPlayer
 	 */
 	private void drawCanvas(Canvas canvas, boolean drawPlayer){
-		bg.draw(canvas);
+		background.draw(canvas);
 		for(Obstacle r : obstacles){
 			r.draw(canvas);
 		}
@@ -210,7 +209,7 @@ public class GameView extends SurfaceView{
 		if(drawPlayer){
 			player.draw(canvas);
 		}
-		fg.draw(canvas);
+		frontground.draw(canvas);
 		pauseButton.draw(canvas);
 		
 		// Score Text
@@ -330,11 +329,11 @@ public class GameView extends SurfaceView{
 			p.move();
 		}
 		
-		bg.setSpeedX(-getSpeedX()/2);
-		bg.move();
+		background.setSpeedX(-getSpeedX()/2);
+		background.move();
 		
-		fg.setSpeedX(-getSpeedX()*4/3);
-		fg.move();
+		frontground.setSpeedX(-getSpeedX()*4/3);
+		frontground.move();
 		
 		pauseButton.move();
 		
