@@ -1,3 +1,8 @@
+Quick starting guide:
+https://youtu.be/5Yymo-ZMrRQ
+
+--
+
 0. You need: Java SDK, Android SDK installed and download important stuff via SDK Manager (like newest Android API). I suggest you use an IDE like Eclipse with ADT Plugin (Android Studio might work too, but I didn't try)
 
 1. Clone this repository to your local harddrive: `git clone https://github.com/cubei/FlappyCow.git`
