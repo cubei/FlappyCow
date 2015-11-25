@@ -48,8 +48,8 @@ public class GameOverDialog extends Dialog {
 				saveCoins();
 				if(game.numberOfRevive <= 1){
 					game.accomplishmentBox.saveLocal(game);
-					if(game.getGamesClient().isConnected()){
-						game.accomplishmentBox.submitScore(game, game.getGamesClient());
+					if(game.getApiClient().isConnected()){
+						game.accomplishmentBox.submitScore(game, game.getApiClient());
 						AccomplishmentBox.savesAreOnline(game);
 					}else{
 						AccomplishmentBox.savesAreOffline(game);

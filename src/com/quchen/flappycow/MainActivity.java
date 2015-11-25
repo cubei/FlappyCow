@@ -7,7 +7,7 @@
 
 package com.quchen.flappycow;
 
-import com.google.android.gms.games.GamesClient;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.example.games.basegameutils.BaseGameActivity;
 
 import android.os.Bundle;
@@ -36,10 +36,10 @@ public class MainActivity extends BaseGameActivity {
         setContentView(view);
         setSocket();
     }
-    
-    public GamesClient getGamesClient() {
-    	return this.mHelper.getGamesClient();
-    }
+
+	public GoogleApiClient getApiClient(){
+		return mHelper.getApiClient();
+	}
     
     public void login() {
     	beginUserInitiatedSignIn();
@@ -91,7 +91,7 @@ public class MainActivity extends BaseGameActivity {
 		view.setOnline(true);
 		view.invalidate();
 		if(AccomplishmentBox.isOnline(this)){
-			AccomplishmentBox.getLocal(this).submitScore(this, this.mHelper.getGamesClient());
+			AccomplishmentBox.getLocal(this).submitScore(this, getApiClient());
 		}
 	}
     

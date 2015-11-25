@@ -8,7 +8,8 @@
 
 package com.quchen.flappycow;
 
-import com.google.android.gms.games.GamesClient;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -48,7 +49,6 @@ public class AccomplishmentBox{
 	 * The accomblishments will be saved local via SharedPreferences.
 	 * This makes it very easy to cheat.
 	 * 
-	 * @param outbox Data that should be saved
 	 * @param activity activity that is needed for shared preferences
 	 */
 	public void saveLocal(Activity activity){
@@ -80,25 +80,25 @@ public class AccomplishmentBox{
 	/**
 	 * Uploads accomplishments to Google Play Services
 	 * @param activity
-	 * @param gamesClient
+	 * @param apiClient
 	 */
-	public void submitScore(Activity activity, GamesClient gamesClient){
-		gamesClient.submitScore(activity.getResources().getString(R.string.leaderboard_highscore), this.points);
+	public void submitScore(Activity activity, GoogleApiClient apiClient){
+		Games.Leaderboards.submitScore(apiClient, activity.getResources().getString(R.string.leaderboard_highscore), this.points);
 		
 		if(this.achievement_50_coins){
-			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_50_coins));
+			Games.Achievements.unlock(apiClient, activity.getResources().getString(R.string.achievement_50_coins));
 		}
 		if(this.achievement_toastification){
-			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_toastification));
+			Games.Achievements.unlock(apiClient, activity.getResources().getString(R.string.achievement_toastification));
 		}
 		if(this.achievement_bronze){
-			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_bronze));
+			Games.Achievements.unlock(apiClient, activity.getResources().getString(R.string.achievement_bronze));
 		}
 		if(this.achievement_silver){
-			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_silver));
+			Games.Achievements.unlock(apiClient, activity.getResources().getString(R.string.achievement_silver));
 		}
 		if(this.achievement_gold){
-			gamesClient.unlockAchievement(activity.getResources().getString(R.string.achievement_gold));
+			Games.Achievements.unlock(apiClient, activity.getResources().getString(R.string.achievement_gold));
 		}
 		
 		AccomplishmentBox.savesAreOnline(activity);
