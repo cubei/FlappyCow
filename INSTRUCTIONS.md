@@ -1,5 +1,8 @@
 Quick starting guide:
-https://youtu.be/5Yymo-ZMrRQ
+
+Eclipse: https://youtu.be/5Yymo-ZMrRQ
+
+Android Studio: https://youtu.be/tJj0rZsLxz8
 
 --
 
