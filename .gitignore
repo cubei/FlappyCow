@@ -1,9 +1,10 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
 .git/
-.settings/
-assets
-gen/
-bin/
-.classpath
-.gitignore
-.project
 keystore

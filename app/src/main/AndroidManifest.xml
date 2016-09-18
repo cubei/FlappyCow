@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--	@author Lars Harmsen
+		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.quchen.flappycow">
+
+	<!-- Remove the following permissions, if you don't want ads -->
+	    <!-- Used to request banner and interstitial ads. -->
+	    <uses-permission android:name="android.permission.INTERNET" />
+	
+	    <!-- Used to avoid sending an ad request if there is no connectivity. -->
+	    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	    
+	    <!-- Samsung AdHub needs these -->
+	    <!--
+	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+		<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+		 -->
+	<!-- Remove the lines above, if you don't want ads -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        
+        <!-- For Google Play Services -->       
+        <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/app_id" />
+        
+        <activity
+	    android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".Game"
+            android:label="@string/app_name"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.quchen.flappycow.Game" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".About"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.quchen.flappycow.About" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        
+        <!-- Remove the lines below, if you don't want ads -->
+	        <meta-data android:name="com.google.android.gms.version"
+	           android:value="@integer/google_play_services_version"/>
+	        <activity
+	            android:name="com.google.android.gms.ads.AdActivity"
+	            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+	        
+	        <activity android:name="com.sec.android.ad.AdActivity" 
+	             android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <!-- Remove the lines above, if you don't want ads -->
+        
+    </application>
+
+</manifest>
