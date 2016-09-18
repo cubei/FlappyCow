@@ -15,21 +15,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class About extends Activity {
-	@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
         
         // Version
         try {((TextView) findViewById(R.id.version_tv)).setText("" + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
-		} catch (NameNotFoundException e) {e.printStackTrace();}
+        } catch (NameNotFoundException e) {e.printStackTrace();}
         
         // Backbutton
         ((Button)findViewById(R.id.back_button)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-	}
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 }

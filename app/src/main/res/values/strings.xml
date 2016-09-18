@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--	@author Lars Harmsen
-		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
+<!--
+    @author Lars Harmsen
+    Copyright (c) <2014> <Lars Harmsen - Quchen>
+-->
 <resources>
-    <string name="app_name">Flutter Cow</string>
+    <string name="app_name" translatable="false">Flutter Cow</string>
     <string name="current_score">Your score is</string>
     <string name="best_score">Your best score is</string>
-    <string name="defaultscore">42</string>
+    <string name="defaultscore" translatable="false">42</string>
     <string name="medaille">Medaille</string>
     <string name="play_button">Start to play</string>
     <string name="about_button">about</string>
@@ -13,7 +15,7 @@
     <string name="revive_button">Revive for</string>
     <string name="revive_notice">Points won\'t be uploaded to the leaderboard</string>
     <string name="coins">coins</string>
-    <string name="medaille_image">Medaillenimage</string>
+    <string name="medaille_image" translatable="false">Medaillenimage</string>
     <string name="mute_button">Mutes the sound</string>
     <string name="developer">Developer: Lars Harmsen</string>
     <string name="graphics">Graphics: Lars Harmsen</string>
@@ -24,7 +26,6 @@
     <string name="onscreen_score_text">Score:</string>
     <string name="onscreen_coin_text">Coins:</string>
     <string name="on_back_press">Press backbutton again to exit</string>
-    
     <string name="toast_achievement_50_coins">Achievement unlocked: 50 coins</string>
     <string name="toast_achievement_toastification">Achievement unlocked: Toastification</string>
     <string name="toast_achievement_bronze">Achievement unlocked: Bronze</string>

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--	@author Lars Harmsen
-		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
+<!--
+    @author Lars Harmsen
+    Copyright (c) <2014> <Lars Harmsen - Quchen>
+-->
 <resources>
     <string name="current_score">Dein Punktestand</string>
     <string name="best_score">Dein Rekord</string>
+    <string name="medaille">Medaille</string>
+    <string name="play_button">Start to play</string>
     <string name="about_button">Über</string>
     <string name="about_back_button">Zurück</string>
-    <string name="revive_button">Widerbeleben für</string>
+    <string name="revive_button">Wiederbeleben für</string>
     <string name="revive_notice">Punkte werden nicht in der Highscore veröffentlicht</string>
     <string name="coins">Münzen</string>
+    <string name="mute_button">Stumm schalten</string>
     <string name="developer">Entwickler - Lars Harmsen</string>
     <string name="graphics">Grafiken - Lars Harmsen</string>
     <string name="consulting">Beratung - repat</string>
@@ -18,4 +23,9 @@
     <string name="onscreen_score_text">Punkte:</string>
     <string name="onscreen_coin_text">Münzen:</string>
     <string name="on_back_press">Zum Beenden nochmal den Zurückknopf drücken</string>
+    <string name="toast_achievement_50_coins">Achievement unlocked: 50 coins</string>
+    <string name="toast_achievement_toastification">Achievement unlocked: Toastification</string>
+    <string name="toast_achievement_bronze">Achievement unlocked: Bronze</string>
+    <string name="toast_achievement_silver">Achievement unlocked: Silver</string>
+    <string name="toast_achievement_gold">Achievement unlocked: Gold</string>
 </resources>

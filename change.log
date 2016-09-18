@@ -40,7 +40,7 @@ Version 1.81
 - Added german file for externalized strings
 
 Version 1.8
-- The GameOverScreen is now a dialog instead of an activity	(Stupid UI Thread changes)
+- The GameOverScreen is now a dialog instead of an activity (Stupid UI Thread changes)
 - Added Toast, NyanCat, NyanCat music
 
 Version 1.7

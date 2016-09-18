@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--	@author Lars Harmsen
-		Copyright (c) <2014> <Lars Harmsen - Quchen> -->
+<!--
+    @author Lars Harmsen
+    Copyright (c) <2014> <Lars Harmsen - Quchen>
+-->
 <resources>
-    <string name="app_id">508732765831</string>
+    <string name="app_id" translatable="false">508732765831</string>
     
-    <string name="ad_unit_id">ca-app-pub-5615758120938208/8958298370</string>	<!-- Google Admob -->
+    <string name="ad_unit_id" translatable="false">ca-app-pub-5615758120938208/8958298370</string> <!-- Google Admob -->
     
-    <string name="leaderboard_highscore">CgkIh-3XlucOEAIQAQ</string>
+    <string name="leaderboard_highscore" translatable="false">CgkIh-3XlucOEAIQAQ</string>
     
-    <string name="achievement_50_coins">CgkIh-3XlucOEAIQAg</string>
-    <string name="achievement_toastification">CgkIh-3XlucOEAIQAw</string>
-    <string name="achievement_bronze">CgkIh-3XlucOEAIQBA</string>
-    <string name="achievement_silver">CgkIh-3XlucOEAIQBQ</string>
-    <string name="achievement_gold">CgkIh-3XlucOEAIQBg</string>
+    <string name="achievement_50_coins" translatable="false">CgkIh-3XlucOEAIQAg</string>
+    <string name="achievement_toastification" translatable="false">CgkIh-3XlucOEAIQAw</string>
+    <string name="achievement_bronze" translatable="false">CgkIh-3XlucOEAIQBA</string>
+    <string name="achievement_silver" translatable="false">CgkIh-3XlucOEAIQBQ</string>
+    <string name="achievement_gold" translatable="false">CgkIh-3XlucOEAIQBg</string>
 </resources>
