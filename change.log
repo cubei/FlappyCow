@@ -1,3 +1,8 @@
+Version 3.0
+- Changed project structure. The repo is no a Android Studio project instead of Eclipse
+
+...
+
 Version 1.99
 - Fixed crash, when Toast are shown in the wrong thread. (Thanks Clemi for the info)
 
