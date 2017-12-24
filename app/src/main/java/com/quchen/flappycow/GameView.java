@@ -30,6 +30,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -189,8 +190,17 @@ public class GameView extends SurfaceView{
             /*wait*/
             try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
         }
-        Canvas canvas = holder.lockCanvas();
+
+        Canvas canvas;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            canvas = holder.lockHardwareCanvas();
+        } else {
+            canvas = holder.lockCanvas();
+        }
+
         drawCanvas(canvas, true);
+
         holder.unlockCanvasAndPost(canvas);
     }
 
