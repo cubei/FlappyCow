@@ -1,0 +1,2 @@
+The internet permission is used for ads. The ads displayed are coming from Google Admob. This app itself does not collect any personal data for this.
+This app supports the Google Play Services. It is up to the user to log in with a Google account. By doing so, user data from that Google Account are used to manage leaderboard entries and achievements.
