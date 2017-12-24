@@ -108,6 +108,8 @@ public class Obstacle extends Sprite{
     public boolean isPassed(){
         return spider.isPassed() && log.isPassed();
     }
+
+    private static final int SOUND_VOLUME_DIVIDER = 3;
     
     /**
      * Will call obstaclePassed of the game, if this is the first pass of this obstacle.
@@ -116,14 +118,14 @@ public class Obstacle extends Sprite{
         if(!isAlreadyPassed){
             isAlreadyPassed = true;
             view.getGame().increasePoints();
-            Game.soundPool.play(passSound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
+            Game.soundPool.play(passSound, MainActivity.volume/SOUND_VOLUME_DIVIDER, MainActivity.volume/SOUND_VOLUME_DIVIDER, 0, 0, 1);
         }
     }
 
     @Override
     public void onCollision() {
         super.onCollision();
-        Game.soundPool.play(collideSound, MainActivity.volume, MainActivity.volume, 0, 0, 1);
+        Game.soundPool.play(collideSound, MainActivity.volume/SOUND_VOLUME_DIVIDER, MainActivity.volume/SOUND_VOLUME_DIVIDER, 0, 0, 1);
     }
 
 }
