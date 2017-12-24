@@ -6,8 +6,9 @@
 <resources>
     <string name="app_id" translatable="false">508732765831</string>
     
+    <string name="ad_app_id" translatable="false">ca-app-pub-5615758120938208~8730683579</string> <!-- Google Admob -->
     <string name="ad_unit_id" translatable="false">ca-app-pub-5615758120938208/8958298370</string> <!-- Google Admob -->
-    
+
     <string name="leaderboard_highscore" translatable="false">CgkIh-3XlucOEAIQAQ</string>
     
     <string name="achievement_50_coins" translatable="false">CgkIh-3XlucOEAIQAg</string>
