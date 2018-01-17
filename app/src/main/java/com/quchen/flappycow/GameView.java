@@ -139,6 +139,20 @@ public class GameView extends SurfaceView{
 
         draw();
     }
+
+
+
+    private Canvas getCanvas() {
+        Canvas canvas;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            canvas = holder.lockHardwareCanvas();
+        } else {
+            canvas = holder.lockCanvas();
+        }
+
+        return canvas;
+    }
     
     /**
      * Draw Tutorial
@@ -152,7 +166,7 @@ public class GameView extends SurfaceView{
             try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
         }
         
-        Canvas canvas = holder.lockCanvas();
+        Canvas canvas = getCanvas();
         drawCanvas(canvas, true);
         tutorial.move();
         tutorial.draw(canvas);
@@ -181,7 +195,7 @@ public class GameView extends SurfaceView{
         paused = false;
         startTimer();
     }
-    
+
     /**
      * Draws all gameobjects on the surface
      */
@@ -191,13 +205,7 @@ public class GameView extends SurfaceView{
             try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
         }
 
-        Canvas canvas;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            canvas = holder.lockHardwareCanvas();
-        } else {
-            canvas = holder.lockCanvas();
-        }
+        Canvas canvas = getCanvas();;
 
         drawCanvas(canvas, true);
 
@@ -424,7 +432,7 @@ public class GameView extends SurfaceView{
         player.revive();
         for(int i = 0; i < 6; ++i){
             while(!holder.getSurface().isValid()){/*wait*/}
-            Canvas canvas = holder.lockCanvas();
+            Canvas canvas = getCanvas();
             drawCanvas(canvas, i%2 == 0);
             holder.unlockCanvasAndPost(canvas);
             // sleep
