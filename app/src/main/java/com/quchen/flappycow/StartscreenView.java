@@ -185,17 +185,6 @@ public class StartscreenView extends View{
                     && (event.getY() > REGION_PLAY[1] * getHeight())
                     && (event.getY() < REGION_PLAY[3] * getHeight()) ) {
                 mainActivity.startActivity(new Intent("com.quchen.flappycow.Game"));
-            } else if(    (event.getX() > REGION_ACHIEVEMENT[0] * getWidth())
-                    && (event.getX() < REGION_ACHIEVEMENT[2] * getWidth())
-                    && (event.getY() > REGION_ACHIEVEMENT[1] * getHeight())
-                    && (event.getY() < REGION_ACHIEVEMENT[3] * getHeight()) ) {
-                mainActivity.startActivityForResult(Games.Achievements.getAchievementsIntent(mainActivity.getApiClient()), 0);;
-            } else if(    (event.getX() > REGION_LEADERBOARD[0] * getWidth())
-                    && (event.getX() < REGION_LEADERBOARD[2] * getWidth())
-                    && (event.getY() > REGION_LEADERBOARD[1] * getHeight())
-                    && (event.getY() < REGION_LEADERBOARD[3] * getHeight()) ) {
-                mainActivity.startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mainActivity.getApiClient(),
-                        getResources().getString(R.string.leaderboard_highscore)), 0);
             } else if(    (event.getX() > REGION_SPEAKER[0] * getWidth())
                     && (event.getX() < REGION_SPEAKER[2] * getWidth())
                     && (event.getY() > REGION_SPEAKER[1] * getHeight())
@@ -206,6 +195,19 @@ public class StartscreenView extends View{
                     && (event.getY() > REGION_INFO[1] * getHeight())
                     && (event.getY() < REGION_INFO[3] * getHeight()) ) {
                 mainActivity.startActivity(new Intent("com.quchen.flappycow.About"));
+            } else if(online) {
+                if(    (event.getX() > REGION_ACHIEVEMENT[0] * getWidth())
+                        && (event.getX() < REGION_ACHIEVEMENT[2] * getWidth())
+                        && (event.getY() > REGION_ACHIEVEMENT[1] * getHeight())
+                        && (event.getY() < REGION_ACHIEVEMENT[3] * getHeight()) ) {
+                    mainActivity.startActivityForResult(Games.Achievements.getAchievementsIntent(mainActivity.getApiClient()), 0);;
+                } else if(    (event.getX() > REGION_LEADERBOARD[0] * getWidth())
+                        && (event.getX() < REGION_LEADERBOARD[2] * getWidth())
+                        && (event.getY() > REGION_LEADERBOARD[1] * getHeight())
+                        && (event.getY() < REGION_LEADERBOARD[3] * getHeight()) ) {
+                    mainActivity.startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mainActivity.getApiClient(),
+                            getResources().getString(R.string.leaderboard_highscore)), 0);
+                }
             }
         }
         return true;
