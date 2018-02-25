@@ -287,16 +287,15 @@ public class Game extends BaseGameActivity{
         interstitial = new InterstitialAd(this);
         interstitial.setAdUnitId(getResources().getString(R.string.ad_unit_id));
 
-
-
-
-
-
-
-
-
-
         AdRequest adRequest = new AdRequest.Builder().build();
         interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new MyAdListener());
+    }
+
+
+    private class MyAdListener extends AdListener {
+        public void onAdClosed() {
+            handler.sendMessage(Message.obtain(handler, MyHandler.GAME_OVER_DIALOG));
+        }
     }
 }
