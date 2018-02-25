@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BaseGameUtils/BaseGameUtils.iml" filepath="$PROJECT_DIR$/BaseGameUtils/BaseGameUtils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FlutterCow.iml" filepath="$PROJECT_DIR$/FlutterCow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlappyCow.iml" filepath="$PROJECT_DIR$/FlappyCow.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

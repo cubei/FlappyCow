@@ -205,7 +205,7 @@ public class GameView extends SurfaceView{
             try { Thread.sleep(10); } catch (InterruptedException e) { e.printStackTrace(); }
         }
 
-        Canvas canvas = getCanvas();;
+        Canvas canvas = getCanvas();
 
         drawCanvas(canvas, true);
 
