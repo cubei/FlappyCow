@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.quchen.flappycow"
         minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 28
-        versionName "3.1.1"
+        targetSdkVersion 28
+        versionCode 29
+        versionName "3.2.0"
     }
     buildTypes {
         release {
@@ -20,9 +20,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile project(':BaseGameUtils')
-    compile 'com.google.android.gms:play-services-ads:11.8.0'
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:customtabs:28.0.0'
+    implementation project(':BaseGameUtils')
+    implementation 'com.google.android.gms:play-services-ads:17.0.0'
 }

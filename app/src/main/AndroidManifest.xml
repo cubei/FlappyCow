@@ -23,6 +23,7 @@
         
         <!-- For Google Play Services -->       
         <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/app_id" />
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-5615758120938208~8730683579"/>
         
         <activity
             android:name=".MainActivity"

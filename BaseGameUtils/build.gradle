@@ -6,29 +6,32 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 
 dependencies {
 
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile "com.android.support:support-v4:27.0.2"
-    compile "com.google.android.gms:play-services-games:11.8.0"
-    compile "com.google.android.gms:play-services-plus:11.8.0"
+    api 'com.android.support:appcompat-v7:28.0.0'
+    api "com.android.support:support-v4:28.0.0"
+    api "com.google.android.gms:play-services-games:16.0.0"
+    api "com.google.android.gms:play-services-plus:16.0.0"
 }
 
 android {
     // Set defaults so that BaseGameUtils can be used outside of BasicSamples
     if (!project.hasProperty('android_compile_version')) {
-        ext.android_compile_version = 27
+        ext.android_compile_version = 28
     }
     if (!project.hasProperty('android_version')) {
-        ext.android_version = '27'
+        ext.android_version = '28'
     }
 
     compileSdkVersion android_compile_version
     buildToolsVersion android_version
-    buildToolsVersion '27.0.2'
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        minSdkVersion 14
+    }
 }
 
