@@ -7,6 +7,7 @@
 
 package com.quchen.flappycow;
 
+import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.example.games.basegameutils.BaseGameActivity;
@@ -287,7 +288,14 @@ public class Game extends BaseGameActivity{
         interstitial = new InterstitialAd(this);
         interstitial.setAdUnitId(getResources().getString(R.string.ad_unit_id));
 
-        AdRequest adRequest = new AdRequest.Builder().build();
+        Bundle extras = new Bundle();
+        // Make sure only adds appropriate for children of all ages are displayed.
+        extras.putString("max_ad_content_rating", "G");
+
+        AdRequest adRequest = new AdRequest.Builder()
+                .addNetworkExtrasBundle(AdMobAdapter.class, extras)
+                .build();
+
         interstitial.loadAd(adRequest);
         interstitial.setAdListener(new MyAdListener());
     }
