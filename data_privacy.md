@@ -1,5 +1,7 @@
 # Flutter Cow - Data Privacy
 
+This document descripes the usage of data for the Android App **Flutter Cow**.
+
 ### Permission usage
 
 The internet permission is used for ads and to communicate with the Play Services in order to allow the usage of leaderboard and achievements.
